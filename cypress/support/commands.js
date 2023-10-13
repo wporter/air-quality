@@ -1,25 +1,27 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add("fetch", ({ role, portal, page }) => {
+    cy.intercept("/api/auth/session", { fixture: `${role}_role.json` }).as(
+      "session"
+    );
+    cy.intercept("GET", `/api/${page}`, {
+      fixture: `${page}.json`,
+    }).as("GET");
+  
+    cy.visit("/");
+    cy.wait("@session");
+  
+    cy.visit(`/${portal}/${page}`);
+    cy.wait("@GET");
+  });
+  
+  Cypress.Commands.add("action", ({ tag, page }) => {
+    cy.intercept("PUT", `/api/${page}`, { message: "OK", status: 200 }).as("PUT");
+    cy.get('[data-cy="toolbar"]').find(`[data-cy="${tag}-tag"]`).click();
+    cy.wait("@PUT");
+  });
+  
+  Cypress.Commands.add("delete", ({ page }) => {
+    cy.intercept("PUT", `/api/${page}`, { message: "OK", status: 200 }).as("PUT");
+    cy.get('[data-cy="toolbar"]').find('[data-cy="delete"]').click();
+    cy.get('[data-cy="confirm-button"]').click();
+    cy.wait("@PUT");
+  });
