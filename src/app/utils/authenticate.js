@@ -5,7 +5,6 @@ export const authenticate = async (restrictions = {}) => {
   const session = await getServerSession(authOptions);
 
   if (!session.user) {
-    // 401 - authen error... user isn't signed in
     return { message: "Invalid Authentication Credentials.", auth: 401 };
   }
 
@@ -14,14 +13,13 @@ export const authenticate = async (restrictions = {}) => {
   );
 
   if (!authorized && Object.keys(restrictions) > 0) {
-    // 403 - auth error... not correct perms
     return { message: `Forbidden Access`, auth: 403 };
   }
 
   return {
     message: null,
     auth: 200,
-    uid: session.user.id,
+    id: session.user.id,
     user: session.user,
   };
 };
