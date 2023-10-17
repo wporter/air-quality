@@ -2,12 +2,8 @@ import NextAuth from "next-auth";
 import googleProvider from "next-auth/providers/google";
 import { firebaseAdapter } from "@next-auth/firebase-adapter";
 
-import firebase from "firebase/app";
+import { cert } from "firebase-admin/app";
 import "firebase/firestore";
-
-const firestore = (
-  firebase.apps[0] ?? firebase.initializeApp(/* your config */)
-).firestore();
 
 export const options = {
   providers: [
@@ -17,7 +13,13 @@ export const options = {
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     }),
   ],
-  adapter: firebaseAdapter(firestore),
+  adapter: firebaseAdapter({
+    credential: cert({
+      projectId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
+    }),
+  }),
 
   // pages: {
   //     signIn: "/signIn"
