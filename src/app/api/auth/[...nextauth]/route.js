@@ -1,11 +1,19 @@
 import NextAuth from "next-auth";
 import googleProvider from "next-auth/providers/google";
-import { firebaseAdapter } from "@next-auth/firebase-adapter";
+import { FirestoreAdapter } from "@auth/firebase-adapter";
 
 import { cert } from "firebase-admin/app";
-import "firebase/firestore";
 
 export const options = {
+    // eslint-disable-next-line new-cap
+  adapter: FirestoreAdapter({
+    credential: cert({
+      projectId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
+    }),
+  }),
+
   providers: [
     // eslint-disable-next-line new-cap
     googleProvider({
@@ -13,13 +21,6 @@ export const options = {
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     }),
   ],
-  adapter: firebaseAdapter({
-    credential: cert({
-      projectId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-      clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
-    }),
-  }),
 
   // pages: {
   //     signIn: "/signIn"
