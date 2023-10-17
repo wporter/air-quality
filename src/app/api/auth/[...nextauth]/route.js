@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import googleProvider from "next-auth/providers/google";
-import { FirestoreAdapter } from "@auth/firebase-adapter";
+import { firebaseAdapter } from "@next-auth/firebase-adapter";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -17,6 +17,7 @@ export const options = {
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     }),
   ],
+  adapter: firebaseAdapter(firestore),
 
   // pages: {
   //     signIn: "/signIn"
