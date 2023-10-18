@@ -5,7 +5,7 @@ import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { cert } from "firebase-admin/app";
 
 export const options = {
-    // eslint-disable-next-line new-cap
+  // eslint-disable-next-line new-cap
   adapter: FirestoreAdapter({
     credential: cert({
       projectId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
@@ -21,10 +21,6 @@ export const options = {
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     }),
   ],
-
-  // pages: {
-  //     signIn: "/signIn"
-  // }
 };
 // eslint-disable-next-line new-cap
 const handler = NextAuth(options);
