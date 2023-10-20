@@ -1,4 +1,3 @@
-import "./commands";
 import { mount } from "cypress/react18";
 import "@/app/globals.css";
 

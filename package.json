@@ -10,6 +10,8 @@
     "format": "npx prettier --write .",
     "check": "npx prettier --check .",
     "eslint": "npx eslint . --ext js --ext jsx",
+    "cypress": "cypress open",
+    "test": "start-server-and-test dev 3003 cypress",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -29,10 +31,7 @@
     "husky": "^8.0.0",
     "postcss": "^8",
     "prettier": "^3.0.3",
+    "start-server-and-test": "^2.0.1",
     "tailwindcss": "^3"
-  },
-  "description": "![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)\r ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)\r ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)\r ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)\r <br/>\r ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)\r ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)\r ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)\r ![Cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)",
-  "main": "next.config.js",
-  "author": "",
-  "license": "ISC"
+  }
 }
