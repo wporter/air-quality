@@ -10,6 +10,8 @@
     "format": "npx prettier --write .",
     "check": "npx prettier --check .",
     "eslint": "npx eslint . --ext js --ext jsx",
+    "cypress": "cypress open",
+    "test": "start-server-and-test dev 3003 cypress",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10",
+    "cypress": "^13.3.1",
     "eslint": "^8.50.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-next": "^13.5.4",
@@ -31,6 +34,7 @@
     "husky": "^8.0.0",
     "postcss": "^8",
     "prettier": "^3.0.3",
+    "start-server-and-test": "^2.0.1",
     "tailwindcss": "^3"
   }
 }
