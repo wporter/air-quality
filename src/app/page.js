@@ -1,12 +1,16 @@
 "use client";
 import { signIn } from "next-auth/react";
 import Welcome from "@/components/Welcome";
+import dynamic from "next/dynamic";
+
+const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
 const Page = () => {
   return (
-    <div className="m-0 p-0 h-screen overflow-hidden">
+    <div className="flex flex-col justify-center items-center">
       <button onClick={() => signIn("google")}>Sign in</button>
       <Welcome />
+      <Map />
     </div>
   );
 };
