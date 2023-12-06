@@ -14,5 +14,5 @@ export const GET = async () => {
     },
   );
 
-  return res.json({ items: org.data }, { status: 200 });
+  return res.json({ message: "OK", items: org.data }, { status: 200 });
 };
