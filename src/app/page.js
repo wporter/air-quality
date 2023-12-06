@@ -1,10 +1,15 @@
 "use client";
+// Import necessary modules/components
+import React from "react";
 import { signIn } from "next-auth/react";
+import NavBar from "@/components/static/NavBar"; // Import the NavBar component
 
 const Page = () => {
   return (
     <div>
-      <button onClick={() => signIn("google")}>Sign in</button>
+      <NavBar />
+
+      <button onClick={() => signIn("google")}>SIGN IN</button>
     </div>
   );
 };
