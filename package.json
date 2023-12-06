@@ -18,10 +18,15 @@
     "@auth/firebase-adapter": "^1.0.1",
     "axios": "^1.5.1",
     "firebase-admin": "^11.11.0",
+<<<<<<< HEAD
+=======
+    "leaflet": "^1.9.4",
+>>>>>>> d58bab349ba23f12814b52dc863c4b0b055cdb46
     "next": "13.5.4",
     "next-auth": "^4.24.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^10",
