@@ -13,7 +13,7 @@ const Welcome = () => {
       <div className="flex flex-col items-center justify-center flex-1 p-32 text-center">
         <div className="space-y-14">
           <p className="text-7xl font-bold">Air Quality you can trust.</p>
-          <p className="text-2xl font-base">
+          <p className="text-3xl font-base">
             Lorem ipsum dolor sit amet. Sit accusamus galisum qui odio minus non
             repudiandae voluptatibus ut incidunt quia eum quisquam doloremque
             qui possimus voluptatem est quasi culpa. Est labore quis ad quos
