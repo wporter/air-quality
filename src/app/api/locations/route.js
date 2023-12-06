@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import axios from "axios";
 
 export const GET = async () => {
-  const response = await axios.get(
+  const response = await fetch(
     "https://api.quant-aq.com/device-api/v1/devices?network_id=11",
     {
       auth: {
