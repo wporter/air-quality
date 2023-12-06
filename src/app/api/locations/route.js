@@ -1,17 +1,14 @@
+import { api } from "@/app/utils/api";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
-  const response = await fetch(
+  const { data, meta } = await api(
+    "GET",
     "https://api.quant-aq.com/device-api/v1/devices?network_id=11",
     {
-      method: "GET",
-      headers: {
-        Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
-      },
+      Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
     },
   );
 
-  const data = await response.json();
-
-  return NextResponse.json({ items: data }, { status: 200 });
+  return NextResponse.json({ data, meta }, { status: 200 });
 };

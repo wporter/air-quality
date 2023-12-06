@@ -2,7 +2,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Marker from "@/components/Marker";
 
-const Map = () => {
+const Map = ({ markers }) => {
   const position = [34.056, -117.5981];
 
   return (
@@ -18,7 +18,9 @@ const Map = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
-      <Marker position={[33.98, -117.587]} />
+      {markers.map(({ geo }, index) => (
+        <Marker key={index} lat={geo.lat} lon={geo.lon} />
+      ))}
     </MapContainer>
   );
 };
