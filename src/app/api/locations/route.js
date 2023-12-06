@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 export const GET = async () => {
-  return Response.json({ items: [] }).status(200);
+  return NextResponse.json({ items: [] }, { status: 200 });
 };
