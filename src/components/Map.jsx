@@ -7,7 +7,7 @@ const Map = ({ markers }) => {
 
   return (
     <MapContainer
-      className="h-[40vh] w-11/12"
+      className="h-[60vh] w-11/12"
       center={position}
       zoom={11}
       minZoom={8}
