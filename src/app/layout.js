@@ -1,3 +1,4 @@
+import Navigation from "@/components/static/Navigation";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -18,7 +19,10 @@ export default function RootLayout({ children }) {
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossOrigin=""
       />
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 }
