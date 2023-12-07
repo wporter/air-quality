@@ -3,7 +3,7 @@ import googleProvider from "next-auth/providers/google";
 import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { cert } from "firebase-admin/app";
 
-export const options = {
+export const OPTIONS = {
   // eslint-disable-next-line new-cap
   adapter: FirestoreAdapter({
     credential: cert({
@@ -20,8 +20,15 @@ export const options = {
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     }),
   ],
+
+  callbacks: {
+    async session({ session, user }) {
+      session.user = user;
+      return session;
+    },
+  },
 };
 // eslint-disable-next-line new-cap
-const handler = NextAuth(options);
+const handler = NextAuth(OPTIONS);
 
 export { handler as GET, handler as POST };
