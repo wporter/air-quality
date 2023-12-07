@@ -1,19 +1,28 @@
 "use client";
-// Import necessary modules/components
-import React from "react";
-import { signIn } from "next-auth/react";
+import Welcome from "@/components/Welcome";
 import dynamic from "next/dynamic";
-import NavBar from "@/components/static/NavBar"; // Import the NavBar component
+import { useEffect, useState } from "react";
+import { api } from "./utils/api";
 
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
 const Page = () => {
-  return (
-    <div className="flex flex-col justify-center items-center">
-      <NavBar />
+  const [markers, setMarkers] = useState([]);
 
-      <button onClick={() => signIn("google")}>SIGN IN</button>
-      <Map />
+  useEffect(() => {
+    const loadMarkers = async () => {
+      const { data } = await api("GET", "/api/locations");
+      setMarkers(data);
+    };
+
+    loadMarkers();
+  }, []);
+
+  return (
+    <div className="flex flex-col justify-center items-center relative">
+      <Welcome />
+      <p className="text-6xl font-bold my-8 text-left w-11/12">Public View</p>
+      <Map markers={markers} />
     </div>
   );
 };
