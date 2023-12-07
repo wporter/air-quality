@@ -4,6 +4,7 @@ import React from "react";
 import { signIn } from "next-auth/react";
 import dynamic from "next/dynamic";
 import NavBar from "@/components/static/NavBar"; // Import the NavBar component
+// import Navigation from "@/components/static/Navigation"; // Import the NavBar component
 
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
