@@ -23,7 +23,7 @@ const Page = () => {
       <Welcome />
 
       <p className="text-6xl font-bold my-8 text-left w-11/12">Public View</p>
-      
+
       <Map markers={markers} />
     </div>
   );
