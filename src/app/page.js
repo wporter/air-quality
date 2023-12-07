@@ -1,11 +1,32 @@
-import Link from "next/link";
+"use client";
+import Welcome from "@/components/Welcome";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import { api } from "./utils/api";
 
-export default function Home() {
+const Map = dynamic(() => import("../components/Map"), { ssr: false });
+
+const Page = () => {
+  const [markers, setMarkers] = useState([]);
+
+  useEffect(() => {
+    const loadMarkers = async () => {
+      const { data } = await api("GET", "/api/locations");
+      setMarkers(data);
+    };
+
+    loadMarkers();
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <Link href={"/protected"}>Navigate To Protected Page</Link>
-      </div>
-    </main>
+    <div className="flex flex-col justify-center items-center relative">
+      <Welcome />
+
+      <p className="text-6xl font-bold my-8 text-left w-11/12">Public View</p>
+
+      <Map markers={markers} />
+    </div>
   );
-}
+};
+
+export default Page;

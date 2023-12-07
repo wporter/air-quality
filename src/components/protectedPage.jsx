@@ -1,20 +1,28 @@
-"use client";
 import { useEffect, useState } from "react";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { authenticate } from "@/app/utils/authenticate";
 
 const ProtectedPage = ({ fallback, unauthenticatedComponent, children }) => {
-  const { status } = useSession();
-  const [confirmed, setConfirmed] = useState(false);
+  const [authResult, setAuthResult] = useState(null);
 
   useEffect(() => {
-    if (status === "authenticated") {
-      setConfirmed(true);
-    }
-  }, [status]);
+    const auth = async () => {
+      const res = await authenticate();
+      return res;
+    };
 
-  if (status === "loading") {
+    if (authResult === null) {
+      auth().then((res) => {
+        setAuthResult(res);
+      });
+    }
+  }, [authResult]);
+
+  if (authResult === null) {
     return fallback ? fallback : <></>;
-  } else if (status === "unauthenticated") {
+  } else if (authResult.auth === 200) {
+    return children;
+  } else {
     if (unauthenticatedComponent) {
       return <>{unauthenticatedComponent}</>;
     } else {
@@ -31,10 +39,6 @@ const ProtectedPage = ({ fallback, unauthenticatedComponent, children }) => {
         </>
       );
     }
-  }
-
-  if (confirmed) {
-    return children;
   }
 };
 
