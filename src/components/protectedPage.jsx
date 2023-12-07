@@ -1,23 +1,37 @@
 "use client";
+import { useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
 
-import CustomError from "@/errors/customError";
-async function validateAuthentication() {
-  // Implement asynchronous validation.
-  return 1;
-}
+const ProtectedPage = ({ fallback, children }) => {
+  const { status } = useSession();
+  const [confirmed, setConfirmed] = useState(false);
 
-export default async function ProtectedPage({ children }) {
-  try {
-    const authorized = await validateAuthentication();
-    // Unauthorized case
-    if (authorized === -1) {
-      throw new CustomError("Invalid Authentication.", 401);
-    } else if (authorized === 0) {
-      // Handle pending authorization.
+  useEffect(() => {
+    if (status === "authenticated") {
+      setConfirmed(true);
     }
-  } catch (err) {
-    throw new CustomError(err.message, 500);
+  }, [status]);
+
+  if (status === "loading") {
+    return fallback ? fallback : <></>;
+  } else if (status === "unauthenticated") {
+    return (
+      <>
+        <p>{"You are not authorized to view this resource. "}</p>
+        <button
+          onClick={() => {
+            void signIn("google");
+          }}
+        >
+          Sign In
+        </button>
+      </>
+    );
   }
 
-  return <>{children}</>;
-}
+  if (confirmed) {
+    return children;
+  }
+};
+
+export default ProtectedPage;
