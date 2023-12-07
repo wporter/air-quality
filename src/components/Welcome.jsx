@@ -23,7 +23,7 @@ const Welcome = () => {
         <p className="text-2xl font-base">Access Data</p>
         <FaChevronDown
           size={28}
-          className="transition-transform transform hover:scale-125"
+          className="transition-transform transform hover:scale-125 hover:cursor-pointer"
         />
       </div>
     </div>
