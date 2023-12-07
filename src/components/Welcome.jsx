@@ -4,7 +4,7 @@ import { FaChevronDown } from "react-icons/fa";
 
 const Welcome = () => {
   return (
-    <div className="relative flex flex-col items-center justify-between h-screen mb-10">
+    <div className="relative flex flex-col items-center justify-between h-screen">
       <Image
         src={Waves}
         className="absolute top-0 left-0 -z-10 w-screen h-screen object-cover"
