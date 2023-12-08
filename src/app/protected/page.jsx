@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import ProtectedPage from "@/components/ProtectedPage";
 import { signOut, useSession } from "next-auth/react";

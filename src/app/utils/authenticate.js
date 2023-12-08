@@ -4,7 +4,7 @@ import { options } from "../api/auth/[...nextauth]/route";
 export const authenticate = async (restrictions = {}) => {
   const session = await getServerSession(options);
 
-  if (!session.user) {
+  if (!session?.user) {
     return { message: "Invalid Authentication Credentials.", auth: 401 };
   }
 

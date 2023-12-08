@@ -1,22 +1,11 @@
-import { useEffect, useState } from "react";
-import { signIn } from "next-auth/react";
 import { authenticate } from "@/app/utils/authenticate";
 
-const ProtectedPage = ({ fallback, unauthenticatedComponent, children }) => {
-  const [authResult, setAuthResult] = useState(null);
-
-  useEffect(() => {
-    const auth = async () => {
-      const res = await authenticate();
-      return res;
-    };
-
-    if (authResult === null) {
-      auth().then((res) => {
-        setAuthResult(res);
-      });
-    }
-  }, [authResult]);
+const ProtectedPage = async ({
+  fallback,
+  unauthenticatedComponent,
+  children,
+}) => {
+  const authResult = await authenticate();
 
   if (authResult === null) {
     return fallback ? fallback : <></>;
@@ -28,14 +17,7 @@ const ProtectedPage = ({ fallback, unauthenticatedComponent, children }) => {
     } else {
       return (
         <>
-          <p>{"You are not authorized to view this resource. "}</p>
-          <button
-            onClick={() => {
-              void signIn("google");
-            }}
-          >
-            Sign In
-          </button>
+          <p>Not authenticated</p>
         </>
       );
     }
