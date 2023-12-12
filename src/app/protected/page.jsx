@@ -2,13 +2,15 @@ import Image from "next/image";
 import ProtectedPage from "@/components/ProtectedPage";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import TestButton from "@/components/TestButton";
+import { getServerSession } from "next-auth/next";
+import { options } from "../api/auth/[...nextauth]/route";
 
-const Page = () => {
-  const { data: session } = useSession();
+const Page = async () => {
+  const session = await getServerSession(options);
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <Link href={"/"}>Back</Link>
-      <p>Authenticated!</p>
+      <p>Authenticated successfully!</p>
       <>
         <p>{`You are signed in as ${
           session && session.user
@@ -16,19 +18,23 @@ const Page = () => {
             : "No idea"
         }!`}</p>
         <Image src={session.user.image} width={"80"} height={"80"} />
+        <TestButton signedin={true} />
       </>
-      <button
-        onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}
-      >
-        Sign Out
-      </button>
     </div>
   );
 };
 
-export default function Home() {
+export default async function Home() {
   return (
-    <ProtectedPage fallback={<p>Checking Authentication...</p>}>
+    <ProtectedPage
+      fallback={<p>Checking Authentication...</p>}
+      unauthenticatedComponent={
+        <>
+          <p>You are not signed in. </p>
+          <TestButton signedin={false} />
+        </>
+      }
+    >
       <Page />
     </ProtectedPage>
   );
