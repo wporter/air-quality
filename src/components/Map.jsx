@@ -2,12 +2,12 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Marker from "@/components/Marker";
 
-const Map = ({ markers }) => {
+const Map = ({ height, width, markers }) => {
   const position = [34.056, -117.5981];
 
   return (
     <MapContainer
-      className="h-[60vh] w-full"
+      className={`${height} ${width}`}
       center={position}
       zoom={11}
       minZoom={8}
