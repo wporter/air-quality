@@ -1,4 +1,3 @@
-import Navigation from "@/components/Navigation";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -21,10 +20,7 @@ export default function RootLayout({ children, session }) {
         crossOrigin=""
       />
       <body className={inter.className}>
-        <Session session={session}>
-          <Navigation />
-          {children}
-        </Session>
+        <Session session={session}>{children}</Session>
       </body>
     </html>
   );

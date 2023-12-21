@@ -1,4 +1,4 @@
-import { api } from "@/app/utils/api";
+import { api } from "@/utils/api";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
