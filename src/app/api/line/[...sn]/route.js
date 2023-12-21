@@ -2,11 +2,10 @@
 import { api } from "@/app/utils/api";
 import { NextResponse } from "next/server";
 
-export const GET = async () => {
+export const GET = async (req, { params: { sn } }) => {
   const { data } = await api(
     "GET",
-    "https://api.quant-aq.com/device-api/v1/devices/MOD-PM-00407/data",
-    // "https://api.quant-aq.com/device-api/v1/devices/MOD-PM-00407/data-by-date/2023-12-01",
+    `https://api.quant-aq.com/device-api/v1/devices/${sn[0]}/data`,
     {
       Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
     },

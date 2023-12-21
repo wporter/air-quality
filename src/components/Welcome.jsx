@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Waves from "../../public/landingWaves.svg";
+import Waves from "../../public/svg/landingWaves.svg";
 import { FaChevronDown } from "react-icons/fa";
 
 const Welcome = () => {
   return (
-    <div className="relative flex flex-col items-center justify-between h-screen mb-10">
+    <div className="relative flex flex-col items-center justify-between h-screen">
       <Image
         src={Waves}
         className="absolute top-0 left-0 -z-10 w-screen h-screen object-cover"
@@ -23,7 +23,7 @@ const Welcome = () => {
         <p className="text-2xl font-base">Access Data</p>
         <FaChevronDown
           size={28}
-          className="transition-transform transform hover:scale-125"
+          className="transition-transform transform hover:scale-125 hover:cursor-pointer"
         />
       </div>
     </div>

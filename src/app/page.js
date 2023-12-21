@@ -8,7 +8,10 @@ import Line from "@/components/charts/Line";
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
 const Page = () => {
-  const [markers, setMarkers] = useState([]);
+  const [markers, setMarkers] = useState({
+    markers: [],
+    total: 0,
+  });
   const [data, setData] = useState({
     PM1: {
       points: [],
@@ -23,15 +26,20 @@ const Page = () => {
       stroke: "#0000FF",
     },
   });
+  const [markerTable, setMarkerTable] = useState(null);
 
   useEffect(() => {
     const loadMarkers = async () => {
-      const { data } = await api("GET", "/api/locations");
-      setMarkers(data);
+      const { data, meta } = await api("GET", "/api/locations");
+      setMarkers({
+        markers: data,
+        total: meta.total,
+      });
     };
 
     const loadData = async () => {
-      const { PM1, PM10, PM25 } = await api("GET", "/api/data");
+      const { PM1, PM10, PM25 } = await api("GET", `/api/line/MOD-00285`);
+
       setData({
         PM1: {
           points: PM1,
@@ -56,9 +64,16 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center relative">
       <Welcome />
-      <Map markers={markers} />
+      <div className="my-10 text-left w-11/12">
+        <p className="mt-4 text-5xl font-bold">Public View</p>
+        <p className="text-gray-400 my-2">viewing {markers.total} sensors</p>
+        <Map markers={markers.markers} setData={setMarkerTable} />
+      </div>
+
+      <div>{JSON.stringify(markerTable)}</div>
+
       <Line data={data} />
     </div>
   );
