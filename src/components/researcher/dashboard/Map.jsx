@@ -6,7 +6,7 @@ import {
 } from "react-icons/md";
 import Status from "./Status";
 
-const Leaflet = dynamic(() => import("../Map"), { ssr: false });
+const Leaflet = dynamic(() => import("../../Map"), { ssr: false });
 
 const Map = () => {
   return (

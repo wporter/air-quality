@@ -1,5 +1,5 @@
-import Data from "@/components/researcher/Data";
-import Map from "@/components/researcher/Map";
+import Data from "@/components/researcher/dashboard/Data";
+import Map from "@/components/researcher/dashboard/Map";
 import Protected from "@/components/researcher/Protected";
 
 const Page = () => {
