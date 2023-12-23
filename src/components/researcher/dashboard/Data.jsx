@@ -3,9 +3,11 @@ import { api } from "@/utils/api";
 import {
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
+import Search from "../Search";
 
 const columns = [
   {
@@ -52,6 +54,7 @@ const columns = [
 
 const Data = () => {
   const [data, setData] = useState([]);
+  const [filters, setFilters] = useState([]);
 
   useEffect(() => {
     api("GET", "/api/locations").then(({ data }) => setData(data));
@@ -60,10 +63,15 @@ const Data = () => {
   const { getHeaderGroups, getRowModel } = useReactTable({
     data,
     columns,
+    state: {
+      columnFilters: filters,
+    },
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
   return (
     <div className="h-1/2 w-full bg-yellow-500 overflow-scroll p-2">
+      <Search filters={filters} setFilters={setFilters} />
       <div className="bg-air-blue text-white">
         {getHeaderGroups().map(({ headers, id }) => (
           <div key={id} className="flex">
