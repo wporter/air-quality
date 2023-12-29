@@ -16,14 +16,14 @@ const Map = () => {
         <Leaflet height="h-5/6" width="w-10/12" markers={[]} />
         <div className="w-2/12 p-3">
           <Status
-            bg="bg-green-200"
+            bg="bg-status-green"
             Icon={MdOutlineSignalWifi4Bar}
             color="text-green-400"
             value={200}
             text="sensors online"
           />
           <Status
-            bg="bg-red-200"
+            bg="bg-status-red"
             Icon={MdOutlineNetworkWifi1Bar}
             color="text-red-400"
             value={100}
