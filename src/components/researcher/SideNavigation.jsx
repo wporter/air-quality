@@ -9,43 +9,41 @@ const SideNavigation = () => {
       <div className="flex flex-col justify-start space-y-2">
         <Link
           href="/dashboard"
-          className="mt-10 text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="mt-10 text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
-          <MdOutlineDashboard />
+          <MdOutlineDashboard className="text-[#898989] text-xl" />
           <div>Dashboard</div>
         </Link>
 
         <Link
           href="/users"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
-          <FiUsers />
+          <FiUsers className="text-[#898989] text-xl" />
           <div>Users</div>
         </Link>
 
-        {/* set to default researcher view for now */}
         <Link
           href="/researcher"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
-          <FiUsers />
+          <FiUsers className="text-[#898989] text-xl" />
           <div>Menu Option</div>
         </Link>
 
-        {/* set to default researcher view for now */}
         <Link
           href="/researcher"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
-          <FiUsers />
+          <FiUsers className="text-[#898989] text-xl" />
           <div>Menu Option</div>
         </Link>
 
         <Link
           href="/help"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
-          <FiHelpCircle />
+          <FiHelpCircle className="text-[#898989] text-xl" />
           <div>Help</div>
         </Link>
       </div>
