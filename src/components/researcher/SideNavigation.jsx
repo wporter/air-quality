@@ -1,16 +1,15 @@
 import Link from "next/link";
 
 import { MdOutlineDashboard } from "react-icons/md";
-import { FiUsers } from "react-icons/fi";
-import { FiHelpCircle } from "react-icons/fi";
+import { FiUsers, FiHelpCircle } from "react-icons/fi";
 
 const SideNavigation = () => {
   return (
     <div className="w-2/12 h-screen flex flex-col justify-between">
-      <div className="flex flex-col justify-start w-10/12 space-y-2">
+      <div className="flex flex-col justify-start space-y-2">
         <Link
           href="/dashboard"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal"
+          className="mt-10 text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
           <MdOutlineDashboard />
           <div>Dashboard</div>
@@ -18,7 +17,7 @@ const SideNavigation = () => {
 
         <Link
           href="/users"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal"
+          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
           <FiUsers />
           <div>Users</div>
@@ -27,7 +26,7 @@ const SideNavigation = () => {
         {/* set to default researcher view for now */}
         <Link
           href="/researcher"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal"
+          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
           <FiUsers />
           <div>Menu Option</div>
@@ -36,7 +35,7 @@ const SideNavigation = () => {
         {/* set to default researcher view for now */}
         <Link
           href="/researcher"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal"
+          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
           <FiUsers />
           <div>Menu Option</div>
@@ -44,7 +43,7 @@ const SideNavigation = () => {
 
         <Link
           href="/help"
-          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal"
+          className="text-[#363636] flex w-full no-underline items-center py-2 px-4 space-x-2 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
           <FiHelpCircle />
           <div>Help</div>
