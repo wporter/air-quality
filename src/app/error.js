@@ -1,6 +1,8 @@
 "use client";
+import Error from "@/components/Error";
 
-// TO DO - FIX SO IT HANDLES ANY ERROR STATUS CODE...500/429/403/401 page
-export default function InternalError() {
-  // ..
+export default function InternalError({
+  error: { statusCode, errorName, errorMsg },
+}) {
+  return <Error code={statusCode} error={errorName} message={errorMsg} />;
 }
