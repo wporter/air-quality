@@ -1,4 +1,3 @@
-"use client";
 import { ImOmega } from "react-icons/im";
 
 const ErrorNavigation = () => {
