@@ -72,7 +72,7 @@ const Data = () => {
   return (
     <div className="h-1/2 w-full bg-yellow-500 overflow-scroll p-2">
       <Search filters={filters} setFilters={setFilters} />
-      <div className="bg-air-blue text-white">
+      <div className="bg-air-blue-200 text-white">
         {getHeaderGroups().map(({ headers, id }) => (
           <div key={id} className="flex">
             {headers.map(({ id, column }) => (
