@@ -8,6 +8,7 @@ const Welcome = () => {
       <Image
         src={Waves}
         className="absolute top-0 left-0 -z-10 w-screen h-screen object-cover"
+        alt="Home Page Waves"
       />
       <div className="h-full w-11/12 flex flex-col items-center justify-center text-center">
         <p className="text-8xl font-bold mb-10">Air Quality you can trust.</p>
