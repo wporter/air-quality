@@ -14,13 +14,13 @@ const Error = ({ statusCode, errorName, message }) => {
       />
 
       <div className="h-full w-11/12 flex flex-col items-center justify-center text-center">
-        <p className="text-center text-8xl font-semibold italic text-air-blue m-0">
+        <p className="text-center text-8xl font-semibold italic text-air-blue-200 m-0">
           {statusCode}
         </p>
-        <p className="text-center text-xl md:text-2xl font-light italic text-air-blue m-0 mt-2">
+        <p className="text-center text-xl md:text-2xl font-light italic text-air-blue-200 m-0 mt-2">
           {errorName}
         </p>
-        <p className="text-center text-sm md:text-base text-air-blue m-0">
+        <p className="text-center text-sm md:text-base text-air-blue-200 m-0">
           {message}
         </p>
 
