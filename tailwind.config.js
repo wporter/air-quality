@@ -11,7 +11,8 @@ module.exports = {
         air: {
           black: "#1D1D1D",
           green: "#165C21",
-          blue: "#006DD1",
+          "blue-100": "#4D99DF",
+          "blue-200": "#006DD1",
         },
 
         status: {
