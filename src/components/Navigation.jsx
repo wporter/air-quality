@@ -18,7 +18,7 @@ const Navigation = () => {
         <button className="px-24">About Us</button>
       </div>
 
-      <div className="rounded-lg px-7 py-1 text-air-blue-200 border-2 border-air-blue-200 text-xl font-medium">
+      <div className="rounded-lg px-6 py-1 text-air-blue-200 border-2 border-air-blue-200 text-xl font-medium">
         <button onClick={() => (session ? signOut() : signIn("google"))}>
           {session ? "SIGN OUT" : "SIGN IN"}
         </button>
