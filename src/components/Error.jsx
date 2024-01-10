@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Waves from "../../public/svg/errorWaves.svg";
-import ErrorNav from "@/components/ErrorNavigation";
+import Navigation from "@/components/Navigation";
 import BackToHomeButton from "@/components/BackToHomeButton";
 
 const Error = ({ statusCode, errorName, message }) => {
   return (
     <div className="relative flex flex-col items-center justify-between h-screen">
-      <ErrorNav />
+      <Navigation />
       <Image
         src={Waves}
         className="absolute top-64 left-0 -z-10 w-screen h-screen object-cover"
+        alt="Blue Waves"
       />
 
       <div className="h-full w-11/12 flex flex-col items-center justify-center text-center">
