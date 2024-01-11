@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 import Navigation from "@/components/Navigation";
+import ResearchNavigation from "@/components/researcher/Navigation";
 
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
@@ -22,7 +23,9 @@ const Page = () => {
   return (
     <div className="flex flex-col justify-center items-center relative">
       <Navigation />
+      <ResearchNavigation />
       <Welcome />
+
       <div className="text-5xl font-bold my-10 text-left w-11/12">
         <p className="my-4">Public View</p>
         <Map height="h-[60vh]" width="w-full" markers={markers} />
