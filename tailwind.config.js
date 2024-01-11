@@ -16,8 +16,8 @@ module.exports = {
         },
 
         status: {
-          green: "#D8FAE7",
-          red: "#FFEEF1",
+          green: "#2ED47A",
+          red: "#FF5372",
         },
       },
     },
