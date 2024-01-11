@@ -11,7 +11,7 @@ const Leaflet = dynamic(() => import("../../Map"), { ssr: false });
 
 const Map = () => {
   const { data: session } = useSession();
-  const userName = session?.user?.name;
+  const userName = session.user.name;
 
   return (
     <div className="h-1/2 w-full bg-[#F9F9F9]">
