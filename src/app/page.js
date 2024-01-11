@@ -4,8 +4,6 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
 const Page = () => {
@@ -28,7 +26,6 @@ const Page = () => {
         <p className="my-4">Public View</p>
         <Map height="h-[60vh]" width="w-full" markers={markers} />
       </div>
-      <Footer />
     </div>
   );
 };
