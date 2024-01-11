@@ -25,7 +25,6 @@ const Page = () => {
       <Navigation />
       <ResearchNavigation />
       <Welcome />
-
       <div className="text-5xl font-bold my-10 text-left w-11/12">
         <p className="my-4">Public View</p>
         <Map height="h-[60vh]" width="w-full" markers={markers} />
