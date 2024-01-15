@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 import Navigation from "@/components/Navigation";
-
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
 const Page = () => {
