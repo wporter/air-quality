@@ -5,15 +5,21 @@ import {
   MdOutlineNetworkWifi1Bar,
 } from "react-icons/md";
 import Status from "./Status";
+import { useSession } from "next-auth/react";
 
 const Leaflet = dynamic(() => import("../../Map"), { ssr: false });
 
 const Map = () => {
+  const { data: session } = useSession();
+  const userName = session?.user?.name;
+
   return (
-    <div className="h-1/2 w-full bg-purple-500">
-      Welcome William
-      <div className="w-full h-full bg-green-500 flex">
-        <Leaflet height="h-5/6" width="w-10/12" markers={[]} />
+    <div className="h-1/2 w-full bg-[#F9F9F9]">
+      <p className="text-2xl font-light text-[#282828] pt-10 pb-8 pl-8">
+        Welcome, {userName}
+      </p>
+      <div className="w-full h-full bg-[#F9F9F9] flex pl-8">
+        <Leaflet height="h-5/6" width="w-9/12" markers={[]} />
         <div className="w-2/12 p-3 flex flex-col space-y-16">
           <Status
             bg="bg-[#D8FAE7]"
