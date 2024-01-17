@@ -16,7 +16,7 @@ const Map = () => {
         <Leaflet height="h-5/6" width="w-10/12" markers={[]} />
         <div className="w-2/12 p-3 flex flex-col space-y-16">
           <Status
-            bg="bg-status-green"
+            bg="bg-[#D8FAE7]"
             Icon={MdOutlineSignalWifi4Bar}
             color="text-green-400"
             value={300}
@@ -24,7 +24,7 @@ const Map = () => {
           />
 
           <Status
-            bg="bg-status-red"
+            bg="bg-[#FFEEF1]"
             Icon={MdOutlineNetworkWifi1Bar}
             color="text-red-400"
             value={200}
