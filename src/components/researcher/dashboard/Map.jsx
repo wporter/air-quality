@@ -22,7 +22,7 @@ const Map = () => {
         <Leaflet height="h-5/6" width="w-9/12" markers={[]} />
         <div className="w-2/12 ml-20 flex flex-col space-y-16">
           <Status
-            bg="bg-[#D8FAE7]"
+            bg="bg-sensor-green"
             Icon={MdOutlineSignalWifi4Bar}
             color="text-green-400"
             value={300}
@@ -30,7 +30,7 @@ const Map = () => {
           />
 
           <Status
-            bg="bg-[#FFEEF1]"
+            bg="bg-sensor-red"
             Icon={MdOutlineNetworkWifi1Bar}
             color="text-red-400"
             value={200}
