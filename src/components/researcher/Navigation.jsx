@@ -11,8 +11,8 @@ const Navigation = () => {
   return (
     <div className="fixed top-0 left-0 w-full bg-white flex justify-between items-center py-3 px-3 z-10 drop-shadow-xl">
       <div className="flex items-center">
-        <ImOmega className="text-air-blue-200 text-3xl" />
-        <p className="text-air-blue-200 text-3xl font-light ml-2">
+        <ImOmega className="ml-2 text-air-blue-200 text-2xl" />
+        <p className="text-air-blue-200 text-2xl font-light ml-2">
           <span className="font-bold">OMEGA</span>INITIATIVE
         </p>
       </div>
