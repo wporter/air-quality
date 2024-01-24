@@ -8,8 +8,25 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import Search from "../Search";
+import Checkbox from "./Checkbox";
 
 const columns = [
+  {
+    id: "select",
+    width: "w-1/12",
+    header: ({ table }) => (
+      <Checkbox
+        toggle={table.getIsAllRowsSelected()}
+        onClick={table.getToggleAllRowsSelectedHandler()}
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        toggle={row.getIsSelected()}
+        onClick={row.getToggleSelectedHandler()}
+      />
+    ),
+  },
   {
     accessorKey: "sn",
     header: "Serial Number",
