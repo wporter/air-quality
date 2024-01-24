@@ -8,25 +8,9 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import Search from "../Search";
-import Checkbox from "./Checkbox";
+import Dropdown from "./Dropdown";
 
 const columns = [
-  {
-    id: "select",
-    width: "w-1/12",
-    header: ({ table }) => (
-      <Checkbox
-        toggle={table.getIsAllRowsSelected()}
-        onClick={table.getToggleAllRowsSelectedHandler()}
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        toggle={row.getIsSelected()}
-        onClick={row.getToggleSelectedHandler()}
-      />
-    ),
-  },
   {
     accessorKey: "sn",
     header: "Serial Number",
@@ -72,6 +56,10 @@ const columns = [
 const Data = () => {
   const [data, setData] = useState([]);
   const [filters, setFilters] = useState([]);
+  const [option, setOption] = useState({
+    text: "Serial Number",
+    accessor: "sn",
+  });
 
   useEffect(() => {
     api("GET", "/api/locations").then(({ data }) => setData(data));
@@ -86,9 +74,32 @@ const Data = () => {
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+
+  const options = [
+    {
+      accessor: "description",
+      text: "Description",
+    },
+    {
+      accessor: "sn",
+      text: "Serial Number",
+    },
+    {
+      accessor: "model",
+      text: "Model",
+    },
+  ];
+
   return (
-    <div className="mt-6 pr-10 pl-8 h-1/2 w-full bg-yellow-500 overflow-scroll p-2">
-      <Search filters={filters} setFilters={setFilters} />
+    <div className="mt-6 pr-10 pl-8 h-1/2 w-full overflow-scroll p-2">
+      <div className="flex items-center gap-2">
+        <Dropdown options={options} option={option} setOption={setOption} />
+        <Search
+          option={option.accessor}
+          filters={filters}
+          setFilters={setFilters}
+        />
+      </div>
       <div className="mt-4 bg-air-blue-200 text-white">
         {getHeaderGroups().map(({ headers, id }) => (
           <div key={id} className="flex">
