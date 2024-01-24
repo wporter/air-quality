@@ -14,7 +14,7 @@ const Navigation = () => {
         </p>
       </div>
 
-      <div className=" px-5 py-0.4 text-air-blue-200 text-xl ml-auto font-light">
+      <div className="px-5 py-0.4 text-air-blue-200 text-xl ml-auto font-light">
         <button className="px-24">About Us</button>
       </div>
 
