@@ -13,6 +13,7 @@ module.exports = {
           green: "#165C21",
           "blue-100": "#4D99DF",
           "blue-200": "#006DD1",
+          "blue-300": "#C9E4F3",
         },
 
         status: {

@@ -2,7 +2,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { PiSignOutBold } from "react-icons/pi";
 import { ImOmega } from "react-icons/im";
-import { FaUser } from "react-icons/fa6";
 
 const Navigation = () => {
   const { data: session } = useSession();
@@ -18,12 +17,17 @@ const Navigation = () => {
         </p>
       </div>
 
-      <div className=" px-5 py-0.4 text-air-black text-xl ml-auto font-normal">
+      <div className="pr-2 px-2 p y-0.4 text-air-black text-md ml-auto font-normal">
         <button>{session ? session.user.name : "User"}</button>
       </div>
-      <FaUser />
 
-      <div className=" px-5 py-0.4 text-air-black-100 text-sm">
+      <div className="font-bold text-lg border bg-air-blue-300 border-air-blue-100 rounded-full h-9 w-9 flex items-center justify-center">
+        <button onClick={() => (session ? signOut() : signIn("google"))}>
+          {session ? session.user.name[0] : "U"}
+        </button>
+      </div>
+
+      <div className="font-bold px-4 py-0.4 pr-2 pl-20 text-air-black-100 text-sm text">
         <button onClick={() => (session ? signOut() : signIn("google"))}>
           {session ? "LOG OUT" : "LOG IN"}
         </button>
