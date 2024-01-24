@@ -20,6 +20,11 @@ module.exports = {
           green: "#2ED47A",
           red: "#FF5372",
         },
+
+        sensor: {
+          green: "#D8FAE7",
+          red: "#FFEEF1",
+        },
       },
     },
   },
