@@ -33,14 +33,6 @@ const SideNavigation = () => {
         </Link>
 
         <Link
-          href="/menuOption"
-          className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
-        >
-          <FiUsers className="text-[#898989] text-xl" />
-          <div>Menu Option</div>
-        </Link>
-
-        <Link
           href="/help"
           className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
         >
