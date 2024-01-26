@@ -1,12 +1,12 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 
-const Search = ({ filters, setFilters }) => {
-  const value = filters.find(({ id }) => id === "sn")?.value || "";
+const Search = ({ option, filters, setFilters }) => {
+  const value = filters.find(({ id }) => id === option)?.value || "";
 
   const onChange = (id, value) =>
     setFilters((prev) =>
-      prev.filter(({ id }) => id !== "sn").concat({ id, value }),
+      prev.filter(({ id }) => id !== option).concat({ id, value }),
     );
 
   return (
@@ -16,7 +16,7 @@ const Search = ({ filters, setFilters }) => {
         type="text"
         value={value}
         placeholder="Search"
-        onChange={(e) => onChange("sn", e.target.value)}
+        onChange={(e) => onChange(option, e.target.value)}
         className="focus:outline-none"
       />
     </div>
