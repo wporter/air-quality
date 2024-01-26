@@ -2,11 +2,9 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { PiSignOutBold } from "react-icons/pi";
 import { ImOmega } from "react-icons/im";
-import { FaCircleUser } from "react-icons/fa6";
 
 const Navigation = () => {
   const { data: session } = useSession();
-  const userName = session?.user?.name;
 
   return (
     <div className="fixed top-0 left-0 w-full bg-white flex justify-between items-center py-3 px-3 z-10 drop-shadow-xl">
@@ -18,17 +16,20 @@ const Navigation = () => {
       </div>
 
       <div className="flex items-center px-5 py-0.4 py-1 text-black text-lg ml-auto font-normal">
-        {userName}
-        <FaCircleUser className="ml-3 mr-10 text-[#8DC7E8] text-4xl" />
+        <p>{session ? session.user.name : "User"}</p>
       </div>
 
-      <div className="px-5 py-0.4 text-[#383838] text-lg font-medium">
+      <div className="mr-20 font-semibold text-lg border bg-air-blue-300 border-air-blue-400 rounded-full h-9 w-9 flex items-center justify-center">
+        <p>{session ? session.user.name[0] : "U"}</p>
+      </div>
+
+      <div className="px-5 py-0.4 text-black-200 text-base font-medium">
         <button
           className="flex items-center"
           onClick={() => (session ? signOut() : signIn("google"))}
         >
           {session ? "LOG OUT" : "LOG IN"}
-          <PiSignOutBold className="text-xl ml-2 text-[#383838] font-medium" />
+          <PiSignOutBold className="text-xl ml-2 text-black-200 font-medium" />
         </button>
       </div>
     </div>

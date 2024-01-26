@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="w-full grid grid-cols-2 px-16 py-8 bg-white border-t-2 border-[#E0E0E0]">
       <div className="flex flex-col">
-        <p className="text-air-black text-xl flex items-center">
+        <p className="text-air-black-100 text-xl flex items-center">
           <ImOmega className="mr-2" />
           <span className="font-bold">OMEGA</span>
           <span className="font-light">INITIATIVE</span>

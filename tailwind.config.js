@@ -9,10 +9,16 @@ module.exports = {
     extend: {
       colors: {
         air: {
-          black: "#1D1D1D",
+          "black-100": "#1D1D1D",
+          "black-200": "#383838",
+          "black-300": "#282828",
           green: "#165C21",
           "blue-100": "#4D99DF",
           "blue-200": "#006DD1",
+          "blue-300": "#C9E4F3",
+          "blue-400": "#8DC7E8",
+          "white-100": "#F9F9F9",
+          grey: "#6A707E",
         },
 
         status: {
@@ -23,6 +29,12 @@ module.exports = {
         sensor: {
           green: "#D8FAE7",
           red: "#FFEEF1",
+        },
+
+        nav: {
+          black: "#363636",
+          grey: "#898989",
+          hover: "#F4F4F4",
         },
       },
     },
