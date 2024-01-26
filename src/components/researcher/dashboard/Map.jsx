@@ -14,11 +14,11 @@ const Map = () => {
   const userName = session?.user?.name;
 
   return (
-    <div className="h-1/2 w-full bg-[#F9F9F9]">
-      <p className="text-2xl font-light text-[#282828] pt-10 pb-6 pl-8">
+    <div className="h-1/2 w-full bg-air-white-100">
+      <p className="text-2xl font-light text-air-black-300 pt-10 pb-6 pl-8">
         Welcome, {userName}
       </p>
-      <div className="w-full h-full bg-[#F9F9F9] flex pl-8">
+      <div className="w-full h-full bg-air-white-100 flex pl-8">
         <Leaflet height="h-5/6" width="w-9/12" markers={[]} />
         <div className="w-2/12 ml-20 flex flex-col space-y-16">
           <Status

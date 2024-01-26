@@ -19,19 +19,17 @@ const Navigation = () => {
         <p>{session ? session.user.name : "User"}</p>
       </div>
 
-      <div className="font-bold text-lg border bg-air-blue-300 border-air-blue-100 rounded-full h-9 w-9 flex items-center justify-center">
-        <p>
-          {session ? session.user.name[0] : "U"}
-        </p>
+      <div className="mr-20 font-semibold text-lg border bg-air-blue-300 border-air-blue-400 rounded-full h-9 w-9 flex items-center justify-center">
+        <p>{session ? session.user.name[0] : "U"}</p>
       </div>
 
-      <div className="px-5 py-0.4 text-[#383838] text-lg font-medium">
+      <div className="px-5 py-0.4 text-black-200 text-base font-medium">
         <button
           className="flex items-center"
           onClick={() => (session ? signOut() : signIn("google"))}
         >
           {session ? "LOG OUT" : "LOG IN"}
-          <PiSignOutBold className="text-xl ml-2 text-[#383838] font-medium" />
+          <PiSignOutBold className="text-xl ml-2 text-black-200 font-medium" />
         </button>
       </div>
     </div>

@@ -10,7 +10,7 @@ const SideNavigation = () => {
       <div className="flex flex-col justify-start space-y-2">
         <Link
           href="/researcher"
-          className="mt-10 text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="mt-10 text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-nav-hover transition-colors duration-300"
         >
           <MdOutlineDashboard className="text-[#898989] text-xl" />
           <div>Dashboard</div>
@@ -18,25 +18,25 @@ const SideNavigation = () => {
 
         <Link
           href="/users"
-          className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="text-nav-black flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-nav-hover transition-colors duration-300"
         >
-          <FiUsers className="text-[#898989] text-xl" />
+          <FiUsers className="text-nav-grey text-xl" />
           <div>Users</div>
         </Link>
 
         <Link
           href="/data"
-          className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="text-nav-black flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-nav-hover transition-colors duration-300"
         >
-          <AiOutlinePieChart className="text-[#898989] text-xl" />
+          <AiOutlinePieChart className="text-nav-grey text-xl" />
           <div>Data</div>
         </Link>
 
         <Link
           href="/help"
-          className="text-[#363636] flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-[#F4F4F4] transition-colors duration-300"
+          className="text-nav-black flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-nav-hover transition-colors duration-300"
         >
-          <FiHelpCircle className="text-[#898989] text-xl" />
+          <FiHelpCircle className="text-nav-grey text-xl" />
           <div>Help</div>
         </Link>
       </div>
