@@ -1,10 +1,10 @@
-import Dashboard from "@/components/researcher/dashboard/Dashboard";
+import Data from "@/components/researcher/data/Data";
 import Protected from "@/components/researcher/Protected";
 
-const Page = () => {
+const Page = ({ params }) => {
   return (
     <Protected>
-      <Dashboard />
+      <Data params={params} />
     </Protected>
   );
 };

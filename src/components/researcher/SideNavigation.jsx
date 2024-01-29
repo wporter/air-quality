@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { MdOutlineDashboard } from "react-icons/md";
-import { FiUsers, FiHelpCircle } from "react-icons/fi";
+import { FiHelpCircle } from "react-icons/fi";
 import { AiOutlinePieChart } from "react-icons/ai";
 
 const SideNavigation = () => {
@@ -15,15 +15,6 @@ const SideNavigation = () => {
           <MdOutlineDashboard className="text-[#898989] text-xl" />
           <div>Dashboard</div>
         </Link>
-
-        <Link
-          href="/users"
-          className="text-nav-black flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-nav-hover transition-colors duration-300"
-        >
-          <FiUsers className="text-nav-grey text-xl" />
-          <div>Users</div>
-        </Link>
-
         <Link
           href="/data"
           className="text-nav-black flex items-center w-full no-underline py-2 px-4 space-x-12 font-normal hover:bg-nav-hover transition-colors duration-300"
