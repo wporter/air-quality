@@ -9,7 +9,7 @@ export const GET = async (req, { params }) => {
     `https://api.quant-aq.com/device-api/v1/data/most-recent/?sn=${sn}`,
     {
       Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
-    }
+    },
   );
 
   return NextResponse.json({ data, meta }, { status: 200 });

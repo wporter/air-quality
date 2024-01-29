@@ -39,10 +39,10 @@ const Dashboard = () => {
                 ({ last_seen }) =>
                   parseInt(
                     new Date(
-                      new Date().getTime() - new Date(last_seen).getTime()
+                      new Date().getTime() - new Date(last_seen).getTime(),
                     ).getTime() /
-                      (1000 * 60)
-                  ) <= 1000
+                      (1000 * 60),
+                  ) <= 1000,
               ).length
             }
             text="Sensors Online"
@@ -58,10 +58,10 @@ const Dashboard = () => {
                 ({ last_seen }) =>
                   parseInt(
                     new Date(
-                      new Date().getTime() - new Date(last_seen).getTime()
+                      new Date().getTime() - new Date(last_seen).getTime(),
                     ).getTime() /
-                      (1000 * 60)
-                  ) > 1000
+                      (1000 * 60),
+                  ) > 1000,
               ).length
             }
             text="Sensors Offline"

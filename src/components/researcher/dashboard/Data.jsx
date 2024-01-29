@@ -33,9 +33,9 @@ const columns = [
       <p>
         {parseInt(
           new Date(
-            new Date().getTime() - new Date(getValue()).getTime()
+            new Date().getTime() - new Date(getValue()).getTime(),
           ).getTime() /
-            (1000 * 60)
+            (1000 * 60),
         )}{" "}
         minutes ago
       </p>
