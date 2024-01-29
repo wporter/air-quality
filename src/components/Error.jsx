@@ -1,13 +1,11 @@
 import Image from "next/image";
 import Waves from "../../public/svg/errorWaves.svg";
-import Navigation from "@/components/Navigation";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
 
 const Error = ({ statusCode, errorName, message }) => {
   return (
-    <div className="relative flex flex-col items-center justify-between h-screen">
-      <Navigation />
+    <div className="relative flex flex-col items-center justify-between h-screen w-full">
       <Image
         src={Waves}
         className="absolute top-64 left-0 -z-10 w-screen h-screen object-cover"

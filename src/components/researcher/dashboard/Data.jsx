@@ -1,14 +1,14 @@
 "use client";
-import { api } from "@/utils/api";
 import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Search from "../Search";
 import Dropdown from "./Dropdown";
+import Link from "next/link";
 
 const columns = [
   {
@@ -51,19 +51,21 @@ const columns = [
     header: "Status",
     cell: ({ getValue }) => <p>{getValue()}</p>,
   },
+  {
+    accessorKey: "sn",
+    header: "Link",
+    cell: ({ getValue }) => (
+      <Link href={`/researcher/data/${getValue()}`}>MORE DATA</Link>
+    ),
+  },
 ];
 
-const Data = () => {
-  const [data, setData] = useState([]);
+const Data = ({ data }) => {
   const [filters, setFilters] = useState([]);
   const [option, setOption] = useState({
     text: "Serial Number",
     accessor: "sn",
   });
-
-  useEffect(() => {
-    api("GET", "/api/locations").then(({ data }) => setData(data));
-  }, []);
 
   const { getHeaderGroups, getRowModel } = useReactTable({
     data,
