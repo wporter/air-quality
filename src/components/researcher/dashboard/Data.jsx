@@ -9,6 +9,7 @@ import { useState } from "react";
 import Search from "../Search";
 import Dropdown from "./Dropdown";
 import Link from "next/link";
+import Tag from "../Tag";
 
 const columns = [
   {
@@ -44,12 +45,18 @@ const columns = [
   {
     accessorKey: "outdoors",
     header: "Outdoors",
-    cell: ({ getValue }) => <p>{getValue() ? "true" : "false"}</p>,
+    cell: ({ getValue }) => (
+      <Tag color={getValue() ? "1" : "0"} text={getValue() ? "TRUE" : "FALSE"}>
+        {console.log(getValue())}
+      </Tag>
+    ),
   },
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ getValue }) => <p>{getValue()}</p>,
+    cell: ({ getValue }) => (
+      <Tag color={getValue() === "ACTIVE" ? "1" : "0"} text={getValue()} />
+    ),
   },
   {
     accessorKey: "sn",

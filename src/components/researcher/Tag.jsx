@@ -1,7 +1,9 @@
-export const Tag = ({ text, backgroundColor }) => {
+import { tags } from "@/data/Tags";
+
+export const Tag = ({ text, color }) => {
   return (
     <div
-      className={`${backgroundColor} min-w-fit px-10 py-4 my-4 rounded-3xl text-3xl flex justify-center items-center`}
+      className={`${tags[color]} w-fit px-4 py-1 rounded flex justify-center items-center`}
     >
       {text}
     </div>
