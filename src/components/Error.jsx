@@ -5,10 +5,10 @@ import { LuArrowLeft } from "react-icons/lu";
 
 const Error = ({ statusCode, errorName, message }) => {
   return (
-    <div className="relative flex flex-col items-center justify-between h-screen w-full">
+    <div className="relative flex flex-col items-center justify-between h-screen w-full overflow-hidden">
       <Image
         src={Waves}
-        className="absolute top-64 left-0 -z-10 w-screen h-screen object-cover"
+        className="absolute top-64 -z-10 w-screen h-screen object-cover"
         alt="Blue Waves"
       />
 
