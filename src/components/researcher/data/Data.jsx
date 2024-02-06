@@ -2,7 +2,7 @@
 import { api } from "@/utils/api";
 import { useEffect, useState } from "react";
 import Details from "./Details";
-
+// this is a comment to let me make a change so i can commit lol
 const Data = ({ params }) => {
   const { sn } = params;
 
