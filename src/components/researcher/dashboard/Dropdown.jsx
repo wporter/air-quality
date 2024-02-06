@@ -23,9 +23,7 @@ const Dropdown = ({ options, option, setOption }) => {
           options.map(({ accessor, text }, index) => (
             <div
               className={`hover:cursor-pointer px-4 py-1 hover:bg-nav-hover transition-colors duration-300 ${
-                index === 0 || index === 1
-                  ? "border-b border-dropdown-grey"
-                  : ""
+                index < 2 && "border-b-2 border-dropdown-grey"
               } ${
                 index === 0
                   ? "hover:rounded-t-lg"
