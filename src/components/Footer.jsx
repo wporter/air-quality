@@ -12,10 +12,6 @@ const Footer = () => {
         </p>
         <p className="text-sm font-light">Ontario, California</p>
       </div>
-      <div className="text-right">
-        <p className="text-sm font-light">Contact</p>
-        <p className="text-sm font-medium">dummy@email.com</p>
-      </div>
     </div>
   );
 };
