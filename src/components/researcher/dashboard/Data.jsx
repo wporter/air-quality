@@ -70,8 +70,7 @@ const columns = [
 const Data = ({ data }) => {
   const [filters, setFilters] = useState([]);
   const [option, setOption] = useState({
-    text: "Serial Number",
-    accessor: "sn",
+    text: "Select",
   });
 
   const { getHeaderGroups, getRowModel } = useReactTable({
