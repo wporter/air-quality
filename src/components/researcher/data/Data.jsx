@@ -17,7 +17,6 @@ const Data = ({ params }) => {
         temp,
         // eslint-disable-next-line camelcase
         timestamp_local,
-        geo,
         co,
         co2,
         no,
@@ -33,8 +32,6 @@ const Data = ({ params }) => {
         temp: temp,
         // eslint-disable-next-line camelcase
         timestamp: timestamp_local,
-        lat: geo.lat,
-        lon: geo.lon,
         co: co,
         co2: co2,
         no: no,
