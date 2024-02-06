@@ -10,7 +10,7 @@ const Dropdown = ({ options, option, setOption }) => {
         onClick={() => setToggle(!toggle)}
         className="flex items-center justify-between px-2 hover:cursor-pointer text-gray-400"
       >
-        {option.text}{" "}
+        {option.text}
         <GoTriangleDown className={`${toggle && "rotate-180"} text-2xl`} />
       </div>
 
@@ -24,13 +24,8 @@ const Dropdown = ({ options, option, setOption }) => {
             <div
               className={`hover:cursor-pointer px-4 py-1 hover:bg-nav-hover transition-colors duration-300 ${
                 index < 2 && "border-b-2 border-dropdown-grey"
-              } ${
-                index === 0
-                  ? "hover:rounded-t-lg"
-                  : index === options.length - 1
-                    ? "hover:rounded-b-lg"
-                    : ""
-              }`}
+              } ${"first:rounded-t-lg"}
+              ${"last:rounded-b-lg"}`}
               key={index}
               onClick={() => {
                 setOption({ accessor, text });
