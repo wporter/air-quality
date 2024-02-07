@@ -1,10 +1,16 @@
 import Error from "@/components/Error";
 
 describe("Tag", () => {
-  it("ACTIVE", () => {
+  it("404 Page Not Found", () => {
     cy.mount(<Error status="404" name="Page Not Found." />);
 
-    cy.get('[data-cy="ACTIVE-tag"]').contains("ACTIVE");
-    cy.get('[data-cy="ACTIVE-tag"]').should("have.class", "bg-status-green");
+    cy.get('[data-cy="error-status"]').contains("404");
+    cy.get('[data-cy="error-name"]').contains("Page Not Found.");
+  });
+  it("500 Internal Server Error", () => {
+    cy.mount(<Error status="500" name="Internal Server Error" />);
+
+    cy.get('[data-cy="error-status"]').contains("500");
+    cy.get('[data-cy="error-name"]').contains("Internal Server Error");
   });
 });
