@@ -37,6 +37,10 @@ module.exports = {
           grey: "#898989",
           hover: "#F4F4F4",
         },
+
+        dropdown: {
+          grey: "#F3F3F3",
+        },
       },
     },
   },
