@@ -1,4 +1,4 @@
-const { default: Tag } = require("@/components/researcher/Tag");
+import Tag from "@/components/researcher/Tag";
 
 describe("Tag", () => {
   it("ACTIVE", () => {
