@@ -3,7 +3,7 @@ import { MdRefresh } from "react-icons/md";
 const Details = ({ fields, refresh }) => {
   return (
     <div className="w-1/3 border border-gray-300 rounded-lg px-9 py-4 my-4">
-      <div className="flex justify-between items-center border-b-[2px] border-gray-300 py-2">
+      <div className="flex justify-between items-center border-b-2 border-gray-300 py-2">
         <p className="text-lg font-bold px-2">DEVICE DETAILS</p>
         <MdRefresh
           className="text-xl hover:cursor-pointer"
