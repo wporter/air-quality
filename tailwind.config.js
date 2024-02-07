@@ -37,6 +37,9 @@ module.exports = {
           hover: "#F4F4F4",
         },
       },
+      fontFamily: {
+        neue: ['"Helvetica Neue"', "Arial", "sans-serif"],
+      },
     },
   },
   plugins: [],

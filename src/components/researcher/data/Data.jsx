@@ -27,8 +27,8 @@ const Data = ({ params }) => {
         pm25,
       } = data[0];
       setFields({
+        "Serial Number": sn,
         rh: rh,
-        sn: sn,
         temp: temp,
         // eslint-disable-next-line camelcase
         timestamp: timestamp_local,
