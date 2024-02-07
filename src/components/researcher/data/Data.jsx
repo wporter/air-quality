@@ -16,7 +16,7 @@ const Data = ({ params }) => {
         sn,
         temp,
         // eslint-disable-next-line camelcase
-        timestamp_local,
+        timestamp,
         co,
         co2,
         no,
@@ -27,19 +27,19 @@ const Data = ({ params }) => {
         pm25,
       } = data[0];
       setFields({
-        rh: rh,
-        sn: sn,
-        temp: temp,
+        "Serial Number": sn,
+        "Relative Humidity": rh,
+        Temperature: temp,
         // eslint-disable-next-line camelcase
-        timestamp: timestamp_local,
-        co: co,
-        co2: co2,
-        no: no,
-        no2: no2,
-        o3: o3,
-        pm1: pm1,
-        pm10: pm10,
-        pm25: pm25,
+        Timestamp: new Date(timestamp).toLocaleTimeString(),
+        "Carbon Monoxide": co,
+        "Carbon Dixiode": co2,
+        "Nitric Oxide": no,
+        "Nitrogen Dioxide": no2,
+        Ozone: o3,
+        "PM 1": pm1,
+        "PM 2.5": pm25,
+        "PM 10": pm10,
       });
     });
   };
@@ -49,7 +49,7 @@ const Data = ({ params }) => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <Details fields={fields} refresh={() => load()} />
     </div>
   );
