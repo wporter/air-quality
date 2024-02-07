@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/data/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -18,6 +18,7 @@ module.exports = {
           "blue-300": "#C9E4F3",
           "blue-400": "#8DC7E8",
           "white-100": "#F9F9F9",
+          "white-200": "E0E0E0",
           grey: "#6A707E",
         },
 
@@ -35,6 +36,10 @@ module.exports = {
           black: "#363636",
           grey: "#898989",
           hover: "#F4F4F4",
+        },
+
+        dropdown: {
+          grey: "#F3F3F3",
         },
       },
     },

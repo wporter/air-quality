@@ -46,9 +46,10 @@ const columns = [
     accessorKey: "outdoors",
     header: "Outdoors",
     cell: ({ getValue }) => (
-      <Tag color={getValue() ? "1" : "0"} text={getValue() ? "TRUE" : "FALSE"}>
-        {console.log(getValue())}
-      </Tag>
+      <Tag
+        color={getValue() ? "1" : "0"}
+        text={getValue() ? "TRUE" : "FALSE"}
+      />
     ),
   },
   {
