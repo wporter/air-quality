@@ -5,7 +5,6 @@ import {
   MdOutlineNetworkWifi1Bar,
 } from "react-icons/md";
 import Status from "./Status";
-import { useSession } from "next-auth/react";
 import Data from "@/components/researcher/dashboard/Data";
 import { useEffect, useState } from "react";
 import { api } from "@/utils/api";
@@ -13,8 +12,6 @@ import { api } from "@/utils/api";
 const Leaflet = dynamic(() => import("../../Map"), { ssr: false });
 
 const Dashboard = () => {
-  const { data: session } = useSession();
-  const userName = session?.user?.name;
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -22,13 +19,10 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="h-1/2 w-full bg-air-white-100">
-      <p className="text-2xl font-light text-air-black-300 pt-10 pb-2 pl-8">
-        Welcome, {userName}
-      </p>
-      <div className="w-full h-full bg-air-white-100 flex pl-8">
+    <div className="h-full w-full bg-air-white-100 pt-10">
+      <div className="w-full h-2/4 bg-air-white-100 flex pl-8">
         <Leaflet height="h-full" width="w-9/12" markers={data} />
-        <div className="w-2/12 ml-20 flex flex-col gap-3">
+        <div className="w-3/12 flex flex-col gap-6 justify-center items-center">
           <Status
             bg="bg-sensor-green"
             Icon={MdOutlineSignalWifi4Bar}
