@@ -101,7 +101,7 @@ const Data = ({ data }) => {
   ];
 
   return (
-    <div className="mt-6 pr-10 pl-8 h-1/2 w-full overflow-scroll p-2">
+    <div className="mt-6 pr-10 pl-8 h-screen w-full overflow-scroll p-2">
       <div className="flex items-center gap-2">
         <Dropdown options={options} option={option} setOption={setOption} />
         <Search
