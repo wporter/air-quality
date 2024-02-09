@@ -19,34 +19,30 @@ const About = () => {
               WHAT IS OMEGA INTITIATIVE?
             </p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Metus
-              aliquam eleifend mi in nulla posuere sollicitudin. Laoreet id
-              donec ultrices tincidunt arcu non sodales neque. Enim diam
-              vulputate ut pharetra sit. Vitae ultricies leo integer malesuada
-              nunc vel risus commodo viverra. Dui accumsan sit amet nulla
-              facilisi morbi. Consectetur purus ut faucibus pulvinar elementum.
-              Viverra ipsum nunc aliquet bibendum enim. Quam vulputate dignissim
-              suspendisse in est ante in nibh mauris. Eu volutpat odio facilisis
-              mauris sit. Eget nunc scelerisque viverra mauris in aliquam. Neque
-              volutpat ac tincidunt vitae semper quis lectus. Tempus quam
-              pellentesque nec nam aliquam sem et tortor consequat. Sit amet
-              cursus sit amet dictum. Sit amet cursus sit amet dictum sit amet
-              justo. Viverra suspendisse potenti nullam ac tortor. Aenean
-              euismod elementum nisi quis.
+              Revolutionizing Air Quality in Inland Southern California In a
+              groundbreaking move, the Center for Environmental Research and
+              Technology (CE-CERT) at the Marlan and Rosemary Bourns College of
+              Engineering is tackling the pressing issue of air pollution in
+              Inland Southern California, thanks to a $2 million boost from the
+              California Attorney General&apos;s Office. This initiative springs
+              from the fallout of the Volkswagen emissions scandal, aiming to
+              right the environmental wrongs that have disproportionately harmed
+              low-income Latino and Black communities living in the shadow of
+              the region&apos;s booming logistics industry. Our project, a
+              cornerstone of the OMEGA Initiative, is on a mission to scrutinize
+              the environmental toll of goods movement, in collaboration with UC
+              Berkeley and the Coalition for Clean Air, and to pioneer solutions
+              that clean the air we all breathe.
               <br /> <br />
-              Egestas pretium aenean pharetra magna ac placerat vestibulum. Id
-              volutpat lacus laoreet non curabitur gravida arcu ac. Sem
-              fringilla ut morbi tincidunt augue interdum velit euismod in.
-              Turpis in eu mi bibendum neque egestas congue quisque egestas.
-              Massa eget egestas purus viverra accumsan in. Lacus luctus
-              accumsan tortor posuere ac ut consequat semper. Tempor nec feugiat
-              nisl pretium fusce id velit ut tortor. Bibendum ut tristique et
-              egestas quis ipsum suspendisse. Quis enim lobortis scelerisque
-              fermentum dui. Gravida arcu ac tortor dignissim convallis aenean
-              et. Eget felis eget nunc lobortis mattis aliquam faucibus purus.
-              Et sollicitudin ac orci phasellus egestas tellus rutrum tellus. Et
-              molestie ac feugiat sed lectus vestibulum mattis ullamcorper.
+              With an innovative blend of on-board emissions tracking, smart
+              freight management, and grassroots air quality monitoring,
+              we&apos;re not just studying the problem—we&apos;re fixing it. Led
+              by CE-CERT director Matthew Barth, our team is dedicated to making
+              a tangible difference. This isn&apos;t just research; it&apos;s a
+              quest for cleaner air, healthier communities, and a sustainable
+              future for Southern California&apos;s heartland. Join us as we
+              forge a path to environmental justice and innovation, one breath
+              of fresh air at a time.
             </p>
           </div>
           <div className="w-1/2 flex justify-center">
