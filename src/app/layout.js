@@ -1,8 +1,9 @@
-import Navigation from "@/components/Navigation";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import Session from "@/components/Session";
+import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
 
 // eslint-disable-next-line new-cap
 const inter = Inter({ subsets: ["latin"] });
@@ -23,7 +24,11 @@ export default function RootLayout({ children, session }) {
       <body className={inter.className}>
         <Session session={session}>
           <Navigation />
-          {children}
+          <div className="flex flex-col items-center justify-center">
+            {children}
+          </div>
+
+          <Footer />
         </Session>
       </body>
     </html>

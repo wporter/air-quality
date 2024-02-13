@@ -2,12 +2,12 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Marker from "@/components/Marker";
 
-const Map = ({ markers, setData }) => {
+const Map = ({ height, width, markers }) => {
   const position = [34.056, -117.5981];
 
   return (
     <MapContainer
-      className="h-[60vh] w-full !z-0"
+      className={`${height} ${width}`}
       center={position}
       zoom={11}
       minZoom={8}
@@ -18,14 +18,9 @@ const Map = ({ markers, setData }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
+      {console.log(markers)}
       {markers.map(({ geo, sn }, index) => (
-        <Marker
-          key={index}
-          lat={geo.lat}
-          lon={geo.lon}
-          sn={sn}
-          setData={setData}
-        />
+        <Marker key={index} lat={geo.lat} lon={geo.lon} sn={sn} />
       ))}
     </MapContainer>
   );
