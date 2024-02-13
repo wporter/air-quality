@@ -13,8 +13,6 @@ const accessors = {
 };
 
 const Line = ({ data, title, units }) => {
-  console.log(data);
-
   if (data.PM1.points.length === 0) {
     return <>loading</>;
   }

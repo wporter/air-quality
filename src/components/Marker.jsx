@@ -20,10 +20,7 @@ const Marker = ({ sn, lat, lon }) => {
 
   const handleClick = async () => {
     // const { items } = await api("GET", `/api/data/${sn}`);
-
     // setData(items);
-
-    console.log(sn);
   };
 
   return (
