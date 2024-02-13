@@ -52,10 +52,15 @@ const Dashboard = () => {
                 ({ last_seen }) =>
                   parseInt(
                     new Date(
-                      new Date().getTime() - new Date(last_seen).getTime(),
+                      new Date().getTime() -
+                        new Date(
+                          new Date(last_seen).getTime() -
+                            new Date().getTimezoneOffset() * 60000,
+                        ),
                     ).getTime() /
                       (1000 * 60),
-                  ) > 1000,
+                  ) >
+                  60 * 5,
               ).length
             }
             text="Sensors Offline"

@@ -11,15 +11,16 @@ const Map = ({ height, width, markers }) => {
       center={position}
       zoom={11}
       minZoom={8}
-      maxZoom={20}
+      maxZoom={18}
       scrollWheelZoom={false}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
-      {markers.map(({ geo }, index) => (
-        <Marker key={index} lat={geo.lat} lon={geo.lon} />
+      {console.log(markers)}
+      {markers.map(({ geo, sn }, index) => (
+        <Marker key={index} lat={geo.lat} lon={geo.lon} sn={sn} />
       ))}
     </MapContainer>
   );

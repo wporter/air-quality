@@ -30,17 +30,25 @@ const columns = [
   {
     accessorKey: "last_seen",
     header: "Last Seen",
-    cell: ({ getValue }) => (
-      <p>
-        {parseInt(
-          new Date(
-            new Date().getTime() - new Date(getValue()).getTime(),
-          ).getTime() /
-            (1000 * 60),
-        )}{" "}
-        minutes ago
-      </p>
-    ),
+    cell: ({ getValue }) => {
+      const computed = parseInt(
+        new Date(
+          new Date().getTime() -
+            new Date(
+              new Date(getValue()).getTime() -
+                new Date().getTimezoneOffset() * 60000,
+            ),
+        ).getTime() /
+          (1000 * 60),
+      );
+
+      return (
+        <>
+          {computed < 60 && <p>{computed} minutes ago</p>}
+          {computed > 60 && <p>{(computed / 60).toFixed(2)} hours ago</p>}
+        </>
+      );
+    },
   },
   {
     accessorKey: "outdoors",

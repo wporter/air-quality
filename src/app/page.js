@@ -6,14 +6,20 @@ import { api } from "../utils/api";
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
 const Page = () => {
-  const [markers, setMarkers] = useState([]);
+  const [markers, setMarkers] = useState({
+    markers: [],
+    total: 0,
+  });
+
+  const loadMarkers = async () => {
+    const { data, meta } = await api("GET", "/api/locations");
+    setMarkers({
+      markers: data,
+      total: meta.total,
+    });
+  };
 
   useEffect(() => {
-    const loadMarkers = async () => {
-      const { data } = await api("GET", "/api/locations");
-      setMarkers(data);
-    };
-
     loadMarkers();
   }, []);
 
@@ -22,7 +28,7 @@ const Page = () => {
       <Welcome />
       <div className="text-5xl font-bold my-10 text-left w-11/12">
         <p className="my-4">Public View</p>
-        <Map height="h-[60vh]" width="w-full" markers={markers} />
+        <Map height="h-[60vh]" width="w-full" markers={markers.markers} />
       </div>
     </div>
   );
