@@ -15,7 +15,7 @@ const Navigation = () => {
         </p>
       </Link>
 
-      <div className="px-5 py-0.4 text-air-blue-300 text-xl ml-auto mr-20 font-light">
+      <div className="px-5 py-0.4 text-air-blue-300 text-xl ml-auto mr-8 font-light">
         <Link href="/about">
           <p className="group text-blue-500 transition-all duration-500 ease-in-out relative">
             About Us
