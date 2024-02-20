@@ -66,21 +66,21 @@ const Data = ({ params }) => {
       } = data[0];
       setFields({
         "Serial Number": sn,
-        "Relative Humidity": rh,
-        Temperature: temp,
+        "Relative Humidity": `${rh}%`,
+        Temperature: `${temp}°C`,
         // eslint-disable-next-line camelcase
         Timestamp: new Date(
           new Date(timestamp).getTime() -
             new Date().getTimezoneOffset() * 60000,
         ).toLocaleTimeString(),
-        "Carbon Monoxide": co,
-        "Carbon Dixiode": co2,
-        "Nitric Oxide": no,
-        "Nitrogen Dioxide": no2,
-        Ozone: o3,
-        "PM 1": pm1,
-        "PM 2.5": pm25,
-        "PM 10": pm10,
+        "Carbon Monoxide": `${co} ppb`,
+        "Carbon Dixiode": `${co2} ppm`,
+        "Nitric Oxide": `${no} ppb`,
+        "Nitrogen Dioxide": `${no2} ppb`,
+        Ozone: `${o3} ppb`,
+        "PM 1": `${pm1} μg/m³`,
+        "PM 2.5": `${pm25} μg/m³`,
+        "PM 10": `${pm10} μg/m³`,
       });
     });
   };
