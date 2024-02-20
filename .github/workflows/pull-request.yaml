@@ -41,14 +41,7 @@ jobs:
           node-version: "18.17.0"
       - run: npm ci
       - run: npm run build
-    env:
-      NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID}}
-      NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL: ${{secrets.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL}}
-      NEXT_PUBLIC_FIREBASE_PRIVATE_KEY: ${{secrets.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY}}
-      NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID}}
-      NEXT_PUBLIC_GOOGLE_CLIENT_SECRET: ${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET}}
-      NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
-      NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
+
   testing:
     runs-on: ubuntu-latest
     steps:
@@ -64,11 +57,3 @@ jobs:
           build: npm run build
           start: npm run start
           wait-on: "http://localhost:3003"
-    env:
-      NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID}}
-      NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL: ${{secrets.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL}}
-      NEXT_PUBLIC_FIREBASE_PRIVATE_KEY: ${{secrets.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY}}
-      NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID}}
-      NEXT_PUBLIC_GOOGLE_CLIENT_SECRET: ${{secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET}}
-      NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
-      NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
