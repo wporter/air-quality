@@ -109,7 +109,7 @@ const Data = ({ data }) => {
   ];
 
   return (
-    <div className="mt-6 pr-10 pl-8 h-1/2 w-full overflow-scroll p-2">
+    <div className="mt-6 pr-10 pl-8 h-1/2 w-full p-2">
       <div className="flex items-center gap-2">
         <Dropdown options={options} option={option} setOption={setOption} />
         <Search
@@ -118,30 +118,33 @@ const Data = ({ data }) => {
           setFilters={setFilters}
         />
       </div>
-      <div className="mt-4 bg-air-blue-200 text-white">
-        {getHeaderGroups().map(({ headers, id }) => (
-          <div key={id} className="flex">
-            {headers.map(({ id, column }) => (
-              <div key={id} className="w-2/12 p-1 m-2">
-                {column.columnDef.header}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-      <div>
-        {getRowModel().rows.map(({ id, getVisibleCells }) => (
-          <div
-            className="flex bg-white py-2 hover:bg-white/90 hover:cursor-pointer"
-            key={id}
-          >
-            {getVisibleCells().map(({ id, column, getContext }) => (
-              <div className="w-2/12 p-1 m-2" key={id}>
-                {flexRender(column.columnDef.cell, getContext())}
-              </div>
-            ))}
-          </div>
-        ))}
+
+      <div className="h-3/4">
+        <div className="mt-4 bg-air-blue-200 text-white">
+          {getHeaderGroups().map(({ headers, id }) => (
+            <div key={id} className="flex">
+              {headers.map(({ id, column }) => (
+                <div key={id} className="w-2/12 p-1 m-2">
+                  {column.columnDef.header}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="overflow-y-scroll h-3/4">
+          {getRowModel().rows.map(({ id, getVisibleCells }) => (
+            <div
+              className="flex bg-white p-1 hover:bg-white/90 hover:cursor-pointer"
+              key={id}
+            >
+              {getVisibleCells().map(({ id, column, getContext }) => (
+                <div className="w-2/12 p-1 m-2" key={id}>
+                  {flexRender(column.columnDef.cell, getContext())}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

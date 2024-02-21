@@ -18,8 +18,6 @@ const Line = ({ data, title, units }) => {
     return <>loading</>;
   }
 
-  console.log(data);
-
   const { PM1 } = data;
 
   return (

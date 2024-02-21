@@ -4,7 +4,6 @@ import Line from "./Line";
 
 const Data = async ({ sn }) => {
   const data = await getLine(sn);
-
   const fields = await getDataDetails(sn);
 
   return (
