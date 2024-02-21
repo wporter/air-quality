@@ -1,15 +1,8 @@
 import Welcome from "@/components/Welcome";
-import { getLocations } from "../utils/api";
 import Map from "@/components/Map/Map";
+import { getLocations } from "@/utils/api";
 
-const Page = async () => {
-  const { data, meta } = await getLocations();
-
-  const markers = {
-    markers: data,
-    total: meta.total,
-  };
-
+const Page = ({ markers }) => {
   return (
     <div className="flex flex-col justify-center items-center relative">
       <Welcome />
@@ -22,3 +15,14 @@ const Page = async () => {
 };
 
 export default Page;
+
+export const getStaticProps = async () => {
+  const { data, meta } = await getLocations();
+
+  const markers = {
+    markers: data,
+    total: meta.total,
+  };
+
+  return { props: { markers } };
+};

@@ -56,7 +56,7 @@ export const getDataDetails = async (serialNumber) => {
 export const getLine = async (sn) => {
   const { data } = await api(
     "GET",
-    `https://api.quant-aq.com/device-api/v1/devices/${sn}/data`,
+    `https://api.quant-aq.com/device-api/v1/devices/${sn}/data/`,
     {
       Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
     },

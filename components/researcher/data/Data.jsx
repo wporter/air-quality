@@ -1,11 +1,7 @@
-import { getDataDetails, getLine } from "@/utils/api";
 import Details from "./Details";
 import Line from "./Line";
 
-const Data = async ({ sn }) => {
-  const data = await getLine(sn);
-  const fields = await getDataDetails(sn);
-
+const Data = ({ data, fields }) => {
   return (
     <div className="flex">
       <Details fields={fields} refresh={() => {}} />

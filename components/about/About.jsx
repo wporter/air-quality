@@ -1,11 +1,14 @@
 import { members } from "@/data/Members";
-import Waves from "../../../public/svg/AboutWaves.svg";
+import Waves from "@/public/svg/AboutWaves.svg";
 import Image from "next/image";
 import Profile from "./Profile";
+import Footer from "../Footer";
+import Navigation from "../Navigation";
 
 const About = () => {
   return (
     <div className="relative flex flex-col items-center justify-between">
+      <Navigation />
       <Image
         src={Waves}
         className="absolute top-0 left-0 -z-10 w-screen h-screen object-cover"
@@ -64,6 +67,7 @@ const About = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

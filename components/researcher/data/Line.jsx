@@ -27,7 +27,7 @@ const Line = ({ data, title, units }) => {
         {({ width }) => (
           <XYChart
             height={300}
-            width={width}
+            width={300}
             xScale={{ type: "time" }}
             yScale={{ type: "linear" }}
           >
