@@ -4,23 +4,22 @@ import {
 } from "react-icons/md";
 import Status from "./Status";
 import Data from "@/components/researcher/dashboard/Data";
-import { getLocations } from "@/utils/api";
 import Map from "@/components/Map/Map";
 
-const Dashboard = async () => {
-  const { data } = await getLocations();
+const Dashboard = ({ data }) => {
+  const { markers } = data;
 
   return (
-    <div className="h-full w-full bg-air-white-100 pt-10">
-      <div className="w-full h-2/4 bg-air-white-100 flex pl-8">
-        <Map height="h-full" width="w-9/12" markers={data} />
+    <div className="h-screen w-full bg-air-white-100 pt-2">
+      <div className="w-full h-1/2 bg-air-white-100 flex pl-8">
+        <Map height="h-full" width="w-9/12" markers={markers} />
         <div className="w-3/12 flex flex-col gap-6 justify-center items-center">
           <Status
             bg="bg-sensor-green"
             Icon={MdOutlineSignalWifi4Bar}
             color="text-green-400"
             value={
-              data.filter(
+              markers.filter(
                 // eslint-disable-next-line camelcase
                 ({ last_seen }) =>
                   parseInt(
@@ -39,7 +38,7 @@ const Dashboard = async () => {
             Icon={MdOutlineNetworkWifi1Bar}
             color="text-red-400"
             value={
-              data.filter(
+              markers.filter(
                 // eslint-disable-next-line camelcase
                 ({ last_seen }) =>
                   parseInt(
@@ -59,7 +58,7 @@ const Dashboard = async () => {
           />
         </div>
       </div>
-      <Data data={data} />
+      <Data data={markers} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Waves from "../../public/svg/errorWaves.svg";
+import Waves from "@/public/svg/errorWaves.svg";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
 
