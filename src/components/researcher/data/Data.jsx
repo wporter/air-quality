@@ -1,50 +1,16 @@
-import { getDataDetails, getLine } from "@/utils/api";
-import Details from "./Details";
-import Line from "./Line";
+"use client";
+import Protected from "../Protected";
+import Information from "./Information";
+import { useSearchParams } from "next/navigation";
 
-const Data = async ({ sn }) => {
-  const data = await getLine(sn);
-  const fields = await getDataDetails(sn);
+const Data = () => {
+  const searchParams = useSearchParams();
+  const sn = searchParams.get("sn");
 
   return (
-    <div className="flex">
-      <Details fields={fields} refresh={() => {}} />
-      <div className="h-full w-full flex flex-wrap">
-        <Line
-          data={data}
-          title="Particulate Matter"
-          units="particles per something something"
-        />
-        <Line data={data} title="Gases" units="particles per billion" />
-        <Line
-          data={data}
-          title="Other Information"
-          units="particles per something something"
-        />
-        <Line
-          data={data}
-          title="Particulate Matter"
-          units="particles per something something"
-        />
-        <Line data={data} title="Gases" units="particles per billion" />
-        <Line
-          data={data}
-          title="Other Information"
-          units="particles per something something"
-        />
-        <Line
-          data={data}
-          title="Particulate Matter"
-          units="particles per something something"
-        />
-        <Line data={data} title="Gases" units="particles per billion" />
-        <Line
-          data={data}
-          title="Other Information"
-          units="particles per something something"
-        />
-      </div>
-    </div>
+    <Protected>
+      <Information sn={sn} />
+    </Protected>
   );
 };
 
