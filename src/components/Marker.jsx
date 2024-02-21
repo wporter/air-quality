@@ -18,10 +18,7 @@ const Marker = ({ sn, lat, lon }) => {
     shadowAnchor: null,
   });
 
-  const handleClick = async () => {
-    // const { items } = await api("GET", `/api/data/${sn}`);
-    // setData(items);
-  };
+  const handleClick = async () => {};
 
   return (
     lat &&

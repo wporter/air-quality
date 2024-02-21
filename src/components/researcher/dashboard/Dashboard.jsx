@@ -1,27 +1,19 @@
-"use client";
-import dynamic from "next/dynamic";
 import {
   MdOutlineSignalWifi4Bar,
   MdOutlineNetworkWifi1Bar,
 } from "react-icons/md";
 import Status from "./Status";
 import Data from "@/components/researcher/dashboard/Data";
-import { useEffect, useState } from "react";
-import { api } from "@/utils/api";
+import { getLocations } from "@/utils/api";
+import Map from "@/components/Map/Map";
 
-const Leaflet = dynamic(() => import("../../Map"), { ssr: false });
-
-const Dashboard = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    api("GET", "/api/locations").then(({ data }) => setData(data));
-  }, []);
+const Dashboard = async () => {
+  const { data } = await getLocations();
 
   return (
     <div className="h-full w-full bg-air-white-100 pt-10">
       <div className="w-full h-2/4 bg-air-white-100 flex pl-8">
-        <Leaflet height="h-full" width="w-9/12" markers={data} />
+        <Map height="h-full" width="w-9/12" markers={data} />
         <div className="w-3/12 flex flex-col gap-6 justify-center items-center">
           <Status
             bg="bg-sensor-green"

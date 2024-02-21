@@ -1,3 +1,4 @@
+"use client";
 import {
   AnimatedAxis,
   AnimatedGrid,
@@ -13,9 +14,13 @@ const accessors = {
 };
 
 const Line = ({ data, title, units }) => {
-  if (data.PM1.points.length === 0) {
+  if (data.PM1.length === 0) {
     return <>loading</>;
   }
+
+  console.log(data);
+
+  const { PM1 } = data;
 
   return (
     <div className="w-1/3">
@@ -23,8 +28,7 @@ const Line = ({ data, title, units }) => {
       <ParentSize className="-my-8">
         {({ width }) => (
           <XYChart
-            // height={1000}
-            height="300"
+            height={300}
             width={width}
             xScale={{ type: "time" }}
             yScale={{ type: "linear" }}
@@ -52,15 +56,14 @@ const Line = ({ data, title, units }) => {
               numTicks={10}
               label={units}
             />
-            {Object.values(data).map(({ stroke, key, points }, index) => (
-              <AnimatedLineSeries
-                key={index}
-                stroke={stroke}
-                dataKey={key}
-                data={points}
-                {...accessors}
-              />
-            ))}
+            {/* {Object.values(data).map(({ stroke, key, points }, index) => ( */}
+            <AnimatedLineSeries
+              stroke="#FF0000"
+              dataKey="PM1"
+              data={PM1}
+              {...accessors}
+            />
+            {/* ))} */}
             <Tooltip
               snapTooltipToDatumX
               snapTooltipToDatumY
