@@ -37,6 +37,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+    env:
+      QUANTAQ_API_KEY: ${{secrets.QUANTAQ_API_KEY}}
 
   deploy:
     runs-on: ubuntu-latest
