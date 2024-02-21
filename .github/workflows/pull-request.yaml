@@ -58,6 +58,6 @@ jobs:
           browser: chrome
           build: npm run build
           start: npx serve@latest out
-          wait-on: "http://localhost:3003"
+          wait-on: "http://localhost:3000"
     env:
       QUANTAQ_API_KEY: ${{secrets.QUANTAQ_API_KEY}}
