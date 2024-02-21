@@ -71,7 +71,7 @@ const columns = [
     accessorKey: "sn",
     header: "Link",
     cell: ({ getValue }) => (
-      <Link href={`/researcher/data/${getValue()}`}>MORE DATA</Link>
+      <Link href={`/researcher/data?sn=${getValue()}`}>MORE DATA</Link>
     ),
   },
 ];

@@ -1,10 +1,12 @@
 import Data from "@/components/researcher/data/Data";
 import Protected from "@/components/researcher/Protected";
 
-const Page = ({ params }) => {
+const Page = ({ searchParams }) => {
+  const sn = searchParams["sn"];
+
   return (
     <Protected>
-      <Data params={params} />
+      <Data sn={sn} />
     </Protected>
   );
 };

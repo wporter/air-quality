@@ -1,27 +1,14 @@
-"use client";
 import Welcome from "@/components/Welcome";
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-import { api } from "../utils/api";
-const Map = dynamic(() => import("../components/Map"), { ssr: false });
+import { getLocations } from "../utils/api";
+import Map from "@/components/Map/Map";
 
-const Page = () => {
-  const [markers, setMarkers] = useState({
-    markers: [],
-    total: 0,
-  });
+const Page = async () => {
+  const { data, meta } = await getLocations();
 
-  const loadMarkers = async () => {
-    const { data, meta } = await api("GET", "/api/locations");
-    setMarkers({
-      markers: data,
-      total: meta.total,
-    });
+  const markers = {
+    markers: data,
+    total: meta.total,
   };
-
-  useEffect(() => {
-    loadMarkers();
-  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center relative">
