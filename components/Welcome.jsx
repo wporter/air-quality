@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Waves from "../../public/svg/landingWaves.svg";
+import Waves from "@/public/svg/landingWaves.svg";
 import { FaChevronDown } from "react-icons/fa";
 
 const Welcome = () => {

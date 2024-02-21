@@ -4,7 +4,7 @@ import { ImOmega } from "react-icons/im";
 
 const Navigation = () => {
   return (
-    <div className="w-full bg-white flex justify-between items-center py-3 px-8 z-10 drop-shadow-xl">
+    <div className="w-full bg-white flex justify-between items-center py-3 px-8 z-10">
       <Link href="/" className="flex items-center">
         <ImOmega className="text-air-blue-200 text-3xl" />
         <p className="text-air-blue-200 text-3xl font-light ml-2">
