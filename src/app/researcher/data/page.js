@@ -1,13 +1,11 @@
 import Data from "@/components/researcher/data/Data";
-import Protected from "@/components/researcher/Protected";
+import { Suspense } from "react";
 
-const Page = ({ searchParams }) => {
-  const sn = searchParams["sn"];
-
+const Page = () => {
   return (
-    <Protected>
-      <Data sn={sn} />
-    </Protected>
+    <Suspense>
+      <Data />
+    </Suspense>
   );
 };
 
