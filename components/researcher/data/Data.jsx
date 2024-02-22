@@ -6,39 +6,9 @@ const Data = ({ data, fields }) => {
     <div className="flex">
       <Details fields={fields} refresh={() => {}} />
       <div className="h-full w-full flex flex-wrap">
-        <Line
-          data={data}
-          title="Particulate Matter"
-          units="particles per something something"
-        />
-        <Line data={data} title="Gases" units="particles per billion" />
-        <Line
-          data={data}
-          title="Other Information"
-          units="particles per something something"
-        />
-        <Line
-          data={data}
-          title="Particulate Matter"
-          units="particles per something something"
-        />
-        <Line data={data} title="Gases" units="particles per billion" />
-        <Line
-          data={data}
-          title="Other Information"
-          units="particles per something something"
-        />
-        <Line
-          data={data}
-          title="Particulate Matter"
-          units="particles per something something"
-        />
-        <Line data={data} title="Gases" units="particles per billion" />
-        <Line
-          data={data}
-          title="Other Information"
-          units="particles per something something"
-        />
+        {data.map(({ data, units, title }, index) => (
+          <Line key={index} data={data} title={title} units={units} />
+        ))}
       </div>
     </div>
   );

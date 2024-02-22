@@ -36,17 +36,17 @@ export const getDataDetails = async (serialNumber) => {
 
   return {
     "Serial Number": sn,
-    "Relative Humidity": `${rh}%`,
-    Temperature: `${temp}°C`,
+    "Relative Humidity": rh ? `${rh}%` : "Not Available",
+    Temperature: temp ? `${temp}°C` : "Not Available",
     // eslint-disable-next-line camelcase
     Timestamp: new Date(
       new Date(timestamp).getTime() - new Date().getTimezoneOffset() * 60000,
     ).toLocaleTimeString(),
-    "Carbon Monoxide": `${co} ppb`,
-    "Carbon Dixiode": `${co2} ppm`,
-    "Nitric Oxide": `${no} ppb`,
-    "Nitrogen Dioxide": `${no2} ppb`,
-    Ozone: `${o3} ppb`,
+    "Carbon Monoxide": co ? `${co} ppb` : "Not Available",
+    "Carbon Dixiode": co2 ? `${co2} ppm` : "Not Available",
+    "Nitric Oxide": no ? `${no} ppb` : "Not Available",
+    "Nitrogen Dioxide": no2 ? `${no2} ppb` : "Not Available",
+    Ozone: o3 ? `${o3} ppm` : "Not Available",
     "PM 1": `${pm1} μg/m³`,
     "PM 2.5": `${pm25} μg/m³`,
     "PM 10": `${pm10} μg/m³`,
@@ -65,21 +65,71 @@ export const getLine = async (sn) => {
   const PM1 = [];
   const PM10 = [];
   const PM25 = [];
+  const CO = [];
+  const CO2 = [];
+  const NO = [];
+  const NO2 = [];
+  const O3 = [];
 
-  data.forEach(({ pm1, pm25, pm10, timestamp }) => {
+  data.forEach(({ pm1, pm25, pm10, co, co2, no, no2, o3, timestamp }) => {
     const local =
       new Date(timestamp).getTime() - new Date().getTimezoneOffset() * 60000;
 
     PM1.push({ x: local, y: pm1 });
     PM10.push({ x: local, y: pm10 });
     PM25.push({ x: local, y: pm25 });
+
+    if (co !== undefined) {
+      CO.push({ x: local, y: co });
+      CO2.push({ x: local, y: co2 });
+      NO.push({ x: local, y: no });
+      NO2.push({ x: local, y: no2 });
+      O3.push({ x: local, y: o3 });
+    }
   });
 
-  return {
-    PM1: PM1.reverse(),
-    PM10: PM10.reverse(),
-    PM25: PM25.reverse(),
-  };
+  return [
+    {
+      data: PM1.reverse(),
+      units: "ppb",
+      title: "PM 1.0",
+    },
+    {
+      data: PM25.reverse(),
+      units: "ppb",
+      title: "PM 2.5",
+    },
+    {
+      data: PM10.reverse(),
+      units: "ppb",
+      title: "PM 10",
+    },
+    {
+      data: CO.reverse(),
+      units: "ppb",
+      title: "Carbon Monoxide",
+    },
+    {
+      data: CO2.reverse(),
+      units: "ppm",
+      title: "Carbon Dioxide",
+    },
+    {
+      data: NO.reverse(),
+      units: "ppb",
+      title: "Nitric Oxide",
+    },
+    {
+      data: NO2.reverse(),
+      units: "ppb",
+      title: "Nitric Dioxide",
+    },
+    {
+      data: O3.reverse(),
+      units: "ppm",
+      title: "Ozone",
+    },
+  ];
 };
 
 export const getLocations = async () => {
