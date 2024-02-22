@@ -14,11 +14,9 @@ const accessors = {
 };
 
 const Line = ({ data, title, units }) => {
-  if (data.PM1.length === 0) {
-    return <>loading</>;
+  if (data.length === 0) {
+    return null;
   }
-
-  const { PM1 } = data;
 
   return (
     <div className="w-1/3">
@@ -45,7 +43,6 @@ const Line = ({ data, title, units }) => {
               hideTicks
               orientation="bottom"
               numTicks={4}
-              // label="Timestamp (PST) UTC-08:00"
             />
             <AnimatedAxis
               hideAxisLine
@@ -54,14 +51,12 @@ const Line = ({ data, title, units }) => {
               numTicks={10}
               label={units}
             />
-            {/* {Object.values(data).map(({ stroke, key, points }, index) => ( */}
             <AnimatedLineSeries
               stroke="#FF0000"
-              dataKey="PM1"
-              data={PM1}
+              dataKey={title}
+              data={data}
               {...accessors}
             />
-            {/* ))} */}
             <Tooltip
               snapTooltipToDatumX
               snapTooltipToDatumY
@@ -74,9 +69,9 @@ const Line = ({ data, title, units }) => {
                 return (
                   <>
                     {Object.values(tooltipData.datumByKey).map(
-                      ({ datum, key }, index) => (
+                      ({ datum }, index) => (
                         <div key={index}>
-                          {key}: {datum.y}
+                          {datum.y} {units}
                         </div>
                       ),
                     )}

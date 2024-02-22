@@ -11,7 +11,11 @@ const Details = ({ fields }) => {
           className="flex justify-between border-b-[1px] border-gray-200 p-4"
         >
           <div>{key}</div>
-          <div>{value ?? "Not Available"}</div>
+          {value === "Not Available" ? (
+            <p className="text-gray-300">Not Available</p>
+          ) : (
+            <p>{value}</p>
+          )}
         </div>
       ))}
       {Object.entries(fields).length === 0 && (
