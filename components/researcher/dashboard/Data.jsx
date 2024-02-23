@@ -56,7 +56,7 @@ const columns = [
     cell: ({ getValue }) => (
       <Tag
         color={getValue() ? "1" : "0"}
-        text={getValue() ? "TRUE" : "FALSE"}
+        text={getValue() ? "True" : "False"}
       />
     ),
   },
@@ -64,14 +64,24 @@ const columns = [
     accessorKey: "status",
     header: "Status",
     cell: ({ getValue }) => (
-      <Tag color={getValue() === "ACTIVE" ? "1" : "0"} text={getValue()} />
+      <Tag
+        color={getValue() === "ACTIVE" ? "1" : "0"}
+        text={
+          getValue().charAt(0).toUpperCase() + getValue().slice(1).toLowerCase()
+        }
+      />
     ),
   },
   {
     accessorKey: "sn",
     header: "Link",
     cell: ({ getValue }) => (
-      <Link href={`/researcher/data/${getValue()}`}>MORE DATA</Link>
+      <Link
+        href={`/researcher/data/${getValue()}`}
+        className="w-fit px-4 py-1 rounded-xl flex justify-center items-center"
+      >
+        More Data
+      </Link>
     ),
   },
 ];

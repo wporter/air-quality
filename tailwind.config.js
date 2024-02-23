@@ -41,6 +41,10 @@ module.exports = {
         dropdown: {
           grey: "#F3F3F3",
         },
+
+        tabe: {
+          grey: "#B3B3B3",
+        },
       },
     },
   },
