@@ -124,7 +124,7 @@ const Data = ({ data }) => {
         />
       </div> */}
 
-      <div className="bg-air-blue-200 text-white">
+      <div className="bg-air-blue-200 text-white rounded-t-lg">
         {getHeaderGroups().map(({ headers, id }) => (
           <div key={id} className="flex">
             {headers.map(({ id, column }) => (
@@ -138,7 +138,7 @@ const Data = ({ data }) => {
       <div className="overflow-y-scroll h-[85%]">
         {getRowModel().rows.map(({ id, getVisibleCells }) => (
           <div
-            className="flex bg-white p-1 hover:bg-white/90 hover:cursor-pointer"
+            className="flex bg-white p-1 hover:bg-nav-hover hover:cursor-pointer transition-colors duration-300 mt-2 mb-2"
             key={id}
           >
             {getVisibleCells().map(({ id, column, getContext }) => (
