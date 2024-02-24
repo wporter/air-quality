@@ -55,7 +55,10 @@ const columns = [
     accessorKey: "outdoors",
     header: "Outdoors",
     cell: ({ getValue }) => (
-      <Tag bg={getValue() ? "1" : "0"} text={getValue() ? "True" : "False"} />
+      <Tag
+        color={getValue() ? "1" : "0"}
+        text={getValue() ? "True" : "False"}
+      />
     ),
   },
   {
@@ -63,7 +66,7 @@ const columns = [
     header: "Status",
     cell: ({ getValue }) => (
       <Tag
-        bg={getValue() === "ACTIVE" ? "1" : "0"}
+        color={getValue() === "ACTIVE" ? "1" : "0"}
         text={
           getValue().charAt(0).toUpperCase() + getValue().slice(1).toLowerCase()
         }
@@ -75,7 +78,10 @@ const columns = [
     header: "Link",
     cell: ({ getValue }) => (
       <Link href={`/researcher/data/${getValue()}`}>
-        <Tag bg={"grey"} text={"More Data"} Icon={GoArrowRight} color="black" />
+        <div className="bg-table-grey w-fit px-4 py-1 rounded-xl flex justify-center items-center">
+          More Data
+          <GoArrowRight className="text-xl ml-1" />
+        </div>
       </Link>
     ),
   },
