@@ -42,7 +42,7 @@ module.exports = {
           grey: "#F3F3F3",
         },
 
-        tabe: {
+        table: {
           grey: "#B3B3B3",
         },
       },

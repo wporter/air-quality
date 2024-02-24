@@ -10,6 +10,7 @@ import {
 // import Dropdown from "./Dropdown";
 import Link from "next/link";
 import Tag from "../Tag";
+import { GoArrowRight } from "react-icons/go";
 
 const columns = [
   {
@@ -54,10 +55,7 @@ const columns = [
     accessorKey: "outdoors",
     header: "Outdoors",
     cell: ({ getValue }) => (
-      <Tag
-        color={getValue() ? "1" : "0"}
-        text={getValue() ? "True" : "False"}
-      />
+      <Tag bg={getValue() ? "1" : "0"} text={getValue() ? "True" : "False"} />
     ),
   },
   {
@@ -65,7 +63,7 @@ const columns = [
     header: "Status",
     cell: ({ getValue }) => (
       <Tag
-        color={getValue() === "ACTIVE" ? "1" : "0"}
+        bg={getValue() === "ACTIVE" ? "1" : "0"}
         text={
           getValue().charAt(0).toUpperCase() + getValue().slice(1).toLowerCase()
         }
@@ -76,11 +74,8 @@ const columns = [
     accessorKey: "sn",
     header: "Link",
     cell: ({ getValue }) => (
-      <Link
-        href={`/researcher/data/${getValue()}`}
-        className="w-fit px-4 py-1 rounded-xl flex justify-center items-center"
-      >
-        More Data
+      <Link href={`/researcher/data/${getValue()}`}>
+        <Tag bg={"grey"} text={"More Data"} Icon={GoArrowRight} color="black" />
       </Link>
     ),
   },
