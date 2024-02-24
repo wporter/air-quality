@@ -1,4 +1,4 @@
-import { Marker as LeafletMarker } from "react-leaflet";
+import { Marker as LeafletMarker, Tooltip } from "react-leaflet";
 import L from "leaflet";
 
 const Marker = ({ sn, lat, lon }) => {
@@ -18,7 +18,9 @@ const Marker = ({ sn, lat, lon }) => {
     shadowAnchor: null,
   });
 
-  const handleClick = async () => {};
+  const handleClick = async () => {
+    alert(`Serial Number: ${sn}`);
+  };
 
   return (
     lat &&
@@ -29,7 +31,9 @@ const Marker = ({ sn, lat, lon }) => {
         eventHandlers={{
           click: handleClick,
         }}
-      />
+      >
+        <Tooltip>{sn}</Tooltip>
+      </LeafletMarker>
     )
   );
 };
