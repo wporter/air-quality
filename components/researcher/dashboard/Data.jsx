@@ -86,7 +86,7 @@ const Data = ({ data }) => {
   //   accessor: "sn",
   // });
 
-  const { getHeaderGroups, getRowModel, setSorting } = useReactTable({
+  const { getHeaderGroups, getRowModel } = useReactTable({
     data,
     columns,
     // state: {
