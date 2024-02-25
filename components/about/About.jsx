@@ -11,7 +11,7 @@ const About = () => {
       <Navigation />
       <Image
         src={Waves}
-        className="absolute top-0 left-0 -z-10 w-screen h-screen object-cover"
+        className="absolute top-0 left-0 -z-10 object-cover"
         alt="About Page Waves"
       />
 
