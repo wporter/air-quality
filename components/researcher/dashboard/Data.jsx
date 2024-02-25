@@ -13,7 +13,7 @@ import Link from "next/link";
 import Tag from "../Tag";
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import { TbArrowsSort } from "react-icons/tb";
-
+import { GoArrowRight } from "react-icons/go";
 
 const columns = [
   {
