@@ -14,6 +14,7 @@ import Tag from "../Tag";
 import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import { TbArrowsSort } from "react-icons/tb";
 
+
 const columns = [
   {
     accessorKey: "sn",
@@ -59,7 +60,7 @@ const columns = [
     cell: ({ getValue }) => (
       <Tag
         color={getValue() ? "1" : "0"}
-        text={getValue() ? "TRUE" : "FALSE"}
+        text={getValue() ? "True" : "False"}
       />
     ),
   },
@@ -67,14 +68,24 @@ const columns = [
     accessorKey: "status",
     header: "Status",
     cell: ({ getValue }) => (
-      <Tag color={getValue() === "ACTIVE" ? "1" : "0"} text={getValue()} />
+      <Tag
+        color={getValue() === "ACTIVE" ? "1" : "0"}
+        text={
+          getValue().charAt(0).toUpperCase() + getValue().slice(1).toLowerCase()
+        }
+      />
     ),
   },
   {
     accessorKey: "sn",
     header: "Link",
     cell: ({ getValue }) => (
-      <Link href={`/researcher/data/${getValue()}`}>MORE DATA</Link>
+      <Link href={`/researcher/data/${getValue()}`}>
+        <div className="bg-table-grey w-fit px-4 py-1 rounded-xl flex justify-center items-center">
+          More Data
+          <GoArrowRight className="text-xl ml-1" />
+        </div>
+      </Link>
     ),
   },
 ];
@@ -126,7 +137,7 @@ const Data = ({ data }) => {
         />
       </div> */}
 
-      <div className="bg-air-blue-200 text-white">
+      <div className="bg-air-blue-200 text-white rounded-t-lg">
         {getHeaderGroups().map(({ headers, id }) => (
           <div key={id} className="flex">
             {headers.map(({ id, column }) => (
@@ -151,7 +162,7 @@ const Data = ({ data }) => {
       <div className="overflow-y-scroll h-[85%]">
         {getRowModel().rows.map(({ id, getVisibleCells }) => (
           <div
-            className="flex bg-white p-1 hover:bg-white/90 hover:cursor-pointer"
+            className="flex bg-white p-1 hover:bg-nav-hover hover:cursor-pointer transition-colors duration-300 mt-2 mb-2"
             key={id}
           >
             {getVisibleCells().map(({ id, column, getContext }) => (

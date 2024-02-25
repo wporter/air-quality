@@ -11,17 +11,17 @@ const About = () => {
       <Navigation />
       <Image
         src={Waves}
-        className="absolute top-0 left-0 -z-10 w-screen h-screen object-cover"
+        className="absolute top-0 left-0 -z-10 object-cover"
         alt="About Page Waves"
       />
 
-      <div className="w-11/12 my-8">
+      <div className="w-10/12 my-12">
         <div className="flex justify-between p-4">
           <div className="w-3/4">
-            <p className="text-2xl font-semibold my-2 text-air-blue-200">
+            <p className="text-3xl font-semibold my-2  text-air-blue-200">
               WHAT IS OMEGA INTITIATIVE?
             </p>
-            <p>
+            <p className=" mb-20 my-5">
               Revolutionizing Air Quality in Inland Southern California In a
               groundbreaking move, the Center for Environmental Research and
               Technology (CE-CERT) at the Marlan and Rosemary Bourns College of
@@ -31,11 +31,17 @@ const About = () => {
               from the fallout of the Volkswagen emissions scandal, aiming to
               right the environmental wrongs that have disproportionately harmed
               low-income Latino and Black communities living in the shadow of
-              the region&apos;s booming logistics industry. Our project, a
-              cornerstone of the OMEGA Initiative, is on a mission to scrutinize
-              the environmental toll of goods movement, in collaboration with UC
-              Berkeley and the Coalition for Clean Air, and to pioneer solutions
-              that clean the air we all breathe.
+              the region&apos;s booming logistics industry.
+              <br /> <br />
+              This initiative springs from the fallout of the Volkswagen
+              emissions scandal, aiming to right the environmental wrongs that
+              have disproportionately harmed low-income Latino and Black
+              communities living in the shadow of the region&apos;s booming
+              logistics industry. Our project, a cornerstone of the OMEGA
+              Initiative, is on a mission to scrutinize the environmental toll
+              of goods movement, in collaboration with UC Berkeley and the
+              Coalition for Clean Air, and to pioneer solutions that clean the
+              air we all breathe.
               <br /> <br />
               With an innovative blend of on-board emissions tracking, smart
               freight management, and grassroots air quality monitoring,
@@ -49,14 +55,14 @@ const About = () => {
             </p>
           </div>
           <div className="w-1/2 flex justify-center">
-            <div className="bg-gray-300 w-3/4 h-full rounded-lg" />
+            <div className="bg-gray-300 w-3/4 h-3/4 my-12 rounded-lg" />
           </div>
         </div>
-        <p className="text-2xl font-semibold my-2 text-air-blue-200">
+        <p className="text-3xl font-semibold mx-4 mb-5 text-air-blue-200">
           OUR TEAM
         </p>
 
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 my-2">
           {members.map(({ name, position, image }, index) => (
             <Profile
               key={index}
