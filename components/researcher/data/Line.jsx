@@ -43,6 +43,13 @@ const Line = ({ data, title, units }) => {
               hideTicks
               orientation="bottom"
               numTicks={4}
+              tickFormat={(date) => {
+                return new Intl.DateTimeFormat("default", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: false,
+                }).format(new Date(date));
+              }}
             />
             <AnimatedAxis
               hideAxisLine
