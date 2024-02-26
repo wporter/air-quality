@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 const Profile = ({ name, position, image }) => {
   return (
     <div className="text-center">
