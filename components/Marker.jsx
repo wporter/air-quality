@@ -51,10 +51,23 @@ const Marker = ({ sn, lat, lon, lastSeen }) => {
         }}
       >
         <Tooltip offset={[15, 0]} direction="top">
-          <div className="flex flex-row items-center space-x-5 p-2 border-b border-tooltip-grey">
-            <FaCircle className="text-tooltip-green text-base" />
-            <p className="font-normal text-base text-tooltip-black-100">{sn}</p>
-            <p className="italic font-thin text-xs">last seen {calcTime()}</p>
+          <div className="flex flex-col px-1 py-2 space-y-3">
+            <div className="flex flex-row items-center space-x-5 border-b border-tooltip-grey p-1">
+              <FaCircle className="text-tooltip-green text-base" />
+              <p className="font-normal text-base text-tooltip-black-100">
+                {sn}
+              </p>
+              <p className="italic font-thin text-xs">last seen {calcTime()}</p>
+            </div>
+
+            <div className="flex flex-row items-center space-x-40 px-2">
+              <p className="font-light text-base text-tooltip-black-200">
+                PM: 2.5
+              </p>
+              <p className="font-light text-base text-tooltip-black-200">
+                AQI: 45
+              </p>
+            </div>
           </div>
         </Tooltip>
       </LeafletMarker>
