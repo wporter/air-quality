@@ -45,6 +45,14 @@ module.exports = {
         table: {
           grey: "#B3B3B3",
         },
+
+        tooltip: {
+          grey: "#DADADA",
+          "black-100": "#424242",
+          "black-200": "#212121",
+          green: "#05D97F",
+          red: "##FF3C5F",
+        },
       },
     },
   },
