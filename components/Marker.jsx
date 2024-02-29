@@ -19,24 +19,24 @@ const Marker = ({ sn, lat, lon, lastSeen }) => {
     shadowAnchor: null,
   });
 
-  const calcTime = () => {
-    const computed = parseInt(
-      new Date(
-        new Date().getTime() -
-          new Date(
-            new Date(lastSeen).getTime() -
-              new Date().getTimezoneOffset() * 60000,
-          ),
-      ).getTime() /
-        (1000 * 60),
-    );
+  // const calcTime = () => {
+  //   const computed = parseInt(
+  //     new Date(
+  //       new Date().getTime() -
+  //         new Date(
+  //           new Date(lastSeen).getTime() -
+  //             new Date().getTimezoneOffset() * 60000,
+  //         ),
+  //     ).getTime() /
+  //       (1000 * 60),
+  //   );
 
-    if (computed < 60) {
-      return `${computed} minutes ago`;
-    } else {
-      return `${(computed / 60).toFixed(2)} hours ago`;
-    }
-  };
+  //   if (computed < 60) {
+  //     return `${computed} minutes ago`;
+  //   } else {
+  //     return `${(computed / 60).toFixed(2)} hours ago`;
+  //   }
+  // };
 
   const handleClick = async () => {};
 
@@ -51,13 +51,13 @@ const Marker = ({ sn, lat, lon, lastSeen }) => {
         }}
       >
         <Tooltip offset={[15, 0]} direction="top">
-          <div className="flex flex-col px-1 py-2 space-y-3">
+          <div className="flex flex-col px-2 space-y-3">
             <div className="flex flex-row items-center space-x-5 border-b border-tooltip-grey p-1">
               <FaCircle className="text-tooltip-green text-base" />
               <p className="font-normal text-base text-tooltip-black-100">
-                {sn}
+                MOD-145273
               </p>
-              <p className="italic font-thin text-xs">last seen {calcTime()}</p>
+              <p className="italic font-thin text-xs">Last Seen 14s ago</p>
             </div>
 
             <div className="flex flex-row items-center space-x-40 px-2">
