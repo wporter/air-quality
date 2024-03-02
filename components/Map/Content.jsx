@@ -18,8 +18,17 @@ const Map = ({ height, width, markers }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
-      {markers.map(({ geo, sn }, index) => (
-        <Marker key={index} lat={geo.lat} lon={geo.lon} sn={sn} />
+
+      {/* eslint-disable-next-line camelcase */}
+      {markers.map(({ geo, sn, last_seen }, index) => (
+        <Marker
+          key={index}
+          lat={geo.lat}
+          lon={geo.lon}
+          sn={sn}
+          // eslint-disable-next-line camelcase
+          lastSeen={last_seen}
+        />
       ))}
     </MapContainer>
   );
