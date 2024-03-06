@@ -43,6 +43,12 @@ const Line = ({ data, title, units }) => {
               hideTicks
               orientation="bottom"
               numTicks={4}
+              tickFormat={(date) => {
+                return new Date(date).toLocaleTimeString(navigator.language, {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+              }}
             />
             <AnimatedAxis
               hideAxisLine
