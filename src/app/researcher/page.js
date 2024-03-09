@@ -1,3 +1,4 @@
+import Protected from "@/components/researcher/Protected";
 import Dashboard from "@/components/researcher/dashboard/Dashboard";
 import { getLocations } from "@/utils/api";
 
@@ -9,7 +10,11 @@ const Page = async () => {
     total: meta.total,
   };
 
-  return <Dashboard data={markers} />;
+  return (
+    <Protected>
+      <Dashboard data={markers} />
+    </Protected>
+  );
 };
 
 export default Page;
