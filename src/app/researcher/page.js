@@ -1,13 +1,7 @@
 import Dashboard from "@/components/researcher/dashboard/Dashboard";
 import { getLocations } from "@/utils/api";
 
-const Page = ({ markers }) => {
-  return <Dashboard data={markers} />;
-};
-
-export default Page;
-
-export const getStaticProps = async () => {
+const Page = async () => {
   const { data, meta } = await getLocations();
 
   const markers = {
@@ -15,5 +9,7 @@ export const getStaticProps = async () => {
     total: meta.total,
   };
 
-  return { props: { markers } };
+  return <Dashboard data={markers} />;
 };
+
+export default Page;
