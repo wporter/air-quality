@@ -72,20 +72,17 @@ export const getLine = async (sn) => {
   const NO2 = [];
   const O3 = [];
 
-  data.forEach(({ pm1, pm25, pm10, co, co2, no, no2, o3, timestamp }) => {
-    const local =
-      new Date(timestamp).getTime() - new Date().getTimezoneOffset() * 60000;
-
-    PM1.push({ x: local, y: pm1 });
-    PM10.push({ x: local, y: pm10 });
-    PM25.push({ x: local, y: pm25 });
+  data.forEach(({ pm1, pm25, pm10, co, co2, no, no2, o3, timestamp_local }) => {
+    PM1.push({ x: timestamp_local, y: pm1 });
+    PM10.push({ x: timestamp_local, y: pm10 });
+    PM25.push({ x: timestamp_local, y: pm25 });
 
     if (co !== undefined) {
-      CO.push({ x: local, y: co });
-      CO2.push({ x: local, y: co2 });
-      NO.push({ x: local, y: no });
-      NO2.push({ x: local, y: no2 });
-      O3.push({ x: local, y: o3 });
+      CO.push({ x: timestamp_local, y: co });
+      CO2.push({ x: timestamp_local, y: co2 });
+      NO.push({ x: timestamp_local, y: no });
+      NO2.push({ x: timestamp_local, y: no2 });
+      O3.push({ x: timestamp_local, y: o3 });
     }
   });
 
