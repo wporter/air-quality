@@ -12,7 +12,7 @@ const Details = ({ fields }) => {
         >
           <div>{key}</div>
           {value === "Not Available" ? (
-            <p className="text-gray-300">Not Available</p>
+            <p className="text-gray-300">Unavailable</p>
           ) : (
             <p>{value}</p>
           )}

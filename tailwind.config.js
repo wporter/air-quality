@@ -1,10 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./data/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
@@ -44,6 +40,14 @@ module.exports = {
 
         table: {
           grey: "#B3B3B3",
+        },
+
+        tooltip: {
+          grey: "#DADADA",
+          "black-100": "#424242",
+          "black-200": "#212121",
+          green: "#05D97F",
+          red: "##FF3C5F",
         },
       },
     },
