@@ -5,12 +5,12 @@ import { getDataDetails, getLine } from "@/utils/api";
 const Post = async ({ params }) => {
   const { sn } = params;
 
-  const data = await getLine(sn);
-  const fields = await getDataDetails(sn);
+  const line = await getLine(sn);
+  const { data, meta } = await getDataDetails(sn);
 
   return (
     <Protected>
-      <Data data={data} fields={fields} />
+      <Data data={line} fields={data} meta={meta} />
     </Protected>
   );
 };
