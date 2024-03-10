@@ -35,18 +35,22 @@ export const getDataDetails = async (serialNumber) => {
   } = data[0];
 
   return {
-    "Serial Number": sn,
-    "Relative Humidity": rh ? `${rh}%` : "Not Available",
-    Temperature: temp ? `${temp}°C` : "Not Available",
-    Timestamp: new Date(timestamp_local).toLocaleTimeString(),
-    "Carbon Monoxide": co ? `${co} ppb` : "Not Available",
-    "Carbon Dixiode": co2 ? `${co2} ppm` : "Not Available",
-    "Nitric Oxide": no ? `${no} ppb` : "Not Available",
-    "Nitrogen Dioxide": no2 ? `${no2} ppb` : "Not Available",
-    Ozone: o3 ? `${o3} ppm` : "Not Available",
-    "PM 1": `${pm1} μg/m³`,
-    "PM 2.5": `${pm25} μg/m³`,
-    "PM 10": `${pm10} μg/m³`,
+    meta: {
+      sn,
+    },
+    data: {
+      "Relative Humidity": rh ? `${rh}%` : "Not Available",
+      Temperature: temp ? `${temp}°C` : "Not Available",
+      Timestamp: new Date(timestamp_local).toLocaleTimeString(),
+      "Carbon Monoxide": co ? `${co} ppb` : "Not Available",
+      "Carbon Dixiode": co2 ? `${co2} ppm` : "Not Available",
+      "Nitric Oxide": no ? `${no} ppb` : "Not Available",
+      "Nitrogen Dioxide": no2 ? `${no2} ppb` : "Not Available",
+      Ozone: o3 ? `${o3} ppm` : "Not Available",
+      "PM 1": `${pm1} μg/m³`,
+      "PM 2.5": `${pm25} μg/m³`,
+      "PM 10": `${pm10} μg/m³`,
+    },
   };
 };
 
