@@ -6,9 +6,7 @@ import Status from "./Status";
 import Data from "@/components/researcher/dashboard/Data";
 import Map from "@/components/Map/Map";
 
-const Dashboard = ({ data }) => {
-  const { markers } = data;
-
+const Dashboard = ({ locations, markers }) => {
   return (
     <div className="h-screen w-full bg-air-white-100 pt-2">
       <div className="w-full h-1/2 bg-air-white-100 flex pl-8">
@@ -21,18 +19,17 @@ const Dashboard = ({ data }) => {
             value={
               markers.filter(
                 // eslint-disable-next-line camelcase
-                ({ last_seen }) =>
+                ({ timestamp_local }) =>
                   parseInt(
                     new Date(
-                      new Date().getTime() - new Date(last_seen).getTime(),
-                    ).getTime() /
-                      (1000 * 60),
-                  ) <= 1000,
+                      new Date().getTime() -
+                        new Date(timestamp_local).getTime(),
+                    ).getMinutes(),
+                  ) <= 60,
               ).length
             }
             text="Sensors Online"
           />
-
           <Status
             bg="bg-sensor-red"
             Icon={MdOutlineNetworkWifi1Bar}
@@ -40,25 +37,20 @@ const Dashboard = ({ data }) => {
             value={
               markers.filter(
                 // eslint-disable-next-line camelcase
-                ({ last_seen }) =>
+                ({ timestamp_local }) =>
                   parseInt(
                     new Date(
                       new Date().getTime() -
-                        new Date(
-                          new Date(last_seen).getTime() -
-                            new Date().getTimezoneOffset() * 60000,
-                        ),
-                    ).getTime() /
-                      (1000 * 60),
-                  ) >
-                  60 * 5,
+                        new Date(timestamp_local).getTime(),
+                    ).getMinutes(),
+                  ) > 60,
               ).length
             }
             text="Sensors Offline"
           />
         </div>
       </div>
-      <Data data={markers} />
+      <Data data={locations} />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Marker from "@/components/Marker";
@@ -19,15 +20,14 @@ const Map = ({ height, width, markers }) => {
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
 
-      {/* eslint-disable-next-line camelcase */}
-      {markers.map(({ geo, sn, last_seen }, index) => (
+      {markers.map(({ geo, sn, timestamp_local, measurements }, index) => (
         <Marker
           key={index}
           lat={geo.lat}
           lon={geo.lon}
           sn={sn}
-          // eslint-disable-next-line camelcase
-          lastSeen={last_seen}
+          timestamp_local={timestamp_local}
+          measurements={measurements}
         />
       ))}
     </MapContainer>
