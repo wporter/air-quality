@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ImOmega } from "react-icons/im";
 import { MdOutlineDashboard } from "react-icons/md";
 import { FiHelpCircle } from "react-icons/fi";
-import { AiOutlinePieChart } from "react-icons/ai";
 
 const SideNavigation = () => {
   return (
@@ -17,14 +16,6 @@ const SideNavigation = () => {
           <MdOutlineDashboard className="text-[#898989] text-xl mx-2" />
           <div>Dashboard</div>
         </Link>
-        <Link
-          href="/data"
-          className="text-nav-black flex items-center w-full no-underline py-2 px-4 font-normal hover:bg-nav-hover transition-colors duration-300"
-        >
-          <AiOutlinePieChart className="text-nav-grey text-xl mx-2" />
-          <div>Data</div>
-        </Link>
-
         <Link
           href="/help"
           className="text-nav-black flex items-center w-full no-underline py-2 px-4 font-normal hover:bg-nav-hover transition-colors duration-300"
