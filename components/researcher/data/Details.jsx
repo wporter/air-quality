@@ -1,21 +1,10 @@
-import { FaExternalLinkAlt } from "react-icons/fa";
 const Details = ({ fields }) => {
-  const serial = fields["Serial Number"] || "DEVICE DETAILS";
-  const deviceLink = `https://app.quant-aq.com/device/${serial}`;
-
   return (
     <div className="w-1/3 border border-gray-300 rounded-lg px-9 py-4 my-4">
       <div className="flex justify-between items-center border-b-2 border-gray-300 py-2">
-        <p className="text-lg font-bold px-2">{serial} </p>
-        <a
-          href={deviceLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center" // Add any additional styling as needed
-        >
-          <FaExternalLinkAlt />
-        </a>
+        <p className="text-lg font-bold px-2">DEVICE DETAILS</p>
       </div>
+
       {Object.entries(fields).map(([key, value], index) => (
         <div
           key={index}
