@@ -10,7 +10,7 @@ export const api = async (method, url, headers) => {
 };
 
 export const getDataDetails = async (serialNumber) => {
-  const response = await api(
+  const { data } = await api(
     "GET",
     `https://api.quant-aq.com/device-api/v1/data/most-recent/?sn=${serialNumber}`,
     {
@@ -32,24 +32,28 @@ export const getDataDetails = async (serialNumber) => {
     pm1,
     pm10,
     pm25,
-  } = response.data[0];
+  } = data[0];
 
   return {
-    "Serial Number": sn,
-    "Relative Humidity": rh ? `${rh}%` : "Not Available",
-    Temperature: temp ? `${temp}°C` : "Not Available",
-    // eslint-disable-next-line camelcase
-    Timestamp: new Date(
-      new Date(timestamp).getTime() - new Date().getTimezoneOffset() * 60000,
-    ).toLocaleTimeString(),
-    "Carbon Monoxide": co ? `${co} ppb` : "Not Available",
-    "Carbon Dixiode": co2 ? `${co2} ppm` : "Not Available",
-    "Nitric Oxide": no ? `${no} ppb` : "Not Available",
-    "Nitrogen Dioxide": no2 ? `${no2} ppb` : "Not Available",
-    Ozone: o3 ? `${o3} ppm` : "Not Available",
-    "PM 1": `${pm1} μg/m³`,
-    "PM 2.5": `${pm25} μg/m³`,
-    "PM 10": `${pm10} μg/m³`,
+    meta: {
+      sn,
+    },
+    data: {
+      "Relative Humidity": rh ? `${rh}%` : "Not Available",
+      Temperature: temp ? `${temp}°C` : "Not Available",
+      // eslint-disable-next-line camelcase
+      Timestamp: new Date(
+        new Date(timestamp).getTime() - new Date().getTimezoneOffset() * 60000,
+      ).toLocaleTimeString(),
+      "Carbon Monoxide": co ? `${co} ppb` : "Not Available",
+      "Carbon Dixiode": co2 ? `${co2} ppm` : "Not Available",
+      "Nitric Oxide": no ? `${no} ppb` : "Not Available",
+      "Nitrogen Dioxide": no2 ? `${no2} ppb` : "Not Available",
+      Ozone: o3 ? `${o3} ppm` : "Not Available",
+      "PM 1": `${pm1} μg/m³`,
+      "PM 2.5": `${pm25} μg/m³`,
+      "PM 10": `${pm10} μg/m³`,
+    },
   };
 };
 
