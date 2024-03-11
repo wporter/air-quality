@@ -68,7 +68,7 @@ const Data = ({ data }) => {
   });
 
   return (
-    <div className="mt-2 px-8 w-full h-1/2 overflow-y-scroll">
+    <div className="mt-5 px-8 w-full h-1/2 overflow-y-scroll bg-air-white-100">
       <div className="bg-air-blue-200 text-white rounded-t-lg">
         {getHeaderGroups().map(({ headers, id }) => (
           <div key={id} className="flex">
