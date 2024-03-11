@@ -11,17 +11,17 @@ const About = () => {
       <Navigation />
       <Image
         src={Waves}
-        className="absolute top-0 left-0 -z-10 object-cover"
+        className="absolute top-0 left-0 -z-10 object-cover w-screen"
         alt="About Page Waves"
       />
 
       <div className="w-10/12 my-12">
         <div className="flex justify-between p-4">
           <div className="w-3/4">
-            <p className="text-3xl font-semibold my-2  text-air-blue-200">
+            <p className="text-3xl font-semibold my-2 text-air-blue-200">
               WHAT IS OMEGA INTITIATIVE?
             </p>
-            <p className=" mb-20 my-5">
+            <p className="mb-20 my-5">
               Revolutionizing Air Quality in Inland Southern California In a
               groundbreaking move, the Center for Environmental Research and
               Technology (CE-CERT) at the Marlan and Rosemary Bourns College of
@@ -54,11 +54,14 @@ const About = () => {
               of fresh air at a time.
             </p>
           </div>
+
+          {/* place holder for team photo */}
           <div className="w-1/2 flex justify-center">
             <div className="bg-gray-300 w-3/4 h-3/4 my-12 rounded-lg" />
           </div>
         </div>
-        <p className="text-3xl font-semibold mx-4 mb-5 text-air-blue-200">
+
+        <p className="text-3xl font-semibold mx-4 mb-5 mt-72 text-air-blue-200">
           OUR TEAM
         </p>
 
@@ -73,6 +76,7 @@ const About = () => {
           ))}
         </div>
       </div>
+
       <Footer />
     </div>
   );

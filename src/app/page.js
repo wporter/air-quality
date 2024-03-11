@@ -1,5 +1,6 @@
 import Welcome from "@/components/Welcome";
 import Map from "@/components/Map/Map";
+import Footer from "@/components/Footer";
 import { getMarkers } from "@/utils/api";
 
 const Page = async () => {
@@ -12,6 +13,8 @@ const Page = async () => {
         <p className="my-4 font-bold text-5xl">Public View</p>
         <Map height="h-[60vh]" width="w-full" markers={items} />
       </div>
+
+      <Footer />
     </div>
   );
 };
