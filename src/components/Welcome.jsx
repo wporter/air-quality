@@ -5,27 +5,29 @@ import Navigation from "@/components/Navigation";
 
 const Welcome = () => {
   return (
-    <div className="relative flex flex-col items-center justify-between h-screen">
+    <div className="relative flex flex-col items-center justify-between min-h-screen w-full overflow-hidden">
       <Navigation />
-      <Image
-        src={Waves}
-        className="absolute top-0 left-0 -z-10 w-screen h-screen object-cover"
-        alt="Home Page Waves"
-      />
-      <div className="h-full w-11/12 flex flex-col items-center justify-center text-center">
-        <p className="text-8xl font-bold mb-10">Air Quality you can trust.</p>
-        <p className="text-3xl font-base">
-          OMEGA Initiative: Objective Measurement/Monitoring/Mitigation of
+
+      <div className="w-full h-full absolute top-0 left-0">
+        <Image
+          src={Waves}
+          className="absolute top-0 left-0 -z-10 object-cover w-full h-full"
+          alt="Home Page Waves"
+        />
+      </div>
+      <div className="w-full md:w-11/12 lg:w-3/4 xl:w-2/3 relative z-10 flex flex-col items-center justify-center text-center">
+        <p className="text-8xl font-bold mb-10 text-air-black-100">
+          Air Quality you can trust.
+        </p>
+        <p className="text-3xl font-base text-air-black-100">
+          OMEGA Initiative: Objective Measurement / Monitoring / Mitigation of
           Emissions from Goods Movement and Impacts on Air Quality.
         </p>
       </div>
 
       <div className="flex flex-col items-center mb-10">
-        <p className="text-2xl font-base">Access Data</p>
-        <FaChevronDown
-          size={28}
-          className="transition-transform transform hover:scale-125 hover:cursor-pointer"
-        />
+        <p className="text-3xl font-base text-air-black-100">Access Data</p>
+        <FaChevronDown className="transition-transform transform hover:scale-125 hover:cursor-pointer text-air-black-100 text-4xl pt-2" />
       </div>
     </div>
   );

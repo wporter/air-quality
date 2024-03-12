@@ -8,7 +8,7 @@ const Map = ({ height, width, markers }) => {
 
   return (
     <MapContainer
-      className={`${height} ${width}`}
+      className={`rounded-lg ${height} ${width}`}
       center={position}
       zoom={11}
       minZoom={8}
