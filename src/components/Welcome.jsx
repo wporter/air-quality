@@ -1,26 +1,17 @@
 "use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import Waves from "@/public/svg/landingWaves.svg";
 import { FaChevronDown } from "react-icons/fa";
 import Navigation from "@/components/Navigation";
 
 const Welcome = () => {
-  useEffect(() => {
-    const chevronDown = document.getElementById("chevron-down");
-    if (chevronDown) {
-      const scrollToPublicView = () => {
-        const section = document.getElementById("public-view-section");
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
-        }
-      };
-
-      chevronDown.addEventListener("click", scrollToPublicView);
-      return () => chevronDown.removeEventListener("click", scrollToPublicView);
+  const ChevronClick = () => {
+    const section = document.getElementById("public-view-section");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
     }
-  }, []);
+  };
 
   return (
     <div className="relative flex flex-col items-center justify-between min-h-screen w-full overflow-hidden">
@@ -45,7 +36,7 @@ const Welcome = () => {
       <div className="flex flex-col items-center mb-10">
         <p className="text-3xl font-base text-air-black-100">Access Data</p>
         <FaChevronDown
-          id="chevron-down"
+          onClick={ChevronClick}
           className="transition-transform transform hover:scale-125 hover:cursor-pointer text-air-black-100 text-4xl pt-2"
         />
       </div>
