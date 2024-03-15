@@ -13,14 +13,14 @@ const SideNavigation = () => {
           href="/researcher"
           className="text-[#363636] flex items-center w-full no-underline py-2 px-4 font-normal hover:bg-nav-hover transition-colors duration-300"
         >
-          <MdOutlineDashboard className="text-[#898989] text-xl mx-2" />
+          <MdOutlineDashboard className="text-[#898989] text-xl mx-2 w-6 h-6" />
           <div>Dashboard</div>
         </Link>
         <Link
           href="/help"
           className="text-nav-black flex items-center w-full no-underline py-2 px-4 font-normal hover:bg-nav-hover transition-colors duration-300"
         >
-          <FiHelpCircle className="text-nav-grey text-xl mx-2" />
+          <FiHelpCircle className="text-nav-grey text-xl mx-2 w-6 h-6" />
           <div>Help</div>
         </Link>
       </div>
