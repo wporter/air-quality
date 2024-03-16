@@ -10,9 +10,7 @@ const Post = async ({ params }) => {
 
   return (
     <Protected>
-      <div className="pl-8">
-        <Data data={line} fields={data} meta={meta} />
-      </div>
+      <Data data={line} fields={data} meta={meta} />
     </Protected>
   );
 };

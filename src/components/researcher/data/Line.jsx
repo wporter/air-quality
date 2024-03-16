@@ -19,7 +19,7 @@ const Line = ({ data, title, units }) => {
   }
 
   return (
-    <div className="pl-8 py-8 w-1/3 ">
+    <div className="pl-8 py-8 w-1/3">
       {title}
       <ParentSize className="-my-8">
         {({ width }) => (

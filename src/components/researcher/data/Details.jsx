@@ -29,7 +29,7 @@ const Details = ({ fields, meta }) => {
         </div>
       ))}
       {Object.entries(fields).length === 0 && (
-        <div className=" flex justify-center border-b-[1px] border-gray-200 p-4">
+        <div className="flex justify-center border-b-[1px] border-gray-200 p-4">
           Loading...
         </div>
       )}
