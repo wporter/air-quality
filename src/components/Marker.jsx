@@ -56,6 +56,11 @@ const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
                 <p className="font-light text-base text-tooltip-black-200">
                   {value}
                 </p>
+                {measurement === "pm25" && (
+                  <p className="font-light text-base text-tooltip-black-200">
+                    AQI is: {(value / 9) * 100}
+                  </p>
+                )}
               </div>
             ))}
           </div>
