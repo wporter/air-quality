@@ -1,8 +1,8 @@
 export const statusOfAqi = {
-  "0-50": "text-green-500",
-  "51-100": "text-yellow-500",
-  "101-150": "text-orange-500",
-  "151-200": "text-red-500",
-  "201-300": "text-purple-500",
-  "301-800": "text-yellow-950",
+  "0-50": "text-aqi-green",
+  "51-100": "text-aqi-yellow",
+  "101-150": "text-aqi-orange",
+  "151-200": "text-aqi-red",
+  "201-300": "text-aqi-purple",
+  "301-500": "text-aqi-maroon",
 };
