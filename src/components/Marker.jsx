@@ -48,22 +48,26 @@ const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
               </p>
             </div>
 
-            {Object.entries(measurements).map(([measurement, value], index) => (
-              <div className="flex gap-2" key={index}>
-                <p className="font-light text-base text-tooltip-black-200">
-                  {measurement}
-                </p>
-                <p className="font-light text-base text-tooltip-black-200">
-                  {value}
-                </p>
-                {measurement === "pm25" && (
-                  // comment this part out later
-                  <p className="font-light text-base text-tooltip-black-200">
-                    AQI is: {(value / 9) * 100}
-                  </p>
+            <div className="flex justify-between pl-2 pr-2 pb-2">
+              <div>
+                {Object.entries(measurements).map(
+                  ([measurement, value], index) => (
+                    <div className="flex gap-2" key={index}>
+                      <p className="font-light text-base text-tooltip-black-200">
+                        {measurement}:
+                      </p>
+                      <p className="font-light text-base text-tooltip-black-200">
+                        {value}
+                      </p>
+                    </div>
+                  ),
                 )}
               </div>
-            ))}
+
+              <div className="font-light text-base">
+                AQI: {((measurements.pm25 / 9) * 100).toFixed(2)}
+              </div>
+            </div>
           </div>
         </Tooltip>
       </LeafletMarker>
