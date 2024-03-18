@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { Marker as LeafletMarker, Tooltip } from "react-leaflet";
-import { FaCircle } from "react-icons/fa";
+import AqiStatus from "@/components/AqiStatus";
 import L from "leaflet";
 
 const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
@@ -35,7 +35,7 @@ const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
         <Tooltip offset={[15, 0]} direction="top">
           <div className="flex flex-col px-2 space-y-3">
             <div className="flex flex-row items-center space-x-5 border-b border-tooltip-grey p-1">
-              <FaCircle className="text-tooltip-green text-base" />
+              <AqiStatus value={measurements.pm25} />
               <p className="font-normal text-base text-tooltip-black-100">
                 {sn}
               </p>
@@ -57,6 +57,7 @@ const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
                   {value}
                 </p>
                 {measurement === "pm25" && (
+                  // comment this part out later
                   <p className="font-light text-base text-tooltip-black-200">
                     AQI is: {(value / 9) * 100}
                   </p>
