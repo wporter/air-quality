@@ -22,6 +22,11 @@ const Form = ({ setForm }) => {
       return;
     }
 
+    if (message === "user not found") {
+      toast.error("Username Invalid");
+      return;
+    }
+
     setUser(username);
     setForm(false);
     toast.success("Successfully Signed In");
@@ -43,6 +48,7 @@ const Form = ({ setForm }) => {
             <label htmlFor="username">Username</label>
             <input
               id="username"
+              type="text"
               value={data.username}
               placeholder="username"
               className="border-2 border-air-blue-200 focus:outline-none rounded p-2"
@@ -53,6 +59,7 @@ const Form = ({ setForm }) => {
             <label htmlFor="password">Password</label>
             <input
               id="password"
+              type="password"
               value={data.password}
               placeholder="password"
               className="border-2 border-air-blue-200 focus:outline-none rounded p-2"

@@ -27,8 +27,6 @@ const Navigation = () => {
         </Link>
       </div>
 
-      {console.log(user)}
-
       {user && (
         <Link
           href="/researcher"
