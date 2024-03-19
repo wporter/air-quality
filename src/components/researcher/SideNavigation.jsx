@@ -5,7 +5,7 @@ import { FiHelpCircle } from "react-icons/fi";
 
 const SideNavigation = () => {
   return (
-    <div className="relative z-50 w-48 h-screen flex flex-col justify-between shadow-2xl">
+    <div className="min-h-screen w-48 z-10 flex-shrink-0 flex-grow-0 flex flex-col justify-between shadow-2xl">
       <div className="flex flex-col justify-center items-center space-y-2 mt-8">
         <Link
           href="/"
