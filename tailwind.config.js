@@ -47,7 +47,17 @@ module.exports = {
           "black-100": "#424242",
           "black-200": "#212121",
           green: "#05D97F",
-          red: "##FF3C5F",
+          red: "#FF3C5F",
+        },
+
+        aqi: {
+          green: "#68DF43",
+          yellow: "#FFFD54",
+          orange: "#EE8433",
+          red: "#EB3023",
+          purple: "#854693",
+          maroon: "#731326",
+          black: "#4A4A4A",
         },
       },
     },
