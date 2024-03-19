@@ -3,10 +3,49 @@ import { Marker as LeafletMarker, Tooltip } from "react-leaflet";
 import AqiStatus from "@/components/AqiStatus";
 import L from "leaflet";
 import ReactDOMServer from "react-dom/server";
+import { aqiValue } from "@/data/Aqi";
 
 const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
+  const handleClick = async () => {};
+
+  const calcAqi = (value) => {
+    let numerator = 0;
+    let denominator = 0;
+    let pmMin = 0;
+    let pmMax = 0;
+
+    let aqiLowerBound = 0;
+    let aqiUpperBound = 0;
+
+    for (const range in aqiValue) {
+      if (Object.prototype.hasOwnProperty.call(aqiValue, range)) {
+        const [min, max] = range.split("-").map(Number);
+
+        if (value >= min && value <= max) {
+          const [resultLower, resultUpper] = aqiValue[range]
+            .split("-")
+            .map(Number);
+          aqiLowerBound = resultLower;
+          aqiUpperBound = resultUpper;
+
+          pmMin = min;
+          pmMax = max;
+          break;
+        }
+      }
+    }
+
+    numerator = aqiUpperBound - aqiLowerBound;
+    denominator = pmMax - pmMin;
+
+    const result = (numerator / denominator) * (value - pmMin) + aqiLowerBound;
+    return Math.round(result);
+  };
+
+  const pm10AqiVal = calcAqi(Math.round(measurements.pm10));
+
   const iconHtml = ReactDOMServer.renderToString(
-    <AqiStatus value={measurements.pm25} show="true" />,
+    <AqiStatus value={pm10AqiVal} show="true" />,
   );
 
   const ICON = L.divIcon({
@@ -19,8 +58,6 @@ const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
     shadowAnchor: null,
     className: "border-none",
   });
-
-  const handleClick = async () => {};
 
   return (
     lat &&
@@ -35,7 +72,7 @@ const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
         <Tooltip offset={[14, 0]} direction="top">
           <div className="flex flex-col px-2 space-y-3">
             <div className="flex flex-row items-center space-x-5 border-b border-tooltip-grey p-1">
-              <AqiStatus value={measurements.pm25} />
+              <AqiStatus value={pm10AqiVal} />
               <p className="font-normal text-base text-tooltip-black-100">
                 {sn}
               </p>
@@ -64,9 +101,7 @@ const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
                 )}
               </div>
 
-              <div className="font-light text-base">
-                AQI: {Math.round((measurements.pm25 / 9) * 100)}
-              </div>
+              <div className="font-light text-base">AQI: {pm10AqiVal}</div>
             </div>
           </div>
         </Tooltip>

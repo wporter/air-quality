@@ -1,15 +1,13 @@
-import { statusOfAqi } from "@/data/StatusAqi";
+import { statusAqiColor } from "@/data/StatusAqiColor";
 
 const AqiStatus = ({ value, show }) => {
-  const calcAqiColor = (value) => {
-    const aqi = (value / 9) * 100;
-
-    for (const range in statusOfAqi) {
-      if (Object.prototype.hasOwnProperty.call(statusOfAqi, range)) {
+  const calcAqiColor = (valOfAqi) => {
+    for (const range in statusAqiColor) {
+      if (Object.prototype.hasOwnProperty.call(statusAqiColor, range)) {
         const [min, max] = range.split("-").map(Number);
 
-        if (aqi >= min && aqi <= max) {
-          return statusOfAqi[range];
+        if (valOfAqi >= min && valOfAqi <= max) {
+          return statusAqiColor[range];
         }
       }
     }
@@ -35,7 +33,7 @@ const AqiStatus = ({ value, show }) => {
             fontSize="5"
             className="fill-current text-aqi-black font-normal"
           >
-            {Math.round((value / 9) * 100)}
+            {value}
           </text>
         )}
       </svg>
