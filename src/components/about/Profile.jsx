@@ -3,7 +3,7 @@ const Profile = ({ name, position, image }) => {
     <div className="justify-start items-start inline-flex">
       <div className="inline-flex flex-col justify-start gap-3 flex-start items-center ">
         <img
-          className="rounded-full w-[250px] h-[250px]"
+          className="rounded-full w-[200px] h-[200px]"
           src="https://m.media-amazon.com/images/I/810XSuEz1vL.jpg"
           alt="User Profile Pictures"
         />

@@ -26,7 +26,7 @@ const Error = ({ status, name, message }) => {
           {name}
         </p>
         <p
-          className="text-center text-sm md:text-base text-air-blue-200 m-0"
+          className="text-center text-sm md:text-base text-air-blue-200 mt-1"
           data-cy="error-message"
         >
           {message}
