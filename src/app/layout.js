@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Omega Initiatve",
+  title: "Omega Initiative",
   description: "Air quality information you can trust.",
 };
 

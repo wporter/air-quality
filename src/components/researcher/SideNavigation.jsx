@@ -6,9 +6,15 @@ import { FiHelpCircle } from "react-icons/fi";
 const SideNavigation = () => {
   return (
     <div className="min-h-screen z-10 flex flex-col justify-between shadow-2xl">
+
       <div className="flex flex-col justify-center items-center space-y-2 mt-8">
-        <ImOmega className="text-air-blue-200 text-3xl" />
-        <p className="text-air-blue-200 text-xl font-bold">OMEGA</p>
+        <Link
+          href="/"
+          className="text-air-blue-200 flex flex-col items-center no-underline py-2 px-4"
+        >
+          <ImOmega className="text-3xl" />
+          <p className="text-xl font-bold pt-2 pb-5">OMEGA</p>
+        </Link>
         <Link
           href="/researcher"
           className="text-nav-black flex items-center w-full no-underline py-2 px-4 font-normal hover:bg-nav-hover transition-colors duration-300"
