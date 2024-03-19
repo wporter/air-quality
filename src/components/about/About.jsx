@@ -61,7 +61,7 @@ const About = () => {
           </div>
         </div>
 
-        <p className="text-4xl font-semibold mx-4 mb-5 mt-12 text-air-blue-200">
+        <p className="text-4xl font-semibold mx-4 mb-5 mt-32 text-air-blue-200">
           OUR TEAM
         </p>
 
