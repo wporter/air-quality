@@ -6,7 +6,7 @@ import ReactDOMServer from "react-dom/server";
 
 const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
   const iconHtml = ReactDOMServer.renderToString(
-    <AqiStatus className="text-2xl" value={measurements.pm25} />,
+    <AqiStatus value={measurements.pm25} show="true" />,
   );
 
   const ICON = L.divIcon({
@@ -32,10 +32,10 @@ const Marker = ({ sn, lat, lon, timestamp_local, measurements }) => {
           click: handleClick,
         }}
       >
-        <Tooltip offset={[0, 0]} direction="top">
+        <Tooltip offset={[14, 0]} direction="top">
           <div className="flex flex-col px-2 space-y-3">
             <div className="flex flex-row items-center space-x-5 border-b border-tooltip-grey p-1">
-              <AqiStatus className="text-xl" value={measurements.pm25} />
+              <AqiStatus value={measurements.pm25} />
               <p className="font-normal text-base text-tooltip-black-100">
                 {sn}
               </p>

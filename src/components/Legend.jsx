@@ -3,9 +3,11 @@ import React from "react";
 const Legend = () => {
   return (
     <div className="absolute bottom-4 left-4 bg-white p-4 rounded-lg shadow-md">
-      <div className="text-sm font-normal mb-2">Air Quality Index</div>
+      <div className="text-sm font-normal mb-2 text-tooltip-black-200">
+        Air Quality Index
+      </div>
 
-      <div className="flex">
+      <div className="flex text-tooltip-black-200">
         <div className="flex flex-col items-center gap-1">
           <div className="w-14 h-4 bg-aqi-green flex justify-center items-center text-xs"></div>
           <p className="text-xs">0-50</p>
