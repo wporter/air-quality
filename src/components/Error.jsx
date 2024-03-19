@@ -35,10 +35,10 @@ const Error = ({ status, name, message }) => {
         <div className="mt-16">
           <Link
             href="/"
-            className="flex items-center rounded-xl px-4 py-2.5 text-air-blue-200 border border-air-blue-200 text-xl"
+            className="flex items-center rounded-xl px-4 py-2.5 text-air-blue-200 border border-air-blue-200 text-xl hover:bg-air-blue-200 hover:bg-opacity-25 transition-colors duration-300"
           >
             <LuArrowLeft className="text-air-blue text-2xl font-bold" />
-            <p className="text-air-blue-200 text-lg font-normal ml-2">
+            <p className="text-air-blue-200 text-lg font-normal ml-2 ">
               BACK TO HOMEPAGE
             </p>
           </Link>

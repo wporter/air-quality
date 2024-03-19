@@ -1,4 +1,4 @@
-# Air Quality
+# Omega Initiative
 
 ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
@@ -10,9 +10,15 @@
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 ![Cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 
-## Figma
+## Design
 
-[Air Quality Figma Design File]()
+[Air Quality Figma Design File](https://www.figma.com/file/krRtbkjPXTZjalhCi53bcJ/Airbenders-wireframing?type=design&node-id=0%3A1&mode=design&t=C0Y4LccFQPBDNsHN-1)
+
+![landing](https://github.com/UCR-Senior-Design/air-quality/assets/43308867/ff85ad13-4ad7-4009-913a-a574a75d753c)
+![landingp2](https://github.com/UCR-Senior-Design/air-quality/assets/43308867/012607cf-b51c-4976-b344-4d20fb1b33de)
+
+![dashboard](https://github.com/UCR-Senior-Design/air-quality/assets/43308867/2582171e-7b94-4658-9ea8-dcb834c8323f)
+![details](https://github.com/UCR-Senior-Design/air-quality/assets/43308867/8e8da9db-1890-43e2-9210-29c6ee5a7181)
 
 ## Node.js
 
@@ -24,10 +30,23 @@ This project is built using [Next.js](https://nextjs.org), a React framework. Ne
 
 ## Environment Variables
 
-The following environment variables are required and must be stored in an `.env` file:
+The following environment variables are required and must be stored in an `.env` file. For the `QUANTAQ_API_KEY` variable, please make an account on the [QuantAQ website](https://quant-aq.com/).
+
+From there, head over to the menu and go through Organization and then to Developer. Make sure to generate a new key, give it a token name, and paste the key into the `QUANTAQ_API_KEY` variable for your `.env` file:
 
 ```env
-n/a
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL=
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=
+NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+QUANTAQ_API_KEY=
 ```
 
 ## Commands
