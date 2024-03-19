@@ -1,4 +1,4 @@
-export const statusOfAqi = {
+export const statusAqiColor = {
   "0-50": "text-aqi-green",
   "51-100": "text-aqi-yellow",
   "101-150": "text-aqi-orange",
