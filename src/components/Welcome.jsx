@@ -23,7 +23,7 @@ const Welcome = () => {
           alt="Home Page Waves"
         />
       </div>
-      <div className="w-full md:w-11/12 lg:w-3/4 xl:w-2/3 relative z-10 flex flex-col items-center justify-center text-center">
+      <div className="w-full md:w-11/12 lg:w-3/4 xl:w-2/3 relative flex flex-col items-center justify-center text-center">
         <p className="text-8xl font-bold mb-10 text-air-black-100">
           Air Quality you can trust.
         </p>
