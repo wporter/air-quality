@@ -19,13 +19,13 @@ const Line = ({ data, title, units }) => {
   }
 
   return (
-    <div className="pl-8 py-8 w-1/3">
+    <div className="pl-4 py-4 w-1/3">
       {title}
       <ParentSize className="-my-8">
         {({ width }) => (
           <XYChart
-            height={300}
-            width={300}
+            height={250}
+            width={250}
             xScale={{ type: "time" }}
             yScale={{ type: "linear" }}
           >
