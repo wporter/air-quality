@@ -15,6 +15,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@arcgis/core": "^4.29.8",
     "@tanstack/react-table": "^8.11.2",
     "@visx/xychart": "^3.5.1",
     "leaflet": "^1.9.4",
