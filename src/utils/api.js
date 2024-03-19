@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
-export const api = async (method, url, headers) => {
+export const api = async (method, url, headers, body) => {
   const response = await fetch(url, {
     method: method,
     headers: headers,
+    body: JSON.stringify(body),
   });
 
   const data = await response.json();
@@ -159,4 +160,15 @@ export const getMarkers = async () => {
   }));
 
   return { items };
+};
+
+export const getAuth = async (password) => {
+  const response = await api(
+    "GET",
+    "https://api.quant-aq.com/device-api/v1/orgs/1212",
+    {
+      Authorization: "Basic " + btoa(`${password}:`),
+    },
+  );
+  return response;
 };
