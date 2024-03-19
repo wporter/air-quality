@@ -12,7 +12,7 @@
 
 ## Figma
 
-[Air Quality Figma Design File]()
+[Air Quality Figma Design File](https://www.figma.com/file/krRtbkjPXTZjalhCi53bcJ/Airbenders-wireframing?type=design&node-id=0%3A1&mode=design&t=C0Y4LccFQPBDNsHN-1)
 
 ## Node.js
 
@@ -24,10 +24,23 @@ This project is built using [Next.js](https://nextjs.org), a React framework. Ne
 
 ## Environment Variables
 
-The following environment variables are required and must be stored in an `.env` file:
+The following environment variables are required and must be stored in an `.env` file. For the `QUANTAQ_API_KEY` variable, please make an account on the [QuantAQ website](https://quant-aq.com/).
+
+From there, head over to the menu and go through Organization and then to Developer. Make sure to generate a new key, give it a token name, and paste the key into the `QUANTAQ_API_KEY` variable for your `.env` file:
 
 ```env
-n/a
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=1:
+NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL=
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=
+NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+QUANTAQ_API_KEY=
 ```
 
 ## Commands
