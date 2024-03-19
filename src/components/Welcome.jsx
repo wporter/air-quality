@@ -1,13 +1,21 @@
+"use client";
+import React from "react";
 import Image from "next/image";
 import Waves from "@/public/svg/landingWaves.svg";
 import { FaChevronDown } from "react-icons/fa";
 import Navigation from "@/components/Navigation";
 
 const Welcome = () => {
+  const ChevronClick = () => {
+    const section = document.getElementById("public-view-section");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="relative flex flex-col items-center justify-between min-h-screen w-full overflow-hidden">
       <Navigation />
-
       <div className="w-full h-full absolute top-0 left-0">
         <Image
           src={Waves}
@@ -27,7 +35,10 @@ const Welcome = () => {
 
       <div className="flex flex-col items-center mb-10">
         <p className="text-3xl font-base text-air-black-100">Access Data</p>
-        <FaChevronDown className="transition-transform transform hover:scale-125 hover:cursor-pointer text-air-black-100 text-4xl pt-2" />
+        <FaChevronDown
+          onClick={ChevronClick}
+          className="transition-transform transform hover:scale-125 hover:cursor-pointer text-air-black-100 text-4xl pt-2"
+        />
       </div>
     </div>
   );

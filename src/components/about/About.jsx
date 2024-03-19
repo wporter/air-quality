@@ -15,7 +15,7 @@ const About = () => {
         alt="About Page Waves"
       />
 
-      <div className="w-10/12 my-12">
+      <div className="w-10/12 pt-32">
         <div className="flex justify-between p-4">
           <div className="w-3/4">
             <p className="text-3xl md:text-4xl lg:text-5xl font-semibold my-2 text-air-blue-200">
@@ -60,7 +60,6 @@ const About = () => {
             <div className="bg-gray-300 w-full md:w-full lg:w-4/5 xl:w-4/5 h-64 md:h-auto my-12 rounded-lg shadow"></div>
           </div>
         </div>
-
         <p className="text-4xl font-semibold mx-4 mb-5 mt-32 text-air-blue-200">
           OUR TEAM
         </p>
