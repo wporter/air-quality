@@ -18,10 +18,10 @@ const About = () => {
       <div className="w-10/12 pt-32">
         <div className="flex justify-between p-4">
           <div className="w-3/4">
-            <p className="text-3xl font-semibold my-2 text-air-blue-200">
-              WHAT IS OMEGA INTITIATIVE?
+            <p className="text-3xl md:text-4xl lg:text-5xl font-semibold my-2 text-air-blue-200">
+              WHAT IS OMEGA INITIATIVE?
             </p>
-            <p className="mb-20 my-5">
+            <p className=" text-xl mb-5 my-5">
               Revolutionizing Air Quality in Inland Southern California In a
               groundbreaking move, the Center for Environmental Research and
               Technology (CE-CERT) at the Marlan and Rosemary Bourns College of
@@ -56,16 +56,15 @@ const About = () => {
           </div>
 
           {/* place holder for team photo */}
-          <div className="w-1/2 flex justify-center">
-            <div className="bg-gray-300 w-3/4 h-3/4 my-12 rounded-lg" />
+          <div className="md:w-1/3 flex justify-center md:justify-end">
+            <div className="bg-gray-300 w-full md:w-full lg:w-4/5 xl:w-4/5 h-64 md:h-auto my-12 rounded-lg shadow"></div>
           </div>
         </div>
-
-        <p className="text-3xl font-semibold mx-4 mb-5 mt-48 text-air-blue-200">
+        <p className="text-4xl font-semibold mx-4 mb-5 mt-32 text-air-blue-200">
           OUR TEAM
         </p>
 
-        <div className="grid grid-cols-4 gap-4 my-2 pb-10">
+        <div className="grid grid-cols-5 gap-4 my-2">
           {members.map(({ name, position, image }, index) => (
             <Profile
               key={index}
