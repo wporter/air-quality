@@ -29,6 +29,13 @@ const SideNavigation = () => {
           <div>Help</div>
         </Link>
       </div>
+      <Link
+        href="/help"
+        className="text-nav-black flex items-center w-full no-underline py-2 px-4 font-normal hover:text-red-500"
+      >
+        <FiHelpCircle className="text-nav-grey text-xl mx-2" />
+        <div>Signout</div>
+      </Link>
     </div>
   );
 };

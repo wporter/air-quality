@@ -1,8 +1,14 @@
 "use client";
 import Link from "next/link";
+import { useContext, useState } from "react";
 import { ImOmega } from "react-icons/im";
+import { User } from "../app/hooks/Auth";
+import Form from "./Form";
 
 const Navigation = () => {
+  const { user } = useContext(User);
+  const [form, setForm] = useState(false);
+
   return (
     <div className="w-full bg-white flex justify-between items-center py-3 px-8 z-10 drop-shadow-md">
       <Link href="/" className="flex items-center">
@@ -21,9 +27,27 @@ const Navigation = () => {
         </Link>
       </div>
 
-      <div className="rounded-lg px-6 py-1 text-air-blue-200 border-2 border-air-blue-200 text-xl font-medium hover:bg-air-blue-200 hover:bg-opacity-25 transition-colors duration-300">
-        <button>Sign In</button>
-      </div>
+      {console.log(user)}
+
+      {user && (
+        <Link
+          href="/researcher"
+          className="rounded-lg px-6 py-1 text-air-blue-200 border-2 border-air-blue-200 text-xl font-medium hover:bg-air-blue-200 hover:bg-opacity-25 transition-colors duration-300"
+        >
+          Dashboard
+        </Link>
+      )}
+
+      {!user && (
+        <button
+          onClick={() => setForm(true)}
+          className="rounded-lg px-6 py-1 text-air-blue-200 border-2 border-air-blue-200 text-xl font-medium hover:bg-air-blue-200 hover:bg-opacity-25 transition-colors duration-300"
+        >
+          Sign In
+        </button>
+      )}
+
+      {form && <Form setForm={setForm} />}
     </div>
   );
 };
