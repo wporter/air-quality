@@ -4,9 +4,22 @@ import ArcGISMap from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import esriConfig from "@arcgis/core/config";
 import Graphic from "@arcgis/core/Graphic";
+import { statusAqiColor } from "@/data/StatusAqiColor";
 
 const ArcGIS = ({ width, height, markers }) => {
   const mapDiv = useRef(null);
+
+  const calcAqiColor = (valOfAqi) => {
+    for (const range in statusAqiColor) {
+      if (Object.prototype.hasOwnProperty.call(statusAqiColor, range)) {
+        const [min, max] = range.split("-").map(Number);
+
+        if (valOfAqi >= min && valOfAqi <= max) {
+          return statusAqiColor[range];
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     if (mapDiv.current) {
@@ -23,7 +36,14 @@ const ArcGIS = ({ width, height, markers }) => {
         zoom: 11,
       });
 
-      markers.forEach(({ geo, sn }) => {
+      markers.forEach((marker) => {
+        const {
+          geo,
+          measurements: { pm10 },
+        } = marker;
+
+        const color = calcAqiColor(pm10);
+
         if (geo.lat == null || geo.lon === null) {
           return;
         }
@@ -36,7 +56,7 @@ const ArcGIS = ({ width, height, markers }) => {
           },
           symbol: {
             type: "simple-marker",
-            color: [0, 0, 0],
+            color: color,
           },
         });
 
