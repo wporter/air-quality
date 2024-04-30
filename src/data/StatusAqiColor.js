@@ -1,8 +1,8 @@
 export const statusAqiColor = {
-  "0-50": "#68DF43",
-  "51-100": "#FFFD54",
-  "101-150": "#EE8433",
-  "151-200": "#EB3023",
-  "201-300": "#854693",
-  "301-500": "#731326",
+  "0-50": "text-aqi-green",
+  "51-100": "text-aqi-yellow",
+  "101-150": "text-aqi-orange",
+  "151-200": "text-aqi-red",
+  "201-300": "text-aqi-purple",
+  "301-500": "text-aqi-maroon",
 };

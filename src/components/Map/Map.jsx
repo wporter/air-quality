@@ -1,8 +1,8 @@
 "use client";
 import dynamic from "next/dynamic";
 
-export const ArcGIS = dynamic(() => import("./ArcGIS"), {
+const Map = dynamic(() => import("./Content"), {
   ssr: false,
 });
 
-export default ArcGIS;
+export default Map;

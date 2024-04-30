@@ -1,7 +1,7 @@
 import Welcome from "@/components/Welcome";
+import Map from "@/components/Map/Map";
 import Footer from "@/components/Footer";
 import { getMarkers } from "@/utils/api";
-import { ArcGIS } from "@/components/Map/Map";
 
 const Page = async () => {
   const { items } = await getMarkers();
@@ -11,7 +11,7 @@ const Page = async () => {
       <Welcome />
       <div className="my-10 w-11/12" id="public-view-section">
         <p className="my-4 font-bold text-5xl">Public View</p>
-        <ArcGIS height="h-[60vh]" width="w-full" markers={items} />
+        <Map height="h-[60vh]" width="w-full" markers={items} />
       </div>
 
       <Footer />
