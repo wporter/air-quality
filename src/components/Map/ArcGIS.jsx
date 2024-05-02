@@ -1,9 +1,9 @@
-"use client";
 import { useRef, useEffect } from "react";
 import ArcGISMap from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import esriConfig from "@arcgis/core/config";
 import Graphic from "@arcgis/core/Graphic";
+import PopupTemplate from "@arcgis/core/PopupTemplate";
 import { statusAqiColor } from "@/data/StatusAqiColor";
 
 const ArcGIS = ({ width, height, markers }) => {
@@ -36,6 +36,11 @@ const ArcGIS = ({ width, height, markers }) => {
         zoom: 11,
       });
 
+      const popupTemplate = new PopupTemplate({
+        title: "{Title}",
+        content: "PM10: {PM10}",
+      });
+
       markers.forEach((marker) => {
         const {
           geo,
@@ -58,6 +63,10 @@ const ArcGIS = ({ width, height, markers }) => {
             type: "simple-marker",
             color: color,
           },
+          attributes: {
+            PM10: pm10,
+          },
+          popupTemplate: popupTemplate,
         });
 
         view.graphics.add(pointGraphic);
