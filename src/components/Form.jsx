@@ -33,7 +33,7 @@ const Form = ({ setForm }) => {
   };
 
   return (
-    <div className="fixed h-screen w-screen bg-black/40 flex items-center justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+    <div className="fixed h-screen w-screen bg-black/40 flex items-center justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-8 z-10">
       <div className="bg-white rounded-xl w-1/3 p-8">
         <div className="flex justify-end w-full">
           <FaTimes
