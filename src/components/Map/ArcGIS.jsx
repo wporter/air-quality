@@ -37,13 +37,14 @@ const ArcGIS = ({ width, height, markers }) => {
       });
 
       const popupTemplate = new PopupTemplate({
-        title: "{Title}",
+        title: "{SN}",
         content: "PM10: {PM10}",
       });
 
       markers.forEach((marker) => {
         const {
           geo,
+          sn,
           measurements: { pm10 },
         } = marker;
 
@@ -64,6 +65,7 @@ const ArcGIS = ({ width, height, markers }) => {
             color: color,
           },
           attributes: {
+            SN: sn,
             PM10: pm10,
           },
           popupTemplate: popupTemplate,
