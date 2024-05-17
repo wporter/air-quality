@@ -75,16 +75,6 @@ const ArcGIS = ({ width, height, markers }) => {
         zoom: 11,
       });
 
-      const popupTemplate = new PopupTemplate({
-        title: "{SN}",
-        content: [
-          {
-            type: "text",
-            text: "PM10: {PM10}",
-          },
-        ],
-      });
-
       markers.forEach((marker) => {
         const {
           geo,
@@ -112,8 +102,17 @@ const ArcGIS = ({ width, height, markers }) => {
           attributes: {
             SN: sn,
             PM10: pm10,
+            AQI: pm10AqiVal,
           },
-          popupTemplate: popupTemplate,
+          popupTemplate: new PopupTemplate({
+            title: "{SN}",
+            content: [
+              {
+                type: "text",
+                text: "PM10: {PM10} μg/m³<br>AQI: {AQI}",
+              },
+            ],
+          }),
         });
 
         view.graphics.add(pointGraphic);
