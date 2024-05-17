@@ -111,13 +111,18 @@ const ArcGIS = ({ width, height, markers }) => {
             LastSeen: lastSeen,
           },
           popupTemplate: new PopupTemplate({
-            title: "{SN}",
-            content: [
-              {
-                type: "text",
-                text: "PM10: {PM10}<br>AQI: {AQI}<br>Last Seen: {LastSeen} minutes ago",
-              },
-            ],
+            title: `<p className="font-normal text-base text-tooltip-black-100">
+            {SN}
+          </p>`,
+            content: `
+              <p className="italic font-thin text-xs">
+                Last Seen: {LastSeen} minutes ago
+              </p>
+              <hr class="my-2 border-gray-300">
+              <div className="font-light text-base text-tooltip-black-200">
+                <p>PM10: {PM10}</p>
+                <p>AQI: {AQI}</p>
+              </div>`,
           }),
         });
 
