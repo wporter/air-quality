@@ -80,12 +80,17 @@ const ArcGIS = ({ width, height, markers }) => {
           geo,
           sn,
           measurements: { pm10 },
+          // eslint-disable-next-line camelcase
+          timestamp_local,
         } = marker;
 
         if (geo.lat == null || geo.lon === null) {
           return;
         }
 
+        const lastSeen = new Date(
+          new Date().getTime() - new Date(timestamp_local).getTime(),
+        ).getMinutes();
         const pm10AqiVal = calcAqi(Math.round(pm10));
         const color = calcAqiColor(pm10AqiVal);
 
@@ -103,13 +108,14 @@ const ArcGIS = ({ width, height, markers }) => {
             SN: sn,
             PM10: pm10,
             AQI: pm10AqiVal,
+            LastSeen: lastSeen,
           },
           popupTemplate: new PopupTemplate({
             title: "{SN}",
             content: [
               {
                 type: "text",
-                text: "PM10: {PM10} μg/m³<br>AQI: {AQI}",
+                text: "PM10: {PM10}<br>AQI: {AQI}<br>Last Seen: {LastSeen} minutes ago",
               },
             ],
           }),
