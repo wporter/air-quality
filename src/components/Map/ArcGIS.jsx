@@ -5,10 +5,47 @@ import esriConfig from "@arcgis/core/config";
 import Graphic from "@arcgis/core/Graphic";
 import PopupTemplate from "@arcgis/core/PopupTemplate";
 import { statusAqiColor } from "@/data/StatusAqiColor";
+import { aqiValue } from "@/data/Aqi";
 
 const ArcGIS = ({ width, height, markers }) => {
   const mapDiv = useRef(null);
 
+  // calculates aqi val
+  const calcAqi = (value) => {
+    let numerator = 0;
+    let denominator = 0;
+    let pmMin = 0;
+    let pmMax = 0;
+
+    let aqiLowerBound = 0;
+    let aqiUpperBound = 0;
+
+    for (const range in aqiValue) {
+      if (Object.prototype.hasOwnProperty.call(aqiValue, range)) {
+        const [min, max] = range.split("-").map(Number);
+
+        if (value >= min && value <= max) {
+          const [resultLower, resultUpper] = aqiValue[range]
+            .split("-")
+            .map(Number);
+          aqiLowerBound = resultLower;
+          aqiUpperBound = resultUpper;
+
+          pmMin = min;
+          pmMax = max;
+          break;
+        }
+      }
+    }
+
+    numerator = aqiUpperBound - aqiLowerBound;
+    denominator = pmMax - pmMin;
+
+    const result = (numerator / denominator) * (value - pmMin) + aqiLowerBound;
+    return Math.round(result);
+  };
+
+  // calculates the aqi color to display on markers
   const calcAqiColor = (valOfAqi) => {
     for (const range in statusAqiColor) {
       if (Object.prototype.hasOwnProperty.call(statusAqiColor, range)) {
@@ -19,6 +56,8 @@ const ArcGIS = ({ width, height, markers }) => {
         }
       }
     }
+
+    return "text-gray-500";
   };
 
   useEffect(() => {
@@ -38,7 +77,12 @@ const ArcGIS = ({ width, height, markers }) => {
 
       const popupTemplate = new PopupTemplate({
         title: "{SN}",
-        content: "PM10: {PM10}",
+        content: [
+          {
+            type: "text",
+            text: "PM10: {PM10}",
+          },
+        ],
       });
 
       markers.forEach((marker) => {
@@ -48,11 +92,12 @@ const ArcGIS = ({ width, height, markers }) => {
           measurements: { pm10 },
         } = marker;
 
-        const color = calcAqiColor(pm10);
-
         if (geo.lat == null || geo.lon === null) {
           return;
         }
+
+        const pm10AqiVal = calcAqi(Math.round(pm10));
+        const color = calcAqiColor(pm10AqiVal);
 
         const pointGraphic = new Graphic({
           geometry: {
