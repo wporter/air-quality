@@ -57,7 +57,8 @@ const ArcGIS = ({ width, height, markers }) => {
       }
     }
 
-    return "text-gray-500";
+    // returns a default grey color if aqi color can't be found
+    return "#999999";
   };
 
   useEffect(() => {
@@ -79,21 +80,27 @@ const ArcGIS = ({ width, height, markers }) => {
         const {
           geo,
           sn,
-          measurements: { pm10 },
           // eslint-disable-next-line camelcase
           timestamp_local,
+          measurements: { pm10 },
         } = marker;
 
         if (geo.lat == null || geo.lon === null) {
           return;
         }
 
+        // calc when sensor was last seen --> converts time into mins
         const lastSeen = new Date(
           new Date().getTime() - new Date(timestamp_local).getTime(),
         ).getMinutes();
+
+        // calcs aqi val using pm10
         const pm10AqiVal = calcAqi(Math.round(pm10));
+
+        // calcs color of aqi
         const color = calcAqiColor(pm10AqiVal);
 
+        // info for marker itself
         const pointGraphic = new Graphic({
           geometry: {
             type: "point",
@@ -111,18 +118,25 @@ const ArcGIS = ({ width, height, markers }) => {
             LastSeen: lastSeen,
           },
           popupTemplate: new PopupTemplate({
-            title: `<p className="font-normal text-base text-tooltip-black-100">
-            {SN}
+            title: `{SN}<br></br><p style="font-style: italic; font-weight: 100; font-size: 0.75rem;">
+            Last Seen: {LastSeen} minutes ago
           </p>`,
             content: `
-              <p className="italic font-thin text-xs">
-                Last Seen: {LastSeen} minutes ago
-              </p>
-              <hr class="my-2 border-gray-300">
-              <div className="font-light text-base text-tooltip-black-200">
-                <p>PM10: {PM10}</p>
-                <p>AQI: {AQI}</p>
-              </div>`,
+            <div style="padding-left: 10px; padding-top: 10px; padding-bottom: 15px;">
+                <table style="font-family: Arial, sans-serif; border-collapse: collapse; width: 80%;">
+                  <tr style="background-color: #f2f2f2;">
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Pollutant</th>
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">AQI</th>
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Concentration</th>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">PM10</td>
+                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; background-color: ${color};">{AQI}</td>
+                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">{PM10} μg/m³</td>
+                  </tr>
+                </table>
+              </div>
+            `,
           }),
         });
 
