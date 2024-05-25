@@ -152,12 +152,14 @@ export const getMarkers = async () => {
     },
   );
 
-  const items = data.map(({ geo, sn, timestamp_local, pm1, pm10, pm25 }) => ({
-    geo,
-    sn,
-    timestamp_local,
-    measurements: { pm1, pm10, pm25 },
-  }));
+  const items =
+    data &&
+    data.map(({ geo, sn, timestamp_local, pm1, pm10, pm25 }) => ({
+      geo,
+      sn,
+      timestamp_local,
+      measurements: { pm1, pm10, pm25 },
+    }));
 
   return { items };
 };
