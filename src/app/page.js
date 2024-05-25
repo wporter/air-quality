@@ -5,7 +5,7 @@ import { ArcGIS } from "@/components/Map/Map";
 
 const Page = async () => {
   const { items } = await getMarkers();
-
+  console.log("Items fetched in Page component:", items);
   return (
     <div className="flex flex-col justify-center items-center relative">
       <Welcome />
@@ -13,7 +13,6 @@ const Page = async () => {
         <p className="my-4 font-bold text-5xl">Public View</p>
         <ArcGIS height="h-[60vh]" width="w-full" markers={items} />
       </div>
-
       <Footer />
     </div>
   );
