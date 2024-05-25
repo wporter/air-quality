@@ -144,22 +144,41 @@ export const getLocations = async () => {
 };
 
 export const getMarkers = async () => {
-  const { data } = await api(
-    "GET",
-    "https://api.quant-aq.com/device-api/v1/data/most-recent/?network_id=11",
-    {
-      Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
-    },
-  );
+  try {
+    const response = await api(
+      "GET",
+      "https://api.quant-aq.com/device-api/v1/data/most-recent/?network_id=11",
+      {
+        Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
+      },
+    );
 
-  const items = data.map(({ geo, sn, timestamp_local, pm1, pm10, pm25 }) => ({
-    geo,
-    sn,
-    timestamp_local,
-    measurements: { pm1, pm10, pm25 },
-  }));
+    const data = response.data;
 
-  return { items };
+    if (!Array.isArray(data)) {
+      console.error("Expected an array, but received:", data);
+      return { items: [] };
+    }
+
+    if (data.length === 0) {
+      console.error("No data received from API");
+      return { items: [] };
+    }
+
+    const items =
+      data &&
+      data.map(({ geo, sn, timestamp_local, pm1, pm10, pm25 }) => ({
+        geo,
+        sn,
+        timestamp_local,
+        measurements: { pm1, pm10, pm25 },
+      }));
+
+    return { items };
+  } catch (error) {
+    console.error("Failed to fetch markers:", error);
+    return { items: [] };
+  }
 };
 
 export const getAuth = async (password) => {
