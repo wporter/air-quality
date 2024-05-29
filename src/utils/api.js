@@ -20,6 +20,13 @@ export const getDataDetails = async (serialNumber) => {
     },
   );
 
+  if (!data || data.length === 0) {
+    return {
+      meta: { sn: serialNumber },
+      data: "No data available",
+    };
+  }
+
   const {
     rh,
     sn,
@@ -44,7 +51,7 @@ export const getDataDetails = async (serialNumber) => {
       Temperature: temp ? `${temp}°C` : "Not Available",
       Timestamp: new Date(timestamp_local).toLocaleTimeString(),
       "Carbon Monoxide": co ? `${co} ppb` : "Not Available",
-      "Carbon Dixiode": co2 ? `${co2} ppm` : "Not Available",
+      "Carbon Dioxide": co2 ? `${co2} ppm` : "Not Available",
       "Nitric Oxide": no ? `${no} ppb` : "Not Available",
       "Nitrogen Dioxide": no2 ? `${no2} ppb` : "Not Available",
       Ozone: o3 ? `${o3} ppm` : "Not Available",
@@ -144,22 +151,67 @@ export const getLocations = async () => {
 };
 
 export const getMarkers = async () => {
-  const { data } = await api(
-    "GET",
-    "https://api.quant-aq.com/device-api/v1/data/most-recent/?network_id=11",
-    {
-      Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
-    },
-  );
+  try {
+    const devicesResponse = await api(
+      "GET",
+      "https://api.quant-aq.com/device-api/v1/devices/",
+      {
+        Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
+      },
+    );
 
-  const items = data.map(({ geo, sn, timestamp_local, pm1, pm10, pm25 }) => ({
-    geo,
-    sn,
-    timestamp_local,
-    measurements: { pm1, pm10, pm25 },
-  }));
+    const devices = devicesResponse.data;
+    console.log("Total devices retrieved:", devices.length);
 
-  return { items };
+    if (!Array.isArray(devices) || devices.length === 0) {
+      console.error("No devices received from API");
+      return { items: [] };
+    }
+
+    const dataPromises = devices.map(({ sn }) =>
+      api(
+        "GET",
+        `https://api.quant-aq.com/device-api/v1/data/most-recent/?sn=${sn}`,
+        {
+          Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
+        },
+      ),
+    );
+
+    const allData = await Promise.all(dataPromises);
+    console.log("Data for each device retrieved successfully.");
+
+    const items = allData.map((response, index) => {
+      const deviceData = response.data[0];
+      const device = devices[index];
+
+      if (!deviceData) {
+        console.log(`Sensor: ${device.sn}, Timestamp: No data available`);
+        return {
+          geo: device.geo,
+          sn: device.sn,
+          timestamp_local: "No data available",
+          measurements: { pm1: "N/A", pm10: "N/A", pm25: "N/A" },
+        };
+      }
+
+      const { geo, sn, timestamp_local, pm1, pm10, pm25 } = deviceData;
+      console.log(`Sensor: ${sn}, Timestamp: ${timestamp_local}`);
+
+      return {
+        geo,
+        sn,
+        timestamp_local,
+        measurements: { pm1, pm10, pm25 },
+      };
+    });
+
+    console.log("Final list of items:", items);
+    return { items };
+  } catch (error) {
+    console.error("Failed to fetch markers:", error);
+    return { items: [] };
+  }
 };
 
 export const getAuth = async (password) => {
