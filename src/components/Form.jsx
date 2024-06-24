@@ -27,6 +27,7 @@ const Form = ({ setForm }) => {
       return;
     }
 
+    localStorage.setItem("user", username);
     setUser(username);
     setForm(false);
     toast.success("Successfully Signed In");
