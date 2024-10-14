@@ -8,19 +8,22 @@ import { ArcGIS } from "@/components/Map/Map";
 
 const Dashboard = ({ locations, markers }) => {
   const now = new Date().getTime();
-
-  const offlineSensors = markers.filter(({ timestampLocal }) => {
-    if (timestampLocal === "No data available") return true;
-    const sensorTime = new Date(timestampLocal).getTime();
-    const diffMinutes = (now - sensorTime) / (1000 * 60);
-    return diffMinutes <= 60;
-  }).length;
-
-  const onlineSensors = markers.filter(({ timestampLocal }) => {
-    if (timestampLocal === "No data available") return false;
-    const sensorTime = new Date(timestampLocal).getTime();
+  // eslint-disable-next-line camelcase
+  const offlineSensors = markers.filter(({ timestamp_local }) => {
+    // eslint-disable-next-line camelcase
+    if (timestamp_local === "No data available") return true;
+    const sensorTime = new Date(timestamp_local).getTime();
     const diffMinutes = (now - sensorTime) / (1000 * 60);
     return diffMinutes > 60;
+  }).length;
+
+  // eslint-disable-next-line camelcase
+  const onlineSensors = markers.filter(({ timestamp_local }) => {
+    // eslint-disable-next-line camelcase
+    if (timestamp_local === "No data available") return false;
+    const sensorTime = new Date(timestamp_local).getTime();
+    const diffMinutes = (now - sensorTime) / (1000 * 60);
+    return diffMinutes <= 60;
   }).length;
 
   return (
