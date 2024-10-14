@@ -18,6 +18,8 @@ const Dashboard = ({ locations, markers }) => {
             color="text-green-400"
             value={
               markers.filter(
+                // test comment
+
                 // eslint-disable-next-line camelcase
                 ({ timestamp_local }) =>
                   parseInt(
