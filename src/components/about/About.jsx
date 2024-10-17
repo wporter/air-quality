@@ -64,7 +64,7 @@ const About = () => {
           OUR TEAM
         </p>
 
-        <div className="grid grid-cols-5 gap-4 my-2">
+        <div className="grid grid-cols-5 gap-4 my-2 pb-14">
           {members.map(({ name, position, image }, index) => (
             <Profile
               key={index}

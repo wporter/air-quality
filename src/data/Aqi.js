@@ -1,3 +1,6 @@
+// pm10 is used
+// documentation ref: https://www.airnow.gov/sites/default/files/2020-05/aqi-technical-assistance-document-sept2018.pdf
+
 export const aqiValue = {
   "0-54": "0-50",
   "55-154": "51-100",
