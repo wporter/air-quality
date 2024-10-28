@@ -118,7 +118,8 @@ const ArcGIS = ({ width, height, markers }) => {
             backgroundColor: color,
             borderLineSize: 1,
             borderLineColor: "#FFFFFF",
-            yoffset: 0,
+            yoffset: -15,
+            xoffset: 0,
             horizontalAlignment: "center",
           },
           attributes: {
