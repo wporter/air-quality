@@ -7,6 +7,7 @@ import PopupTemplate from "@arcgis/core/PopupTemplate";
 import { statusAqiColor } from "@/data/StatusAqiColor";
 import { aqiValue } from "@/data/Aqi";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 
 const ArcGIS = ({ width, height, markers }) => {
   const mapDiv = useRef(null);
@@ -69,6 +70,11 @@ const ArcGIS = ({ width, height, markers }) => {
       const map = new ArcGISMap({
         basemap: "gray-vector",
       });
+
+      const trafficLayer = new MapImageLayer({
+        url: "https://traffic.arcgis.com/arcgis/rest/services/World/Traffic/MapServer",
+      });
+      map.add(trafficLayer);
 
       const layer = new FeatureLayer({
         title: "Air Quality Index",
@@ -139,14 +145,20 @@ const ArcGIS = ({ width, height, markers }) => {
       // Custom legend
       const customLegend = document.createElement("div");
       customLegend.innerHTML = `
-        <div style="padding: 10px; background: white; border: 1px solid #ccc; border-radius: 5px;">
-          <h3 style="font-size: 14px; margin: 0 0 5px 0;">Legend</h3>
-          <p style="margin: 2px 0;"><span style="color: #00E400; font-weight: bold;">Green</span>: Safe</p>
-          <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
-          <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Dangerous</p>
-          <p style="margin: 5px 0; font-style: italic;">Marker Value: AQI</p>
-        </div>
-      `;
+      <div style="padding: 8px; background: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px;">
+        <h3 style="font-size: 14px; margin: 0 0 5px 0;">Legend</h3>
+        <p style="margin: 2px 0;"><strong>Markers:</strong> Sensors</p>
+        <p style="margin: 2px 0;"><span style="color: #00E400; font-weight: bold;">Green</span>: Safe</p>
+        <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
+        <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Dangerous</p>
+        <p style="margin: 2px 0;">Marker Value: AQI.</p>
+        <hr style="margin: 6px 0; border-top: 1px solid #ccc;" />
+        <p style="margin: 2px 0;"><strong>Traffic Circles:</strong> Incidents</p>
+        <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
+        <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Severe</p>
+      </div>
+    `;
+
       view.ui.add(customLegend, "bottom-right");
 
       markers.forEach((marker) => {
