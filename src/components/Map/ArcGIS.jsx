@@ -108,8 +108,18 @@ const ArcGIS = ({ width, height, markers }) => {
             latitude: geo.lat,
           },
           symbol: {
-            type: "simple-marker",
-            color: color,
+            type: "text",
+            color: "#FFFFFF",
+            text: pm10AqiVal.toString(),
+            font: {
+              size: 12,
+              weight: "bold",
+            },
+            backgroundColor: color,
+            borderLineSize: 1,
+            borderLineColor: "#FFFFFF",
+            yoffset: 0,
+            horizontalAlignment: "center",
           },
           attributes: {
             SN: sn,
