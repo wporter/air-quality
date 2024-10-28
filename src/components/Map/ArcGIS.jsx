@@ -6,7 +6,6 @@ import Graphic from "@arcgis/core/Graphic";
 import PopupTemplate from "@arcgis/core/PopupTemplate";
 import { statusAqiColor } from "@/data/StatusAqiColor";
 import { aqiValue } from "@/data/Aqi";
-import Legend from "@arcgis/core/widgets/Legend";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 
 const ArcGIS = ({ width, height, markers }) => {
@@ -137,6 +136,7 @@ const ArcGIS = ({ width, height, markers }) => {
         zoom: 11,
       });
 
+      // Custom legend
       const customLegend = document.createElement("div");
       customLegend.innerHTML = `
         <div style="padding: 10px; background: white; border: 1px solid #ccc; border-radius: 5px;">
@@ -147,16 +147,13 @@ const ArcGIS = ({ width, height, markers }) => {
           <p style="margin: 5px 0; font-style: italic;">Marker Value: AQI</p>
         </div>
       `;
-
-      // Position the custom legend in the bottom-right corner
       view.ui.add(customLegend, "bottom-right");
 
       markers.forEach((marker) => {
         const {
           geo,
           sn,
-          // eslint-disable-next-line camelcase
-          timestamp_local,
+          timestamp_local: timestampLocal,
           measurements: { pm10 },
         } = marker;
 
@@ -164,18 +161,12 @@ const ArcGIS = ({ width, height, markers }) => {
           return;
         }
 
-        // calc when sensor was last seen --> converts time into mins
         const lastSeen = new Date(
-          new Date().getTime() - new Date(timestamp_local).getTime(),
+          new Date().getTime() - new Date(timestampLocal).getTime(),
         ).getMinutes();
-
-        // calcs aqi val using pm10
         const pm10AqiVal = calcAqi(Math.round(pm10));
-
-        // calcs color of aqi
         const color = calcAqiColor(pm10AqiVal);
 
-        // info for marker itself
         const pointGraphic = new Graphic({
           geometry: {
             type: "point",
