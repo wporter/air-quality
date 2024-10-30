@@ -6,6 +6,7 @@ import Graphic from "@arcgis/core/Graphic";
 import PopupTemplate from "@arcgis/core/PopupTemplate";
 import { statusAqiColor } from "@/data/StatusAqiColor";
 import { aqiValue } from "@/data/Aqi";
+
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 
