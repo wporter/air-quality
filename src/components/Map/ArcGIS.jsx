@@ -6,61 +6,52 @@ import Graphic from "@arcgis/core/Graphic";
 import PopupTemplate from "@arcgis/core/PopupTemplate";
 import { statusAqiColor } from "@/data/StatusAqiColor";
 import { aqiValue } from "@/data/Aqi";
-
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 
 const ArcGIS = ({ width, height, markers }) => {
   const mapDiv = useRef(null);
 
-  // calculates aqi val
+  // calculates AQI value
   const calcAqi = (value) => {
     let numerator = 0;
     let denominator = 0;
     let pmMin = 0;
     let pmMax = 0;
-
     let aqiLowerBound = 0;
     let aqiUpperBound = 0;
 
     for (const range in aqiValue) {
       if (Object.prototype.hasOwnProperty.call(aqiValue, range)) {
         const [min, max] = range.split("-").map(Number);
-
         if (value >= min && value <= max) {
           const [resultLower, resultUpper] = aqiValue[range]
             .split("-")
             .map(Number);
           aqiLowerBound = resultLower;
           aqiUpperBound = resultUpper;
-
           pmMin = min;
           pmMax = max;
           break;
         }
       }
     }
-
     numerator = aqiUpperBound - aqiLowerBound;
     denominator = pmMax - pmMin;
-
     const result = (numerator / denominator) * (value - pmMin) + aqiLowerBound;
     return Math.round(result);
   };
 
-  // calculates the aqi color to display on markers
+  // calculates AQI color for markers
   const calcAqiColor = (valOfAqi) => {
     for (const range in statusAqiColor) {
       if (Object.prototype.hasOwnProperty.call(statusAqiColor, range)) {
         const [min, max] = range.split("-").map(Number);
-
         if (valOfAqi >= min && valOfAqi <= max) {
           return statusAqiColor[range];
         }
       }
     }
-
-    // returns a default grey color if aqi color can't be found
     return "#999999";
   };
 
@@ -72,30 +63,20 @@ const ArcGIS = ({ width, height, markers }) => {
         basemap: "gray-vector",
       });
 
+      // Traffic Layer
       const trafficLayer = new MapImageLayer({
         url: "https://traffic.arcgis.com/arcgis/rest/services/World/Traffic/MapServer",
       });
       map.add(trafficLayer);
 
+      // Feature Layer for AQI markers
       const layer = new FeatureLayer({
         title: "Air Quality Index",
-        source: [], // Will be populated with graphics
+        source: [], // Populated with graphics
         fields: [
-          {
-            name: "SN",
-            alias: "Sensor Number",
-            type: "string",
-          },
-          {
-            name: "PM10",
-            alias: "PM10 Concentration (μg/m³)",
-            type: "double",
-          },
-          {
-            name: "AQI",
-            alias: "Air Quality Index",
-            type: "integer",
-          },
+          { name: "SN", alias: "Sensor Number", type: "string" },
+          { name: "PM10", alias: "PM10 Concentration (μg/m³)", type: "double" },
+          { name: "AQI", alias: "Air Quality Index", type: "integer" },
           {
             name: "LastSeen",
             alias: "Last Seen (minutes ago)",
@@ -116,11 +97,7 @@ const ArcGIS = ({ width, height, markers }) => {
               stops: [
                 { value: 0, color: "#00E400", label: "Good (0-50)" },
                 { value: 51, color: "#FFFF00", label: "Moderate (51-100)" },
-                {
-                  value: 101,
-                  color: "#FF7E00",
-                  label: "Unhealthy for Sensitive Groups (101-150)",
-                },
+                { value: 101, color: "#FF7E00", label: "Unhealthy (101-150)" },
                 { value: 151, color: "#FF0000", label: "Unhealthy (151-200)" },
                 {
                   value: 201,
@@ -133,7 +110,6 @@ const ArcGIS = ({ width, height, markers }) => {
           ],
         },
       });
-
       map.add(layer);
 
       const view = new MapView({
@@ -146,20 +122,19 @@ const ArcGIS = ({ width, height, markers }) => {
       // Custom legend
       const customLegend = document.createElement("div");
       customLegend.innerHTML = `
-      <div style="padding: 8px; background: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px;">
-        <h3 style="font-size: 14px; margin: 0 0 5px 0;">Legend</h3>
-        <p style="margin: 2px 0;"><strong>Markers:</strong> Sensors</p>
-        <p style="margin: 2px 0;"><span style="color: #00E400; font-weight: bold;">Green</span>: Safe</p>
-        <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
-        <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Dangerous</p>
-        <p style="margin: 2px 0;">Marker Value: AQI.</p>
-        <hr style="margin: 6px 0; border-top: 1px solid #ccc;" />
-        <p style="margin: 2px 0;"><strong>Traffic Circles:</strong> Incidents</p>
-        <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
-        <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Severe</p>
-      </div>
-    `;
-
+        <div style="padding: 8px; background: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px;">
+          <h3 style="font-size: 14px; margin: 0 0 5px 0;">Legend</h3>
+          <p style="margin: 2px 0;"><strong>Markers:</strong> AQI sensors</p>
+          <p style="margin: 2px 0;"><span style="color: #00E400; font-weight: bold;">Green</span>: Safe</p>
+          <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
+          <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Dangerous</p>
+          <p style="margin: 2px 0;">Marker Value: AQI</p>
+          <hr style="margin: 6px 0; border-top: 1px solid #ccc;" />
+          <p style="margin: 2px 0;"><strong>Traffic Circles:</strong> Incidents</p>
+          <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
+          <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Severe</p>
+        </div>
+      `;
       view.ui.add(customLegend, "bottom-right");
 
       markers.forEach((marker) => {
@@ -187,8 +162,19 @@ const ArcGIS = ({ width, height, markers }) => {
             latitude: geo.lat,
           },
           symbol: {
-            type: "simple-marker",
-            color: color,
+            type: "text",
+            color: "#FFFFFF",
+            text: pm10AqiVal.toString(),
+            font: {
+              size: 12,
+              weight: "bold",
+            },
+            backgroundColor: color,
+            borderLineSize: 1,
+            borderLineColor: "#FFFFFF",
+            yoffset: -15,
+            xoffset: 0,
+            horizontalAlignment: "center",
           },
           attributes: {
             SN: sn,
@@ -219,7 +205,7 @@ const ArcGIS = ({ width, height, markers }) => {
           }),
         });
 
-        layer.source.add(pointGraphic);
+        view.graphics.add(pointGraphic);
       });
 
       return () => view && view.destroy();
