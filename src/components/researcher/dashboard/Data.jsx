@@ -50,7 +50,7 @@ const columns = [
     ),
   },
   {
-    accessorKey: "snLink",
+    accessorKey: "sn",
     header: "Link",
     cell: ({ getValue }) => (
       <Link href={`/researcher/data/${getValue()}`}>
