@@ -2,11 +2,14 @@
 import {
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import Link from "next/link";
 import Tag from "../Tag";
 import { GoArrowRight } from "react-icons/go";
+import { GrAscend, GrDescend } from "react-icons/gr";
+import { TbArrowsSort } from "react-icons/tb";
 
 const columns = [
   {
@@ -57,6 +60,7 @@ const columns = [
         </div>
       </Link>
     ),
+    enableSorting: false,
   },
 ];
 
@@ -65,6 +69,10 @@ const Data = ({ data }) => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    initialState: {
+      sorting: [],
+    },
   });
 
   return (
@@ -74,7 +82,20 @@ const Data = ({ data }) => {
           <div key={id} className="flex">
             {headers.map(({ id, column }) => (
               <div key={id} className="w-2/12 p-1 m-2">
-                {column.columnDef.header}
+                <span>{column.columnDef.header}</span>
+                {column.getCanSort() && ( // Conditionally render the sort button
+                  <button onClick={() => column.toggleSorting?.()}>
+                    {column.getIsSorted() ? (
+                      column.getIsSorted() === "desc" ? (
+                        <GrDescend />
+                      ) : (
+                        <GrAscend />
+                      )
+                    ) : (
+                      <TbArrowsSort />
+                    )}
+                  </button>
+                )}
               </div>
             ))}
           </div>
