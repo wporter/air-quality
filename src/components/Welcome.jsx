@@ -14,7 +14,7 @@ const Welcome = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-between min-h-screen w-full overflow-hidden">
+    <div className="relative flex flex-col items-center justify-between min-h-screen w-full">
       <Navigation />
       <div className="w-full h-full absolute top-0 left-0">
         <Image
@@ -24,9 +24,7 @@ const Welcome = () => {
         />
       </div>
       <div className="w-full md:w-11/12 lg:w-3/4 xl:w-2/3 relative flex flex-col items-center justify-center text-center">
-        <p className="text-8xl font-bold mb-10 text-air-black-100">
-          Air Quality you can trust.
-        </p>
+        <p className="text-8xl font-bold mb-10 text-air-black-100">OMEGA</p>
         <p className="text-3xl font-base text-air-black-100">
           OMEGA Initiative: Objective Measurement / Monitoring / Mitigation of
           Emissions from Goods Movement and Impacts on Air Quality.
