@@ -27,37 +27,39 @@ export const getDataDetails = async (serialNumber) => {
     };
   }
 
-  const {
-    rh,
-    sn,
-    temp,
-    timestamp_local,
-    co,
-    co2,
-    no,
-    no2,
-    o3,
-    pm1,
-    pm10,
-    pm25,
-  } = data[0];
+  // Extract fields safely
+  const sensorData = data[0];
+
+  const { sn, timestamp_local, pm1, pm10, pm25 } = sensorData;
+
+  // Handle nested data safely
+  const rh = sensorData?.met?.rh;
+  const temp = sensorData?.met?.temp;
+
+  const co = sensorData?.co ?? "Not Available";
+  const co2 = sensorData?.co2 ?? "Not Available";
+  const no = sensorData?.no ?? "Not Available";
+  const no2 = sensorData?.no2 ?? "Not Available";
+  const o3 = sensorData?.o3 ?? "Not Available";
 
   return {
-    meta: {
-      sn,
-    },
+    meta: { sn },
     data: {
-      "Relative Humidity": rh ? `${rh}%` : "Not Available",
-      Temperature: temp ? `${temp}°C` : "Not Available",
-      Timestamp: new Date(timestamp_local).toLocaleTimeString(),
-      "Carbon Monoxide": co ? `${co} ppb` : "Not Available",
-      "Carbon Dioxide": co2 ? `${co2} ppm` : "Not Available",
-      "Nitric Oxide": no ? `${no} ppb` : "Not Available",
-      "Nitrogen Dioxide": no2 ? `${no2} ppb` : "Not Available",
-      Ozone: o3 ? `${o3} ppm` : "Not Available",
-      "PM 1": `${pm1} μg/m³`,
-      "PM 2.5": `${pm25} μg/m³`,
-      "PM 10": `${pm10} μg/m³`,
+      "Relative Humidity": rh !== undefined ? `${rh}%` : "Not Available",
+      Temperature: temp !== undefined ? `${temp}°C` : "Not Available",
+      Timestamp: timestamp_local
+        ? new Date(timestamp_local).toLocaleTimeString()
+        : "Not Available",
+      "Carbon Monoxide": co !== "Not Available" ? `${co} ppb` : "Not Available",
+      "Carbon Dioxide":
+        co2 !== "Not Available" ? `${co2} ppm` : "Not Available",
+      "Nitric Oxide": no !== "Not Available" ? `${no} ppb` : "Not Available",
+      "Nitrogen Dioxide":
+        no2 !== "Not Available" ? `${no2} ppb` : "Not Available",
+      Ozone: o3 !== "Not Available" ? `${o3} ppm` : "Not Available",
+      "PM 1": pm1 !== undefined ? `${pm1} μg/m³` : "Not Available",
+      "PM 2.5": pm25 !== undefined ? `${pm25} μg/m³` : "Not Available",
+      "PM 10": pm10 !== undefined ? `${pm10} μg/m³` : "Not Available",
     },
   };
 };
@@ -206,7 +208,7 @@ export const getMarkers = async () => {
       };
     });
 
-    console.log("Final list of items:", items);
+    //console.log("Final list of items:", items);
     return { items };
   } catch (error) {
     console.error("Failed to fetch markers:", error);
