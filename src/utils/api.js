@@ -208,7 +208,7 @@ export const getMarkers = async () => {
       };
     });
 
-    //console.log("Final list of items:", items);
+    // console.log("Final list of items:", items);
     return { items };
   } catch (error) {
     console.error("Failed to fetch markers:", error);
