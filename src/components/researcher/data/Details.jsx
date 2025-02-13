@@ -5,6 +5,9 @@ const Details = ({ fields, meta }) => {
   const { sn } = meta;
 
   const url = `https://app.quant-aq.com/device/${sn}`;
+  const validFields = Object.entries(fields).filter(
+    ([_, value]) => value !== "Not Available",
+  );
 
   return (
     <div className="w-5/12 border border-gray-300 rounded-lg px-9 py-4 m-4">
@@ -15,19 +18,21 @@ const Details = ({ fields, meta }) => {
         </Link>
       </div>
 
-      {Object.entries(fields).map(([key, value], index) => (
-        <div
-          key={index}
-          className="flex justify-between border-b-[1px] border-gray-200 p-4"
-        >
-          <div>{key}</div>
-          {value === "Not Available" ? (
-            <p className="text-gray-300">Unavailable</p>
-          ) : (
+      {validFields.length > 0 ? (
+        validFields.map(([key, value], index) => (
+          <div
+            key={index}
+            className="flex justify-between border-b-[1px] border-gray-200 p-4"
+          >
+            <div>{key}</div>
             <p>{value}</p>
-          )}
+          </div>
+        ))
+      ) : (
+        <div className="flex justify-center border-b-[1px] border-gray-200 p-4">
+          No valid data available
         </div>
-      ))}
+      )}
       {Object.entries(fields).length === 0 && (
         <div className="flex justify-center border-b-[1px] border-gray-200 p-4">
           Loading...
