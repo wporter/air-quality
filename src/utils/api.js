@@ -194,6 +194,7 @@ export const getMarkers = async () => {
           sn: device.sn,
           timestamp_local: "No data available",
           measurements: { pm1: "N/A", pm10: "N/A", pm25: "N/A" },
+          outdoors: device.outdoors, // Include outdoors flag
         };
       }
 
@@ -205,24 +206,13 @@ export const getMarkers = async () => {
         sn,
         timestamp_local,
         measurements: { pm1, pm10, pm25 },
+        outdoors: device.outdoors, // Include outdoors flag
       };
     });
 
-    // console.log("Final list of items:", items);
     return { items };
   } catch (error) {
     console.error("Failed to fetch markers:", error);
     return { items: [] };
   }
-};
-
-export const getAuth = async (password) => {
-  const response = await api(
-    "GET",
-    "https://api.quant-aq.com/device-api/v1/orgs/1212",
-    {
-      Authorization: "Basic " + btoa(`${password}:`),
-    },
-  );
-  return response;
 };
