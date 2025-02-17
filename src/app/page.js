@@ -6,7 +6,6 @@ import { ArcGIS } from "@/components/Map/Map";
 const Page = async () => {
   const { items } = await getMarkers();
 
-  // Filter to include only outdoor sensors dynamically
   const outdoorMarkers = items.filter((item) => item.outdoors === true);
 
   return (

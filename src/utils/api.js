@@ -206,7 +206,7 @@ export const getMarkers = async () => {
         sn,
         timestamp_local,
         measurements: { pm1, pm10, pm25 },
-        outdoors: device.outdoors, // Include outdoors flag
+        outdoors: device.outdoors,
       };
     });
 
