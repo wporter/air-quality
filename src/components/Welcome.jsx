@@ -14,7 +14,7 @@ const Welcome = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-between min-h-screen w-full overflow-hidden">
+    <div className="relative flex flex-col items-center justify-between min-h-screen w-full">
       <Navigation />
       <div className="w-full h-full absolute top-0 left-0">
         <Image
