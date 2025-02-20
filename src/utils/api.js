@@ -199,7 +199,7 @@ export const getMarkers = async () => {
       }
 
       const { geo, sn, timestamp_local, pm1, pm10, pm25 } = deviceData;
-      console.log(`Sensor: ${sn}, Timestamp: ${timestamp_local}`);
+      // console.log(`Sensor: ${sn}, Timestamp: ${timestamp_local}`);
 
       return {
         geo,

@@ -66,7 +66,28 @@ const ArcGIS = ({ width, height, markers }) => {
       // Traffic Layer
       const trafficLayer = new MapImageLayer({
         url: "https://traffic.arcgis.com/arcgis/rest/services/World/Traffic/MapServer",
+        sublayers: [
+          { id: 5, visible: true }, // North america traffic
+          { id: 7, visible: true }, // General traffic
+          { id: 6, visible: true }, // Live traffic
+
+          // Hide the incididents
+          { id: 1, visible: false }, // North america traffic incidents
+          { id: 4, visible: false }, // Detailed incidents
+          { id: 3, visible: false }, // Intermediete incident
+          { id: 2, visible: false }, // Incidents overview
+        ],
       });
+
+      trafficLayer.when(() => {
+        console.log("Traffic Layer Sublayers:");
+        trafficLayer.allSublayers.items.forEach((layer, index) => {
+          console.log(
+            `Index: ${index}, ID: ${layer.id}, Title: ${layer.title}`,
+          );
+        });
+      });
+
       map.add(trafficLayer);
 
       // Feature Layer for AQI markers
@@ -129,10 +150,6 @@ const ArcGIS = ({ width, height, markers }) => {
           <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
           <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Dangerous</p>
           <p style="margin: 2px 0;">Marker Value: AQI</p>
-          <hr style="margin: 6px 0; border-top: 1px solid #ccc;" />
-          <p style="margin: 2px 0;"><strong>Traffic Circles:</strong> Incidents</p>
-          <p style="margin: 2px 0;"><span style="color: #FFFF00; font-weight: bold;">Yellow</span>: Moderate</p>
-          <p style="margin: 2px 0;"><span style="color: #FF0000; font-weight: bold;">Red</span>: Severe</p>
         </div>
       `;
       view.ui.add(customLegend, "bottom-right");
