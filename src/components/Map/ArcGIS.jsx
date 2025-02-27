@@ -157,7 +157,7 @@ const ArcGIS = ({ width, height, markers }) => {
       markers.forEach((marker) => {
         const {
           geo,
-          sn,
+          description,
           timestamp_local: timestampLocal,
           measurements: { pm10 },
         } = marker;
@@ -194,13 +194,13 @@ const ArcGIS = ({ width, height, markers }) => {
             horizontalAlignment: "center",
           },
           attributes: {
-            SN: sn,
+            Description: description,
             PM10: pm10,
             AQI: pm10AqiVal,
             LastSeen: lastSeen,
           },
           popupTemplate: new PopupTemplate({
-            title: `{SN}<br></br><p style="font-style: italic; font-weight: 100; font-size: 0.75rem;">
+            title: `<div style="word-wrap: break-word; max-width: 200px;">{Description}</div><br ></br><p style="font-style: italic; font-weight: 100; font-size: 0.75rem;">
             Last Seen: {LastSeen} minutes ago
           </p>`,
             content: `
