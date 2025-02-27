@@ -192,6 +192,7 @@ export const getMarkers = async () => {
         return {
           geo: device.geo,
           sn: device.sn,
+          description: device.description,
           timestamp_local: "No data available",
           measurements: { pm1: "N/A", pm10: "N/A", pm25: "N/A" },
           outdoors: device.outdoors, // Include outdoors flag
@@ -204,6 +205,7 @@ export const getMarkers = async () => {
       return {
         geo,
         sn,
+        description: device.description,
         timestamp_local,
         measurements: { pm1, pm10, pm25 },
         outdoors: device.outdoors,
