@@ -9,6 +9,9 @@ import { aqiValue } from "@/data/Aqi";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { getLine24h } from "@/utils/api";
+import Line from "@/components/researcher/data/Line";
 
 const ArcGIS = ({ width, height, markers }) => {
   const mapDiv = useRef(null);
@@ -254,27 +257,77 @@ const ArcGIS = ({ width, height, markers }) => {
             PM10: pm10,
             AQI: pm10AqiVal,
             LastSeen: lastSeen,
+            SN: marker.sn,
           },
           popupTemplate: new PopupTemplate({
             title: `<div style="word-wrap: break-word; max-width: 200px;">{Description}</div><br ></br><p style="font-style: italic; font-weight: 100; font-size: 0.75rem;">
-            Last Seen: {LastSeen} minutes ago
-          </p>`,
-            content: `
-            <div style="padding-left: 10px; padding-top: 10px; padding-bottom: 15px;">
-                <table style="font-family: Arial, sans-serif; border-collapse: collapse; width: 80%;">
-                  <tr style="background-color: #f2f2f2;">
-                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Pollutant</th>
-                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">AQI</th>
-                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Concentration</th>
-                  </tr>
-                  <tr>
-                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${selectedPollutant}</td>
-                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; background-color: ${color};">{AQI}</td>
-                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${concentrationValue} μg/m³</td>
-                  </tr>
-                </table>
-              </div>
-            `,
+    Last Seen: {LastSeen} minutes ago
+  </p>`,
+            content: async (feature) => {
+              // Create container for both table and graph
+              const container = document.createElement("div");
+
+              // Existing table HTML
+              container.innerHTML = `
+      <div style="padding-left: 10px; padding-top: 10px; padding-bottom: 15px;">
+        <table style="font-family: Arial, sans-serif; border-collapse: collapse; width: 80%;">
+          <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Pollutant</th>
+            <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">AQI</th>
+            <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Concentration</th>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${selectedPollutant}</td>
+            <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; background-color: ${color};">${pm10AqiVal}</td>
+            <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${concentrationValue} μg/m³</td>
+          </tr>
+        </table>
+        <div id="chart-container-${marker.sn}" style="height: 250px; width: 100%;"></div>
+      </div>
+    `;
+
+              // Add the graph asynchronously
+              // Replace with this try/catch block:
+              try {
+                const sn = marker.sn;
+                const chartContainer = container.querySelector(
+                  `#chart-container-${sn}`,
+                );
+                const timeseriesData = await getLine24h(sn); // Already filtered to 24h
+
+                // Create temporary container for React
+                const tempDiv = document.createElement("div");
+                const root = createRoot(tempDiv);
+
+                root.render(
+                  <div style={{ width: "100%", height: "250px" }}>
+                    <Line
+                      data={
+                        timeseriesData.find(
+                          (d) => d.title === selectedPollutant,
+                        )?.data || []
+                      }
+                      title={selectedPollutant}
+                      units="μg/m³"
+                    />
+                  </div>,
+                );
+
+                // Append after React completes rendering
+                setTimeout(() => {
+                  chartContainer.replaceChildren(tempDiv);
+                }, 0);
+              } catch (error) {
+                console.error("Graph render failed:", error);
+                const errorDiv = document.createElement("div");
+                errorDiv.textContent = "Failed to load graph data";
+                errorDiv.style.color = "red";
+                errorDiv.style.padding = "10px";
+                chartContainer.replaceChildren(errorDiv);
+              }
+
+              return container;
+            },
           }),
         });
 
@@ -287,7 +340,13 @@ const ArcGIS = ({ width, height, markers }) => {
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      {/* Dropdown for pollutant selection */}
+      {/* Hard-coded debug box for the map */}
+      <div
+        style={{ width: "800px", height: "600px", border: "2px solid red" }}
+        ref={mapDiv}
+      />
+
+      {/* Dropdown on top */}
       <select
         value={selectedPollutant}
         onChange={(e) => setSelectedPollutant(e.target.value)}
@@ -306,9 +365,6 @@ const ArcGIS = ({ width, height, markers }) => {
         <option value="PM10">PM10</option>
         <option value="O3">Ozone (O3)</option>
       </select>
-
-      {/* Map container */}
-      <div className={`m-0 p-0 ${width} ${height}`} ref={mapDiv}></div>
     </div>
   );
 };

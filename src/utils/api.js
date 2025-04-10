@@ -2,13 +2,20 @@
 export const api = async (method, url, headers, body) => {
   const response = await fetch(url, {
     method: method,
-    headers: headers,
+    headers: {
+      ...headers,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    mode: "cors",
     body: JSON.stringify(body),
   });
 
-  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
-  return data;
+  return await response.json();
 };
 
 export const getDataDetails = async (serialNumber) => {
@@ -65,13 +72,16 @@ export const getDataDetails = async (serialNumber) => {
 };
 
 export const getLine = async (sn) => {
-  const { data } = await api(
-    "GET",
-    `https://api.quant-aq.com/device-api/v1/devices/${sn}/data/`,
-    {
-      Authorization: "Basic " + btoa(`${process.env.QUANTAQ_API_KEY}:`),
-    },
-  );
+  const response = await fetch(`/api/quant?sn=${sn}`, {
+    method: "GET",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch: ${response.status}`);
+  }
+
+  // Our new route returns { data: ... }, so destructure it:
+  const { data } = await response.json();
 
   const PM1 = [];
   const PM10 = [];
@@ -100,17 +110,17 @@ export const getLine = async (sn) => {
     {
       data: PM1.reverse(),
       units: "ppb",
-      title: "PM 1.0",
+      title: "PM1.0",
     },
     {
       data: PM25.reverse(),
       units: "ppb",
-      title: "PM 2.5",
+      title: "PM2.5",
     },
     {
       data: PM10.reverse(),
       units: "ppb",
-      title: "PM 10",
+      title: "PM10",
     },
     {
       data: CO.reverse(),
@@ -135,9 +145,26 @@ export const getLine = async (sn) => {
     {
       data: O3.reverse(),
       units: "ppm",
-      title: "Ozone",
+      title: "O3",
     },
   ];
+};
+
+export const getLine24h = async (sn) => {
+  try {
+    const data = await getLine(sn);
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+
+    return data.map((pollutant) => ({
+      ...pollutant,
+      data:
+        pollutant.data?.filter((d) => new Date(d.x) > twentyFourHoursAgo) || [],
+    }));
+  } catch (error) {
+    console.error("Failed to get 24h data:", error);
+    return []; // Return empty array instead of crashing
+  }
 };
 
 export const getLocations = async () => {
