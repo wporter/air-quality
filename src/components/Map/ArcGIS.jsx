@@ -16,6 +16,13 @@ import Line from "@/components/researcher/data/Line";
 const ArcGIS = ({ width, height, markers }) => {
   const mapDiv = useRef(null);
   const [selectedPollutant, setSelectedPollutant] = useState("AQI");
+  const pollutantTitleMap = {
+    AQI: "AQI",
+    "PM2.5": "PM2.5",
+    PM10: "PM10",
+    O3: "Ozone",
+  };
+
   // calculates AQI value
   const calcAqi = (value) => {
     let numerator = 0;
@@ -97,7 +104,7 @@ const ArcGIS = ({ width, height, markers }) => {
       // Feature Layer for AQI markers
       const layer = new FeatureLayer({
         title: "Air Quality Index",
-        source: [], // Populated with graphics
+        source: [],
         fields: [
           { name: "SN", alias: "Sensor Number", type: "string" },
           { name: "PM10", alias: "PM10 Concentration (μg/m³)", type: "double" },
@@ -200,7 +207,7 @@ const ArcGIS = ({ width, height, markers }) => {
 
         const color = (() => {
           if (selectedPollutant === "AQI") {
-            return calcAqiColor(pm10AqiVal); // AQI uses the predefined color function
+            return calcAqiColor(pm10AqiVal);
           } else {
             const value =
               selectedPollutant === "PM2.5"
@@ -209,9 +216,9 @@ const ArcGIS = ({ width, height, markers }) => {
                   ? marker.measurements.pm10
                   : selectedPollutant === "O3"
                     ? marker.measurements.o3
-                    : null; // Default to null if no valid pollutant is selected
+                    : null;
 
-            if (value === null || value === undefined) return "#999999"; // Gray if no data
+            if (value === null || value === undefined) return "#999999";
 
             if (value <= 50) return "#00E400";
             if (value <= 100) return "#FFFF00";
@@ -224,12 +231,20 @@ const ArcGIS = ({ width, height, markers }) => {
 
         const concentrationValue =
           selectedPollutant === "PM2.5"
-            ? marker.measurements.pm25?.toFixed(2)
+            ? typeof marker.measurements.pm25 === "number"
+              ? marker.measurements.pm25.toFixed(2)
+              : "N/A"
             : selectedPollutant === "PM10"
-              ? marker.measurements.pm10?.toFixed(2)
+              ? typeof marker.measurements.pm10 === "number"
+                ? marker.measurements.pm10.toFixed(2)
+                : "N/A"
               : selectedPollutant === "O3"
-                ? marker.measurements.o3?.toFixed(2)
-                : marker.measurements.pm10?.toFixed(2);
+                ? typeof marker.measurements.o3 === "number"
+                  ? marker.measurements.o3.toFixed(2)
+                  : "N/A"
+                : typeof marker.measurements.pm10 === "number"
+                  ? marker.measurements.pm10.toFixed(2)
+                  : "N/A";
 
         const pointGraphic = new Graphic({
           geometry: {
@@ -264,10 +279,8 @@ const ArcGIS = ({ width, height, markers }) => {
     Last Seen: {LastSeen} minutes ago
   </p>`,
             content: async (feature) => {
-              // Create container for both table and graph
               const container = document.createElement("div");
 
-              // Existing table HTML
               container.innerHTML = `
       <div style="padding-left: 10px; padding-top: 10px; padding-bottom: 15px;">
         <table style="font-family: Arial, sans-serif; border-collapse: collapse; width: 80%;">
@@ -286,34 +299,44 @@ const ArcGIS = ({ width, height, markers }) => {
       </div>
     `;
 
-              // Add the graph asynchronously
-              // Replace with this try/catch block:
               try {
                 const sn = marker.sn;
                 const chartContainer = container.querySelector(
                   `#chart-container-${sn}`,
                 );
-                const timeseriesData = await getLine24h(sn); // Already filtered to 24h
+                const timeseriesData = await getLine24h(sn);
 
-                // Create temporary container for React
+                const pm10Data =
+                  timeseriesData.find((d) => d.title === "PM10")?.data || [];
+
+                const aqiData = pm10Data.map((point) => ({
+                  x: point.x,
+                  y: calcAqi(point.y),
+                }));
+
+                // Push a "fake" AQI dataset into the array
+                timeseriesData.push({
+                  title: "AQI",
+                  units: "AQI",
+                  data: aqiData,
+                });
+
                 const tempDiv = document.createElement("div");
                 const root = createRoot(tempDiv);
+                const selectedDataset = timeseriesData.find(
+                  (d) => d.title === pollutantTitleMap[selectedPollutant],
+                );
 
                 root.render(
                   <div style={{ width: "100%", height: "250px" }}>
                     <Line
-                      data={
-                        timeseriesData.find(
-                          (d) => d.title === selectedPollutant,
-                        )?.data || []
-                      }
-                      title={selectedPollutant}
-                      units="μg/m³"
+                      data={selectedDataset?.data || []}
+                      title={pollutantTitleMap[selectedPollutant]}
+                      units={selectedDataset?.units || ""}
                     />
                   </div>,
                 );
 
-                // Append after React completes rendering
                 setTimeout(() => {
                   chartContainer.replaceChildren(tempDiv);
                 }, 0);
@@ -339,14 +362,9 @@ const ArcGIS = ({ width, height, markers }) => {
   }, [mapDiv, markers, selectedPollutant]);
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      {/* Hard-coded debug box for the map */}
-      <div
-        style={{ width: "800px", height: "600px", border: "2px solid red" }}
-        ref={mapDiv}
-      />
+    <div className={`relative ${width} ${height}`}>
+      <div className="w-full h-full" ref={mapDiv} />
 
-      {/* Dropdown on top */}
       <select
         value={selectedPollutant}
         onChange={(e) => setSelectedPollutant(e.target.value)}

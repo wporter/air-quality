@@ -8,14 +8,24 @@ import {
 } from "@visx/xychart";
 import { ParentSize } from "@visx/responsive";
 
+// Accessors
 const accessors = {
   xAccessor: (d) => d && new Date(d.x),
-  yAccessor: (d) => d.y,
+  yAccessor: (d) => d && (d.y !== null ? d.y : undefined),
 };
 
 const Line = ({ data, title, units }) => {
-  if (data.length === 0) {
-    return null;
+  if (!data || data.length === 0) {
+    return <div className="pl-4 py-4 w-1/3">No data available for {title}</div>;
+  }
+
+  // Filter out points that have null/undefined y values
+  const cleanedData = data.filter(
+    (point) => point.y !== null && point.y !== undefined,
+  );
+
+  if (cleanedData.length === 0) {
+    return <div className="pl-4 py-4 w-1/3">No valid {title} data</div>;
   }
 
   return (
@@ -25,7 +35,7 @@ const Line = ({ data, title, units }) => {
         {({ width }) => (
           <XYChart
             height={250}
-            width={250}
+            width={Math.max(Math.min(width, 415), 300)}
             xScale={{ type: "time" }}
             yScale={{ type: "linear" }}
           >
@@ -36,31 +46,30 @@ const Line = ({ data, title, units }) => {
                 strokeLinecap: "round",
                 strokeWidth: 1,
               }}
-              label="poggers"
             />
             <AnimatedAxis
               hideAxisLine
               hideTicks
               orientation="bottom"
               numTicks={4}
-              tickFormat={(date) => {
-                return new Date(date).toLocaleTimeString(navigator.language, {
+              tickFormat={(date) =>
+                new Date(date).toLocaleTimeString(navigator.language, {
                   hour: "2-digit",
                   minute: "2-digit",
-                });
-              }}
+                })
+              }
             />
             <AnimatedAxis
               hideAxisLine
               hideTicks
               orientation="left"
-              numTicks={10}
+              numTicks={6}
               label={units}
             />
             <AnimatedLineSeries
               stroke="#FF0000"
               dataKey={title}
-              data={data}
+              data={cleanedData}
               {...accessors}
             />
             <Tooltip

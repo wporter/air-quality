@@ -22,7 +22,7 @@ const Details = ({ fields, meta }) => {
         validFields.map(([key, value], index) => (
           <div
             key={index}
-            className="flex justify-between border-b-[1px] border-gray-200 p-4"
+            className="flex justify-between border-b-[1px] border-black-200 p-4"
           >
             <div>{key}</div>
             <p>{value}</p>
