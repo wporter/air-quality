@@ -2,13 +2,20 @@
 export const api = async (method, url, headers, body) => {
   const response = await fetch(url, {
     method: method,
-    headers: headers,
+    headers: {
+      ...headers,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    mode: "cors",
     body: JSON.stringify(body),
   });
 
-  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
-  return data;
+  return await response.json();
 };
 
 export const getDataDetails = async (serialNumber) => {
@@ -83,61 +90,85 @@ export const getLine = async (sn) => {
   const O3 = [];
 
   data.forEach(({ pm1, pm25, pm10, co, co2, no, no2, o3, timestamp_local }) => {
-    PM1.push({ x: timestamp_local, y: pm1 });
-    PM10.push({ x: timestamp_local, y: pm10 });
-    PM25.push({ x: timestamp_local, y: pm25 });
+    if (timestamp_local) {
+      PM1.push({ x: timestamp_local, y: pm1 });
+      PM10.push({ x: timestamp_local, y: pm10 });
+      PM25.push({ x: timestamp_local, y: pm25 });
 
-    if (co !== undefined) {
-      CO.push({ x: timestamp_local, y: co });
-      CO2.push({ x: timestamp_local, y: co2 });
-      NO.push({ x: timestamp_local, y: no });
-      NO2.push({ x: timestamp_local, y: no2 });
-      O3.push({ x: timestamp_local, y: o3 });
+      if (co !== undefined) CO.push({ x: timestamp_local, y: co });
+      if (co2 !== undefined) CO2.push({ x: timestamp_local, y: co2 });
+      if (no !== undefined) NO.push({ x: timestamp_local, y: no });
+      if (no2 !== undefined) NO2.push({ x: timestamp_local, y: no2 });
+      if (o3 !== undefined) O3.push({ x: timestamp_local, y: o3 });
     }
   });
 
   return [
-    {
-      data: PM1.reverse(),
-      units: "ppb",
-      title: "PM 1.0",
-    },
-    {
-      data: PM25.reverse(),
-      units: "ppb",
-      title: "PM 2.5",
-    },
-    {
-      data: PM10.reverse(),
-      units: "ppb",
-      title: "PM 10",
-    },
-    {
-      data: CO.reverse(),
-      units: "ppb",
-      title: "Carbon Monoxide",
-    },
-    {
-      data: CO2.reverse(),
-      units: "ppm",
-      title: "Carbon Dioxide",
-    },
-    {
-      data: NO.reverse(),
-      units: "ppb",
-      title: "Nitric Oxide",
-    },
-    {
-      data: NO2.reverse(),
-      units: "ppb",
-      title: "Nitric Dioxide",
-    },
-    {
-      data: O3.reverse(),
-      units: "ppm",
-      title: "Ozone",
-    },
+    { data: PM1.reverse(), units: "ppb", title: "PM 1.0" },
+    { data: PM25.reverse(), units: "ppb", title: "PM 2.5" },
+    { data: PM10.reverse(), units: "ppb", title: "PM 10" },
+    { data: CO.reverse(), units: "ppb", title: "Carbon Monoxide" },
+    { data: CO2.reverse(), units: "ppm", title: "Carbon Dioxide" },
+    { data: NO.reverse(), units: "ppb", title: "Nitric Oxide" },
+    { data: NO2.reverse(), units: "ppb", title: "Nitrogen Dioxide" },
+    { data: O3.reverse(), units: "ppm", title: "Ozone" },
   ];
+};
+
+export const getLine24h = async (sn) => {
+  try {
+    const encodedSN = encodeURIComponent(sn);
+
+    const url =
+      typeof window !== "undefined"
+        ? `/api/quant?sn=${encodedSN}`
+        : `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/quant?sn=${encodedSN}`;
+
+    const response = await fetch(url, { method: "GET" });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch: ${response.status}`);
+    }
+
+    const { data } = await response.json();
+
+    const PM1 = [];
+    const PM10 = [];
+    const PM25 = [];
+    const CO = [];
+    const CO2 = [];
+    const NO = [];
+    const NO2 = [];
+    const O3 = [];
+
+    data.forEach(({ pm1, pm25, pm10, co, co2, no, no2, o3, period_end }) => {
+      if (period_end) {
+        PM1.push({ x: period_end, y: pm1 });
+        PM10.push({ x: period_end, y: pm10 });
+        PM25.push({ x: period_end, y: pm25 });
+
+        if (co !== undefined) CO.push({ x: period_end, y: co });
+        if (co2 !== undefined) CO2.push({ x: period_end, y: co2 });
+        if (no !== undefined) NO.push({ x: period_end, y: no });
+        if (no2 !== undefined) NO2.push({ x: period_end, y: no2 });
+        if (o3 !== undefined) O3.push({ x: period_end, y: o3 });
+      }
+    });
+
+    return [
+      { data: PM1, units: "μg/m³", title: "PM1.0" },
+      { data: PM25, units: "μg/m³", title: "PM2.5" },
+      { data: PM10, units: "μg/m³", title: "PM10" },
+      { data: CO, units: "ppb", title: "Carbon Monoxide" },
+      { data: CO2, units: "ppm", title: "Carbon Dioxide" },
+      { data: NO, units: "ppb", title: "Nitric Oxide" },
+      { data: NO2, units: "ppb", title: "Nitrogen Dioxide" },
+      { data: O3, units: "ppm", title: "Ozone" },
+    ];
+  } catch (error) {
+    console.error("Failed to get 24h data:", error);
+    return [];
+  }
 };
 
 export const getLocations = async () => {
@@ -163,7 +194,7 @@ export const getMarkers = async () => {
     );
 
     const devices = devicesResponse.data;
-    console.log("Total devices retrieved:", devices.length);
+    // console.log("Total devices retrieved:", devices.length);
 
     if (!Array.isArray(devices) || devices.length === 0) {
       console.error("No devices received from API");
@@ -181,14 +212,14 @@ export const getMarkers = async () => {
     );
 
     const allData = await Promise.all(dataPromises);
-    console.log("Data for each device retrieved successfully.");
+    // console.log("Data for each device retrieved successfully.");
 
     const items = allData.map((response, index) => {
       const deviceData = response.data[0];
       const device = devices[index];
 
       if (!deviceData) {
-        console.log(`Sensor: ${device.sn}, Timestamp: No data available`);
+        // console.log(`Sensor: ${device.sn}, Timestamp: No data available`);
         return {
           geo: device.geo,
           sn: device.sn,
