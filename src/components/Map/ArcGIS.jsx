@@ -8,9 +8,20 @@ import { statusAqiColor } from "@/data/StatusAqiColor";
 import { aqiValue } from "@/data/Aqi";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
+import { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { getLine24h } from "@/utils/api";
+import Line from "@/components/researcher/data/Line";
 
 const ArcGIS = ({ width, height, markers }) => {
   const mapDiv = useRef(null);
+  const [selectedPollutant, setSelectedPollutant] = useState("AQI");
+  const pollutantTitleMap = {
+    AQI: "AQI",
+    "PM2.5": "PM2.5",
+    PM10: "PM10",
+    O3: "Ozone",
+  };
 
   // calculates AQI value
   const calcAqi = (value) => {
@@ -93,7 +104,7 @@ const ArcGIS = ({ width, height, markers }) => {
       // Feature Layer for AQI markers
       const layer = new FeatureLayer({
         title: "Air Quality Index",
-        source: [], // Populated with graphics
+        source: [],
         fields: [
           { name: "SN", alias: "Sensor Number", type: "string" },
           { name: "PM10", alias: "PM10 Concentration (μg/m³)", type: "double" },
@@ -154,10 +165,11 @@ const ArcGIS = ({ width, height, markers }) => {
       `;
       view.ui.add(customLegend, "bottom-right");
 
+      view.graphics.removeAll();
       markers.forEach((marker) => {
         const {
           geo,
-          sn,
+          description,
           timestamp_local: timestampLocal,
           measurements: { pm10 },
         } = marker;
@@ -169,8 +181,70 @@ const ArcGIS = ({ width, height, markers }) => {
         const lastSeen = new Date(
           new Date().getTime() - new Date(timestampLocal).getTime(),
         ).getMinutes();
-        const pm10AqiVal = calcAqi(Math.round(pm10));
-        const color = calcAqiColor(pm10AqiVal);
+        let displayedValue;
+        console.log(
+          `Marker ${marker.sn} pm2.5 Value:`,
+          marker.measurements.pm25,
+        );
+
+        switch (selectedPollutant) {
+          case "PM2.5":
+            displayedValue = Math.round(marker.measurements.pm25) || "N/A";
+            break;
+          case "PM10":
+            displayedValue = Math.round(marker.measurements.pm10) || "N/A";
+            break;
+          case "O3":
+            displayedValue =
+              marker.measurements.o3 !== undefined
+                ? Math.round(marker.measurements.o3)
+                : "N/A";
+            break;
+          default:
+            displayedValue = calcAqi(Math.round(marker.measurements.pm10));
+        }
+        const pm10AqiVal = calcAqi(Math.round(marker.measurements.pm10)); // Ensure pm10AqiVal is defined
+
+        const color = (() => {
+          if (selectedPollutant === "AQI") {
+            return calcAqiColor(pm10AqiVal);
+          } else {
+            const value =
+              selectedPollutant === "PM2.5"
+                ? marker.measurements.pm25
+                : selectedPollutant === "PM10"
+                  ? marker.measurements.pm10
+                  : selectedPollutant === "O3"
+                    ? marker.measurements.o3
+                    : null;
+
+            if (value === null || value === undefined) return "#999999";
+
+            if (value <= 50) return "#00E400";
+            if (value <= 100) return "#FFFF00";
+            if (value <= 150) return "#FF7E00";
+            if (value <= 200) return "#FF0000";
+            if (value <= 300) return "#8F3F97";
+            return "#7E0023";
+          }
+        })();
+
+        const concentrationValue =
+          selectedPollutant === "PM2.5"
+            ? typeof marker.measurements.pm25 === "number"
+              ? marker.measurements.pm25.toFixed(2)
+              : "N/A"
+            : selectedPollutant === "PM10"
+              ? typeof marker.measurements.pm10 === "number"
+                ? marker.measurements.pm10.toFixed(2)
+                : "N/A"
+              : selectedPollutant === "O3"
+                ? typeof marker.measurements.o3 === "number"
+                  ? marker.measurements.o3.toFixed(2)
+                  : "N/A"
+                : typeof marker.measurements.pm10 === "number"
+                  ? marker.measurements.pm10.toFixed(2)
+                  : "N/A";
 
         const pointGraphic = new Graphic({
           geometry: {
@@ -181,7 +255,7 @@ const ArcGIS = ({ width, height, markers }) => {
           symbol: {
             type: "text",
             color: "#FFFFFF",
-            text: pm10AqiVal.toString(),
+            text: displayedValue.toString(),
             font: {
               size: 12,
               weight: "bold",
@@ -194,31 +268,89 @@ const ArcGIS = ({ width, height, markers }) => {
             horizontalAlignment: "center",
           },
           attributes: {
-            SN: sn,
+            Description: description,
             PM10: pm10,
             AQI: pm10AqiVal,
             LastSeen: lastSeen,
+            SN: marker.sn,
           },
           popupTemplate: new PopupTemplate({
-            title: `{SN}<br></br><p style="font-style: italic; font-weight: 100; font-size: 0.75rem;">
-            Last Seen: {LastSeen} minutes ago
-          </p>`,
-            content: `
-            <div style="padding-left: 10px; padding-top: 10px; padding-bottom: 15px;">
-                <table style="font-family: Arial, sans-serif; border-collapse: collapse; width: 80%;">
-                  <tr style="background-color: #f2f2f2;">
-                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Pollutant</th>
-                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">AQI</th>
-                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Concentration</th>
-                  </tr>
-                  <tr>
-                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">PM10</td>
-                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; background-color: ${color};">{AQI}</td>
-                    <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">{PM10} μg/m³</td>
-                  </tr>
-                </table>
-              </div>
-            `,
+            title: `<div style="word-wrap: break-word; max-width: 200px;">{Description}</div><br ></br><p style="font-style: italic; font-weight: 100; font-size: 0.75rem;">
+    Last Seen: {LastSeen} minutes ago
+  </p>`,
+            content: async (feature) => {
+              const container = document.createElement("div");
+
+              container.innerHTML = `
+      <div style="padding-left: 10px; padding-top: 10px; padding-bottom: 15px;">
+        <table style="font-family: Arial, sans-serif; border-collapse: collapse; width: 80%;">
+          <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Pollutant</th>
+            <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">AQI</th>
+            <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Concentration</th>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${selectedPollutant}</td>
+            <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; background-color: ${color};">${pm10AqiVal}</td>
+            <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${concentrationValue} μg/m³</td>
+          </tr>
+        </table>
+        <div id="chart-container-${marker.sn}" style="height: 250px; width: 100%;"></div>
+      </div>
+    `;
+
+              try {
+                const sn = marker.sn;
+                const chartContainer = container.querySelector(
+                  `#chart-container-${sn}`,
+                );
+                const timeseriesData = await getLine24h(sn);
+
+                const pm10Data =
+                  timeseriesData.find((d) => d.title === "PM10")?.data || [];
+
+                const aqiData = pm10Data.map((point) => ({
+                  x: point.x,
+                  y: calcAqi(point.y),
+                }));
+
+                // Push a "fake" AQI dataset into the array
+                timeseriesData.push({
+                  title: "AQI",
+                  units: "AQI",
+                  data: aqiData,
+                });
+
+                const tempDiv = document.createElement("div");
+                const root = createRoot(tempDiv);
+                const selectedDataset = timeseriesData.find(
+                  (d) => d.title === pollutantTitleMap[selectedPollutant],
+                );
+
+                root.render(
+                  <div style={{ width: "100%", height: "250px" }}>
+                    <Line
+                      data={selectedDataset?.data || []}
+                      title={pollutantTitleMap[selectedPollutant]}
+                      units={selectedDataset?.units || ""}
+                    />
+                  </div>,
+                );
+
+                setTimeout(() => {
+                  chartContainer.replaceChildren(tempDiv);
+                }, 0);
+              } catch (error) {
+                console.error("Graph render failed:", error);
+                const errorDiv = document.createElement("div");
+                errorDiv.textContent = "Failed to load graph data";
+                errorDiv.style.color = "red";
+                errorDiv.style.padding = "10px";
+                chartContainer.replaceChildren(errorDiv);
+              }
+
+              return container;
+            },
           }),
         });
 
@@ -227,9 +359,32 @@ const ArcGIS = ({ width, height, markers }) => {
 
       return () => view && view.destroy();
     }
-  }, [mapDiv, markers]);
+  }, [mapDiv, markers, selectedPollutant]);
 
-  return <div className={`m-0 p-0 ${width} ${height}`} ref={mapDiv}></div>;
+  return (
+    <div className={`relative ${width} ${height}`}>
+      <div className="w-full h-full" ref={mapDiv} />
+
+      <select
+        value={selectedPollutant}
+        onChange={(e) => setSelectedPollutant(e.target.value)}
+        style={{
+          position: "absolute",
+          top: "10px",
+          left: "10px",
+          zIndex: 1000,
+          background: "white",
+          padding: "5px",
+          borderRadius: "5px",
+        }}
+      >
+        <option value="AQI">AQI</option>
+        <option value="PM2.5">PM2.5</option>
+        <option value="PM10">PM10</option>
+        <option value="O3">Ozone (O3)</option>
+      </select>
+    </div>
+  );
 };
 
 export default ArcGIS;
